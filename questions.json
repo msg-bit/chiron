@@ -1,0 +1,1085 @@
+{
+  "version": "1.0",
+  "english": [
+    {
+      "lvl": 1,
+      "concept": "Complete Sentences",
+      "q": "Which of the following is a complete sentence?",
+      "choices": [
+        "Running down the track.",
+        "The engineer ran the test successfully.",
+        "Fast and carefully through the data.",
+        "After the long experiment."
+      ],
+      "correct": 1,
+      "exp": "A complete sentence needs a subject and a verb. 'The engineer ran the test' has both. The others are fragments.",
+      "method": {},
+      "pattern": "Check for two things: a subject and a verb. If either is missing, it is a fragment.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix this fragment: 'Studying late into the night.'",
+      "repro_rule": "Add a subject (who is studying) and a complete verb."
+    },
+    {
+      "lvl": 1,
+      "concept": "Apostrophe Possession",
+      "q": "Select the correct sentence:",
+      "choices": [
+        "Alex borrowed Mikes notebook.",
+        "Alex borrowed Mike's notebook.",
+        "Alex borrowed Mikes' notebook.",
+        "Alex borrowed Mikes's notebook."
+      ],
+      "correct": 1,
+      "exp": "Mike's shows one person owns the notebook. Add apostrophe then s after a singular name.",
+      "method": {},
+      "pattern": "Singular owner: apostrophe + s. Mike's notebook. The engineer's report.",
+      "repro_type": "eng",
+      "repro_prompt": "Add the correct apostrophe: 'The race car aerodynamics were tested.'",
+      "repro_rule": "The race car (singular) owns the aerodynamics. Add apostrophe + s after car."
+    },
+    {
+      "lvl": 1,
+      "concept": "Subject-Verb Agreement",
+      "q": "The race car ___ around the track at 180 mph.",
+      "choices": [
+        "go",
+        "goes",
+        "going",
+        "gone"
+      ],
+      "correct": 1,
+      "exp": "Race car is singular. Singular subjects use singular verbs. Goes is singular.",
+      "method": {},
+      "pattern": "One subject equals singular verb. More than one equals plural verb.",
+      "repro_type": "eng",
+      "repro_prompt": "Choose the correct verb: 'The team of engineers ___ (meet/meets) every Monday.'",
+      "repro_rule": "Cross out 'of engineers.' The team (singular) meets."
+    },
+    {
+      "lvl": 1,
+      "concept": "Active Voice",
+      "q": "Which sentence is clearest and most direct?",
+      "choices": [
+        "The problem was solved by the engineer.",
+        "The engineer solved the problem.",
+        "The solving of the problem was done by the engineer.",
+        "It was the engineer who solved the problem."
+      ],
+      "correct": 1,
+      "exp": "The engineer solved the problem puts the subject doing the action. Active voice. Shorter and clearer.",
+      "method": {},
+      "pattern": "Active: subject does the action. Choose active voice on the ACT.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite in active voice: 'The data was analyzed by the research team.'",
+      "repro_rule": "Put the doer first."
+    },
+    {
+      "lvl": 1,
+      "concept": "Commas in a List",
+      "q": "Which sentence uses commas correctly?",
+      "choices": [
+        "Alex studied math English and science.",
+        "Alex studied math, English and science.",
+        "Alex studied math, English, and science.",
+        "Alex studied, math, English, and science."
+      ],
+      "correct": 2,
+      "exp": "Three or more items need commas between them, including a comma before the final and.",
+      "method": {},
+      "pattern": "Three or more items: comma after each item including before and.",
+      "repro_type": "eng",
+      "repro_prompt": "Add the correct commas: 'The car has a powerful engine excellent brakes and precise steering.'",
+      "repro_rule": "Three items need commas between them and before and."
+    },
+    {
+      "lvl": 1,
+      "concept": "Pronoun Case",
+      "q": "Which sentence uses the correct pronoun?",
+      "choices": [
+        "Him and Alex studied together.",
+        "Alex and him studied together.",
+        "Alex and he studied together.",
+        "He and him studied together."
+      ],
+      "correct": 2,
+      "exp": "He is a subject pronoun. Him is an object pronoun. Since these are the subject (they studied), use he.",
+      "method": {},
+      "pattern": "Test it alone: say He studied not Him studied. Use the same form when combining.",
+      "repro_type": "eng",
+      "repro_prompt": "Choose the correct pronoun: 'The award went to Alex and ___ (he/him).'",
+      "repro_rule": "The pronoun receives the action. Use him."
+    },
+    {
+      "lvl": 2,
+      "concept": "Subject-Verb Agreement Tricky",
+      "q": "Choose the grammatically correct sentence:",
+      "choices": [
+        "The team of engineers are working on the project.",
+        "The team of engineers is working on the project.",
+        "The team of engineers were working on the projects.",
+        "The teams of engineer is working on the project."
+      ],
+      "correct": 1,
+      "exp": "The subject is team, one team, singular. Words of engineers describe but do not change the subject.",
+      "method": {},
+      "pattern": "Cross out everything between subject and verb. The team is. Not engineers.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix the verb: 'The collection of test results show a clear pattern.'",
+      "repro_rule": "The collection (singular) shows."
+    },
+    {
+      "lvl": 2,
+      "concept": "Comma Splice",
+      "q": "Which sentence is punctuated correctly?",
+      "choices": [
+        "The wind tunnel test failed, the team redesigned the wing.",
+        "The wind tunnel test failed the team redesigned the wing.",
+        "The wind tunnel test failed, but the team redesigned the wing.",
+        "The wind tunnel test failed; the team redesigned the wing, too."
+      ],
+      "correct": 2,
+      "exp": "Two complete sentences cannot be joined with just a comma. You need a comma plus a connecting word or a semicolon.",
+      "method": {},
+      "pattern": "Two complete sentences need more than a comma. Add but/and/so, or use a semicolon.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix the comma splice: 'The car was too slow, the engineers added a new engine.'",
+      "repro_rule": "Add so after the comma, or replace the comma with a semicolon."
+    },
+    {
+      "lvl": 2,
+      "concept": "Parallel Structure",
+      "q": "Which sentence uses parallel structure correctly?",
+      "choices": [
+        "The engineer likes calculating drag, to test prototypes, and running simulations.",
+        "The engineer likes to calculate drag, testing, and to run simulations.",
+        "The engineer likes calculating drag, testing prototypes, and running simulations.",
+        "The engineer likes calculated drag, testing, and to run simulations."
+      ],
+      "correct": 2,
+      "exp": "When listing actions, every item must use the same form. In choice C all three end in -ing.",
+      "method": {},
+      "pattern": "Find the list. Check the first item form. Make every other item match it exactly.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix the parallel structure error: 'Alex enjoys reading, to study, and working on problems.'",
+      "repro_rule": "First item is reading (-ing). Change others: studying, working."
+    },
+    {
+      "lvl": 2,
+      "concept": "Pronoun Agreement",
+      "q": "Each of the engineers must submit ___ report by Friday.",
+      "choices": [
+        "their",
+        "our",
+        "his or her",
+        "its"
+      ],
+      "correct": 2,
+      "exp": "Each is singular. The ACT expects his or her for a singular unknown person.",
+      "method": {},
+      "pattern": "Each, every, anyone, nobody are always singular on the ACT. Use his or her.",
+      "repro_type": "eng",
+      "repro_prompt": "Fill in: 'Everyone on the team did ___ best work.'",
+      "repro_rule": "Everyone is singular. Choose his or her."
+    },
+    {
+      "lvl": 2,
+      "concept": "Semicolons",
+      "q": "Which sentence uses a semicolon correctly?",
+      "choices": [
+        "The engine was powerful; but the brakes needed work.",
+        "The engine was powerful; the brakes, however, needed work.",
+        "The engine was; powerful the brakes needed work.",
+        "The engine was powerful; needing better brakes."
+      ],
+      "correct": 1,
+      "exp": "A semicolon joins two complete sentences. Both sides here are complete. Never use a semicolon before and/but/so.",
+      "method": {},
+      "pattern": "Semicolon test: complete sentence on both sides. Never before and/but/so.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix this: 'The test results were clear the team needed to redesign the wing.'",
+      "repro_rule": "Two complete sentences need a semicolon or period between them."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Words",
+      "q": "Choose the best transition: 'The first engine design overheated. ___, the revised design ran perfectly.'",
+      "choices": [
+        "Therefore",
+        "However",
+        "Furthermore",
+        "Similarly"
+      ],
+      "correct": 1,
+      "exp": "Failure then success. These ideas contrast. However signals contrast.",
+      "method": {},
+      "pattern": "Contrast: however. Cause-effect: therefore. Addition: furthermore. Similarity: similarly.",
+      "repro_type": "eng",
+      "repro_prompt": "Choose: 'The car was fastest in qualifying. ___, it finished last in the race.'",
+      "repro_rule": "Fast qualifying plus last place equals contrast. Use However."
+    },
+    {
+      "lvl": 3,
+      "concept": "Misplaced Modifier",
+      "q": "Which sentence has NO modifier error?",
+      "choices": [
+        "Running at top speed, the corner was taken by the car.",
+        "The car, running at top speed, took the corner perfectly.",
+        "At top speed, the corner was running when the car took it.",
+        "Running the car at top speed, the corner was taken perfectly."
+      ],
+      "correct": 1,
+      "exp": "Running at top speed describes the car. The car must immediately follow that phrase.",
+      "method": {},
+      "pattern": "When a sentence opens with an -ing phrase and comma, the next noun must be the thing doing that action.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Studying all night, the exam felt easy to Alex.'",
+      "repro_rule": "Who was studying? Alex. Alex must come right after the comma."
+    },
+    {
+      "lvl": 3,
+      "concept": "Colons",
+      "q": "Which is correct? 'Chiron trained three great heroes ___ Achilles, Hercules, and Jason.'",
+      "choices": [
+        ", namely",
+        "a dash",
+        ":",
+        ";"
+      ],
+      "correct": 2,
+      "exp": "A colon introduces a list when what comes before it is a complete sentence.",
+      "method": {},
+      "pattern": "Colon test: complete sentence before it. Then it can introduce a list.",
+      "repro_type": "eng",
+      "repro_prompt": "Add correct punctuation: 'The test covered three topics ___ grammar, algebra, and reading.'",
+      "repro_rule": "The test covered three topics is complete. What follows is a list. Use a colon."
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy",
+      "q": "Which sentence eliminates unnecessary repetition?",
+      "choices": [
+        "The final end result was a faster car.",
+        "The end result was a faster car.",
+        "The result was a faster car.",
+        "The final result in the end was a faster car."
+      ],
+      "correct": 2,
+      "exp": "Result already means the outcome. Final and end repeat that idea.",
+      "method": {},
+      "pattern": "If a word's meaning is already in another word, one is redundant. End result and past history are common examples.",
+      "repro_type": "eng",
+      "repro_prompt": "Remove the redundancy: 'The basic fundamentals of aerodynamics are not complicated.'",
+      "repro_rule": "Basic and fundamentals mean the same thing. Remove one."
+    },
+    {
+      "lvl": 3,
+      "concept": "Concision",
+      "q": "Which revision is most concise?",
+      "choices": [
+        "Due to the fact that he practiced, Alex improved.",
+        "Because he practiced, Alex improved.",
+        "In light of the fact that Alex practiced, he improved.",
+        "Alex improved as a result of the fact that he practiced."
+      ],
+      "correct": 1,
+      "exp": "Because he practiced does the same job as due to the fact that he practiced in two words instead of seven.",
+      "method": {},
+      "pattern": "Due to the fact that always becomes because. Shorter is always better on the ACT.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite concisely: 'In the event that it rains, the test will be postponed.'",
+      "repro_rule": "In the event that equals if."
+    }
+  ],
+  "math": [
+    {
+      "lvl": 1,
+      "concept": "Substitution",
+      "q": "If v = 4, what is 3v + 2?",
+      "choices": [
+        "9",
+        "12",
+        "14",
+        "18"
+      ],
+      "correct": 2,
+      "exp": "Replace v with 4: 3(4) + 2 = 12 + 2 = 14. Multiply before adding.",
+      "method": {
+        "vars": "v = 4",
+        "formula": "3v + 2",
+        "work": "= 3(4) + 2\n= 12 + 2\n= 14"
+      },
+      "pattern": "Replace the variable with its number, then follow order of operations.",
+      "repro_type": "math",
+      "repro_prompt": "If t = 5, what is 4t - 3?",
+      "repro_vars": "t = 5",
+      "repro_formula": "4t - 3",
+      "repro_answer": "17"
+    },
+    {
+      "lvl": 1,
+      "concept": "One-Step Equations",
+      "q": "If x + 6 = 10, what is x?",
+      "choices": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 2,
+      "exp": "Undo what was done to x. Since 6 was added, subtract 6 from both sides: x = 10 - 6 = 4.",
+      "method": {
+        "vars": "x = unknown",
+        "formula": "x + 6 = 10",
+        "work": "x = 10 - 6\nx = 4"
+      },
+      "pattern": "To isolate a variable, do the opposite operation to both sides.",
+      "repro_type": "math",
+      "repro_prompt": "Solve for x: x - 3 = 9",
+      "repro_vars": "x = unknown",
+      "repro_formula": "x - 3 = 9",
+      "repro_answer": "12"
+    },
+    {
+      "lvl": 1,
+      "concept": "Area of a Rectangle",
+      "q": "A test track section is 12 meters long and 4 meters wide. What is its area?",
+      "choices": [
+        "16 sq m",
+        "32 sq m",
+        "48 sq m",
+        "52 sq m"
+      ],
+      "correct": 2,
+      "exp": "Area = length x width = 12 x 4 = 48. Note: 32 is the perimeter. Read what the question asks.",
+      "method": {
+        "vars": "length = 12 m\nwidth = 4 m",
+        "formula": "Area = length x width",
+        "work": "Area = 12 x 4\n= 48 sq m"
+      },
+      "pattern": "Area = length x width. Perimeter = 2(length + width). Both appear in choices. Read carefully.",
+      "repro_type": "math",
+      "repro_prompt": "A room is 9 feet long and 6 feet wide. What is the area?",
+      "repro_vars": "length = 9 ft\nwidth = 6 ft",
+      "repro_formula": "Area = length x width",
+      "repro_answer": "54"
+    },
+    {
+      "lvl": 1,
+      "concept": "Percentages",
+      "q": "What is 25% of 80?",
+      "choices": [
+        "15",
+        "18",
+        "20",
+        "25"
+      ],
+      "correct": 2,
+      "exp": "Convert percent to decimal: 25% = 0.25. Multiply: 0.25 x 80 = 20.",
+      "method": {
+        "vars": "percent = 25%\nwhole = 80",
+        "formula": "part = (percent / 100) x whole",
+        "work": "= 0.25 x 80\n= 20"
+      },
+      "pattern": "Percent of a number: convert to decimal then multiply.",
+      "repro_type": "math",
+      "repro_prompt": "What is 30% of 60?",
+      "repro_vars": "percent = 30%\nwhole = 60",
+      "repro_formula": "part = 0.30 x 60",
+      "repro_answer": "18"
+    },
+    {
+      "lvl": 1,
+      "concept": "Ratios",
+      "q": "In a class of 30 students, 12 are girls. What is the ratio of girls to boys?",
+      "choices": [
+        "2:3",
+        "3:2",
+        "2:5",
+        "5:2"
+      ],
+      "correct": 0,
+      "exp": "Boys = 30 - 12 = 18. Ratio = 12:18. Divide both by 6: 2:3.",
+      "method": {
+        "vars": "girls = 12\nboys = 30 - 12 = 18",
+        "formula": "ratio = girls : boys",
+        "work": "12 : 18\ndivide both by 6\n= 2 : 3"
+      },
+      "pattern": "To simplify a ratio, find the greatest common factor and divide each number by it.",
+      "repro_type": "math",
+      "repro_prompt": "A box has 15 red balls and 10 blue balls. What is the ratio of red to blue?",
+      "repro_vars": "red = 15\nblue = 10",
+      "repro_formula": "ratio = red : blue",
+      "repro_answer": "3:2"
+    },
+    {
+      "lvl": 1,
+      "concept": "Order of Operations",
+      "q": "What is the value of 3 + 4 x 2?",
+      "choices": [
+        "14",
+        "11",
+        "10",
+        "8"
+      ],
+      "correct": 1,
+      "exp": "Multiplication before addition. 4 x 2 = 8 first, then 3 + 8 = 11.",
+      "method": {
+        "vars": "expression: 3 + 4 x 2",
+        "formula": "multiply before adding",
+        "work": "4 x 2 = 8\n3 + 8 = 11"
+      },
+      "pattern": "Multiply and divide before you add and subtract.",
+      "repro_type": "math",
+      "repro_prompt": "What is 5 + 3 x 4?",
+      "repro_vars": "expression: 5 + 3 x 4",
+      "repro_formula": "multiply before adding",
+      "repro_answer": "17"
+    },
+    {
+      "lvl": 2,
+      "concept": "Linear Equations",
+      "q": "If 4x + 5 = 21, what is the value of 2x?",
+      "choices": [
+        "4",
+        "8",
+        "10",
+        "16"
+      ],
+      "correct": 1,
+      "exp": "Solve: 4x = 16, x = 4. Then find what the question asks: 2x = 2(4) = 8.",
+      "method": {
+        "vars": "x = unknown",
+        "formula": "4x + 5 = 21\nthen find 2x",
+        "work": "4x = 16\nx = 4\n2x = 2(4) = 8"
+      },
+      "pattern": "Solve for x first, then compute the expression the question asks for.",
+      "repro_type": "math",
+      "repro_prompt": "If 3x - 2 = 13, what is the value of 6x?",
+      "repro_vars": "x = unknown",
+      "repro_formula": "3x - 2 = 13 then 6x",
+      "repro_answer": "30"
+    },
+    {
+      "lvl": 2,
+      "concept": "Distance Velocity Time",
+      "q": "A car travels at 75 mph for 4 hours. How far does it travel?",
+      "choices": [
+        "79 miles",
+        "150 miles",
+        "300 miles",
+        "375 miles"
+      ],
+      "correct": 2,
+      "exp": "d = v x t. Distance = 75 x 4 = 300 miles.",
+      "method": {
+        "vars": "v = 75 mph\nt = 4 hours\nd = ?",
+        "formula": "d = v x t",
+        "work": "d = 75 x 4\nd = 300 miles"
+      },
+      "pattern": "d = v x t. Know any two, solve for the third.",
+      "repro_type": "math",
+      "repro_prompt": "A car travels at 55 mph for 3 hours. How far?",
+      "repro_vars": "v = 55 mph\nt = 3 hours",
+      "repro_formula": "d = v x t",
+      "repro_answer": "165"
+    },
+    {
+      "lvl": 2,
+      "concept": "Slope",
+      "q": "What is the slope of the line through (1, 2) and (5, 10)?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 1,
+      "exp": "Slope = (10 - 2) / (5 - 1) = 8 / 4 = 2.",
+      "method": {
+        "vars": "Point 1: (1, 2)\nPoint 2: (5, 10)",
+        "formula": "slope = (y2 - y1) / (x2 - x1)",
+        "work": "= (10 - 2) / (5 - 1)\n= 8 / 4\n= 2"
+      },
+      "pattern": "Slope = rise / run = change in y / change in x.",
+      "repro_type": "math",
+      "repro_prompt": "Find the slope through (2, 3) and (6, 11).",
+      "repro_vars": "Point 1: (2, 3)\nPoint 2: (6, 11)",
+      "repro_formula": "slope = (y2 - y1) / (x2 - x1)",
+      "repro_answer": "2"
+    },
+    {
+      "lvl": 2,
+      "concept": "Percentage Change",
+      "q": "A lap time improved from 80 seconds to 68 seconds. What is the percent decrease?",
+      "choices": [
+        "12%",
+        "14%",
+        "15%",
+        "17%"
+      ],
+      "correct": 2,
+      "exp": "% change = (change / original) x 100 = (12 / 80) x 100 = 15%.",
+      "method": {
+        "vars": "original = 80\nnew = 68\nchange = 12",
+        "formula": "% change = (change / original) x 100",
+        "work": "= (12 / 80) x 100\n= 15%"
+      },
+      "pattern": "Always divide by where you started (the original).",
+      "repro_type": "math",
+      "repro_prompt": "Drag decreased from 500 N to 400 N. What is the percent decrease?",
+      "repro_vars": "original = 500\nnew = 400\nchange = 100",
+      "repro_formula": "% change = (change / original) x 100",
+      "repro_answer": "20%"
+    },
+    {
+      "lvl": 2,
+      "concept": "Functions",
+      "q": "If f(x) = 2x + 3, what is f(5)?",
+      "choices": [
+        "10",
+        "11",
+        "13",
+        "15"
+      ],
+      "correct": 2,
+      "exp": "f(5) means replace x with 5. f(5) = 2(5) + 3 = 13.",
+      "method": {
+        "vars": "x = 5",
+        "formula": "f(x) = 2x + 3",
+        "work": "f(5) = 2(5) + 3\n= 10 + 3\n= 13"
+      },
+      "pattern": "f(number) means substitute that number for x, then follow order of operations.",
+      "repro_type": "math",
+      "repro_prompt": "If g(x) = 3x - 1, what is g(4)?",
+      "repro_vars": "x = 4",
+      "repro_formula": "g(x) = 3x - 1",
+      "repro_answer": "11"
+    },
+    {
+      "lvl": 2,
+      "concept": "Triangle Angles",
+      "q": "A triangle has angles of 55 and 75 degrees. What is the third angle?",
+      "choices": [
+        "40",
+        "50",
+        "55",
+        "60"
+      ],
+      "correct": 1,
+      "exp": "Triangle angles always sum to 180. 180 - 55 - 75 = 50.",
+      "method": {
+        "vars": "A = 55\nB = 75\nC = ?",
+        "formula": "A + B + C = 180",
+        "work": "55 + 75 + C = 180\nC = 50"
+      },
+      "pattern": "Triangle angles always sum to 180. Add what you know, subtract from 180.",
+      "repro_type": "math",
+      "repro_prompt": "A triangle has angles of 40 and 95 degrees. What is the third?",
+      "repro_vars": "A = 40\nB = 95",
+      "repro_formula": "A + B + C = 180",
+      "repro_answer": "45"
+    },
+    {
+      "lvl": 3,
+      "concept": "Systems of Equations",
+      "q": "If x + y = 12 and x - y = 4, what is x?",
+      "choices": [
+        "4",
+        "6",
+        "8",
+        "10"
+      ],
+      "correct": 2,
+      "exp": "Add both equations. The y values cancel: 2x = 16, so x = 8.",
+      "method": {
+        "vars": "Eq1: x + y = 12\nEq2: x - y = 4",
+        "formula": "Add equations to cancel y",
+        "work": "2x = 16\nx = 8"
+      },
+      "pattern": "If one variable has opposite signs, add the equations and it disappears.",
+      "repro_type": "math",
+      "repro_prompt": "If x + y = 10 and x - y = 2, what is x?",
+      "repro_vars": "Eq1: x + y = 10\nEq2: x - y = 2",
+      "repro_formula": "Add equations",
+      "repro_answer": "6"
+    },
+    {
+      "lvl": 3,
+      "concept": "Factoring Quadratics",
+      "q": "Which values of x satisfy x^2 - 7x + 12 = 0?",
+      "choices": [
+        "x = 2 and x = 6",
+        "x = 3 and x = 4",
+        "x = -3 and x = -4",
+        "x = 1 and x = 12"
+      ],
+      "correct": 1,
+      "exp": "Find two numbers that multiply to 12 and add to -7. Those are -3 and -4. So (x-3)(x-4)=0 giving x=3 or x=4.",
+      "method": {
+        "vars": "Need: multiply to 12\n      add to -7",
+        "formula": "(x - ?)(x - ?) = 0",
+        "work": "3 x 4 = 12\n-3 + -4 = -7\n(x-3)(x-4) = 0\nx = 3 or x = 4"
+      },
+      "pattern": "For x^2 + bx + c = 0: find two numbers that multiply to c and add to b.",
+      "repro_type": "math",
+      "repro_prompt": "Find x values that satisfy x^2 - 5x + 6 = 0.",
+      "repro_vars": "Multiply to: 6\nAdd to: -5",
+      "repro_formula": "(x - ?)(x - ?) = 0",
+      "repro_answer": "x = 2 and x = 3"
+    },
+    {
+      "lvl": 3,
+      "concept": "Rate Problems",
+      "q": "Two cars leave the same point in opposite directions. Car A at 60 mph, Car B at 45 mph. How far apart after 2 hours?",
+      "choices": [
+        "120 miles",
+        "90 miles",
+        "210 miles",
+        "150 miles"
+      ],
+      "correct": 2,
+      "exp": "Car A: 60 x 2 = 120. Car B: 45 x 2 = 90. Opposite directions so add: 120 + 90 = 210.",
+      "method": {
+        "vars": "vA = 60 mph, t = 2\nvB = 45 mph, t = 2",
+        "formula": "d = v x t for each\ntotal = dA + dB",
+        "work": "dA = 120\ndB = 90\ntotal = 210"
+      },
+      "pattern": "Opposite directions: calculate each distance then add. Same direction: subtract.",
+      "repro_type": "math",
+      "repro_prompt": "Two trains leave in opposite directions at 70 and 50 mph. How far apart after 3 hours?",
+      "repro_vars": "v1 = 70, t = 3\nv2 = 50, t = 3",
+      "repro_formula": "d = v x t for each, then add",
+      "repro_answer": "360 miles"
+    },
+    {
+      "lvl": 3,
+      "concept": "Probability",
+      "q": "A bag has 3 red, 4 blue, and 5 green balls. What is the probability of picking blue?",
+      "choices": [
+        "1/4",
+        "1/3",
+        "4/12",
+        "2/3"
+      ],
+      "correct": 1,
+      "exp": "Total = 12. Blue = 4. P = 4/12 = 1/3.",
+      "method": {
+        "vars": "blue = 4\ntotal = 12",
+        "formula": "P = favorable / total",
+        "work": "P = 4/12 = 1/3"
+      },
+      "pattern": "Probability = what you want divided by total possible. Count total first.",
+      "repro_type": "math",
+      "repro_prompt": "A bag has 5 red and 7 blue marbles. Probability of picking red?",
+      "repro_vars": "red = 5\ntotal = 12",
+      "repro_formula": "P = red / total",
+      "repro_answer": "5/12"
+    }
+  ],
+  "reading": [
+    {
+      "lvl": 1,
+      "concept": "Finding Information Directly",
+      "passage": "Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-shaped car pushes air to the side and over the top, reducing the resistance that slows the car down.",
+      "q": "According to the passage, what do race car engineers use aerodynamics for?",
+      "choices": [
+        "To design more powerful engines",
+        "To make cars faster and more stable",
+        "To reduce the weight of the car",
+        "To improve fuel quality"
+      ],
+      "correct": 1,
+      "exp": "The passage states directly: engineers use aerodynamics to make cars faster and more stable.",
+      "method": {},
+      "pattern": "For according to the passage questions, find the exact sentence. The correct answer restates it.",
+      "repro_type": "read",
+      "repro_prompt": "What does a well-shaped car do to air?",
+      "repro_answer": "Pushes it to the side and over the top, reducing resistance."
+    },
+    {
+      "lvl": 1,
+      "concept": "Vocabulary in Context",
+      "passage": "Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-shaped car pushes air to the side and over the top, reducing the resistance that slows the car down.",
+      "q": "As used in the passage, 'resistance' most nearly means:",
+      "choices": [
+        "engine power",
+        "air that pushes back against the car",
+        "the weight of the car",
+        "the speed of the car"
+      ],
+      "correct": 1,
+      "exp": "The passage says resistance slows the car down. Only air that pushes back is consistent with something that slows a car.",
+      "method": {},
+      "pattern": "Read the full sentence. Pick the definition that fits the context, not the dictionary.",
+      "repro_type": "read",
+      "repro_prompt": "What is the best synonym for stable in: make cars faster and more stable at high speeds?",
+      "repro_answer": "Steady, balanced, or controlled."
+    },
+    {
+      "lvl": 2,
+      "concept": "Main Idea",
+      "passage": "For decades, engineers assumed that a heavier car was a safer car. Crash tests in the 1970s seemed to confirm this belief. But modern research tells a different story. Lightweight materials like carbon fiber absorb crash energy more effectively than steel, protecting the driver while also making the car faster.",
+      "q": "The main idea of this passage is that:",
+      "choices": [
+        "Crash tests from the 1970s proved heavy cars are safer.",
+        "Modern materials can be both safer and more efficient than heavy ones.",
+        "Carbon fiber is the most expensive engineering material.",
+        "Engineers have always known lighter cars are safer."
+      ],
+      "correct": 1,
+      "exp": "The passage introduces an old belief and then argues modern research overturns it.",
+      "method": {},
+      "pattern": "The main idea covers everything in the passage. A detail answers what. A main idea answers what is the point.",
+      "repro_type": "read",
+      "repro_prompt": "What did engineers assume for decades and what changed that view?",
+      "repro_answer": "They assumed heavier cars were safer. Modern research showed lightweight materials absorb crashes better."
+    },
+    {
+      "lvl": 2,
+      "concept": "Inference",
+      "passage": "Early aircraft designers built wings by intuition and trial and error. The Wright Brothers took a different approach. They built a wind tunnel, collected systematic data on wing shapes, and used that data to design their aircraft. Their first powered flight lasted 12 seconds. Within two years they were flying for 38 minutes.",
+      "q": "The passage implies that the Wright Brothers' rapid improvement was primarily due to:",
+      "choices": [
+        "Better funding than competitors.",
+        "Using data and systematic testing rather than intuition.",
+        "Favorable wind conditions at Kitty Hawk.",
+        "Previous experience with powered aircraft."
+      ],
+      "correct": 1,
+      "exp": "The passage contrasts intuition with systematic data. The rapid improvement follows directly from their data-driven approach.",
+      "method": {},
+      "pattern": "Inference questions ask what the passage implies. The answer must be supported by the passage.",
+      "repro_type": "read",
+      "repro_prompt": "What does the comparison between 12 seconds and 38 minutes suggest?",
+      "repro_answer": "That their systematic approach was working rapidly."
+    },
+    {
+      "lvl": 2,
+      "concept": "Vocabulary in Context",
+      "passage": "For decades, engineers assumed that a heavier car was a safer car. Crash tests in the 1970s seemed to confirm this belief. But modern research tells a different story. Lightweight materials like carbon fiber absorb crash energy more effectively than steel.",
+      "q": "As used in the passage, 'confirm' most nearly means:",
+      "choices": [
+        "contradict",
+        "support",
+        "question",
+        "replace"
+      ],
+      "correct": 1,
+      "exp": "The tests confirmed the belief. In context, confirm means support or provide evidence for.",
+      "method": {},
+      "pattern": "Vocabulary in context: the definition is in the surrounding sentences.",
+      "repro_type": "read",
+      "repro_prompt": "What does effectively mean in: lightweight materials absorb crash energy more effectively than steel?",
+      "repro_answer": "Better, or more successfully."
+    },
+    {
+      "lvl": 3,
+      "concept": "Author's Purpose",
+      "passage": "Critics of electric vehicles often focus on the limitations of current battery technology. What these critics miss is that battery technology is improving at a rate that mirrors the early development of internal combustion engines. In 1910, the gasoline engine was crude and unreliable. Today it powers the global economy. Electric motors are on the same trajectory.",
+      "q": "The author's primary purpose in this passage is to:",
+      "choices": [
+        "Explain how internal combustion engines work.",
+        "Argue that electric vehicles will eventually succeed.",
+        "Criticize those who support gasoline engines.",
+        "Present a balanced view of vehicle technology."
+      ],
+      "correct": 1,
+      "exp": "The author compares electric batteries to early gasoline engines to argue EVs are on a path to success.",
+      "method": {},
+      "pattern": "Author's purpose: Inform means neutral facts. Persuade means argues for a position. Tone tells you which.",
+      "repro_type": "read",
+      "repro_prompt": "Does the author think electric vehicles will succeed or fail? What evidence supports your answer?",
+      "repro_answer": "Succeed. The author compares EV battery development to early gasoline engines implying the same successful trajectory."
+    },
+    {
+      "lvl": 3,
+      "concept": "Tone and Attitude",
+      "passage": "Some engineers dismiss computational fluid dynamics as a shortcut that produces imprecise results. This view is understandable since early CFD models were indeed crude. But dismissing CFD today is like refusing to use a calculator because slide rules built character. Modern CFD predicts airflow with remarkable accuracy and has become indispensable to Formula 1 teams worldwide.",
+      "q": "The author's attitude toward CFD can best be described as:",
+      "choices": [
+        "Cautious and uncertain about its reliability.",
+        "Strongly supportive, while acknowledging early limitations.",
+        "Neutral and purely informational.",
+        "Critical of those who rely on it too heavily."
+      ],
+      "correct": 1,
+      "exp": "The author acknowledges early CFD was crude but strongly defends modern CFD as accurate and indispensable.",
+      "method": {},
+      "pattern": "Tone questions: look for words that signal feelings. The correct answer captures both the stance and any qualifications.",
+      "repro_type": "read",
+      "repro_prompt": "What does the author compare dismissing CFD to, and why does this comparison work?",
+      "repro_answer": "Refusing to use a calculator because slide rules built character. Both involve rejecting a better modern tool."
+    }
+  ],
+  "science": [
+    {
+      "lvl": 1,
+      "concept": "Reading a Table",
+      "passage": "Water temperature recorded over time:\n0 min: 20C\n5 min: 35C\n10 min: 50C\n15 min: 65C",
+      "q": "According to the data, what was the temperature at 10 minutes?",
+      "choices": [
+        "20C",
+        "35C",
+        "50C",
+        "65C"
+      ],
+      "correct": 2,
+      "exp": "Find 10 min in the data and read: 50C. No calculation needed.",
+      "method": {
+        "vars": "Time = 10 min",
+        "formula": "Read from table",
+        "work": "10 min = 50C"
+      },
+      "pattern": "Direct reading questions: find the row, read the value. Do not calculate.",
+      "repro_type": "math",
+      "repro_prompt": "How many degrees did temperature rise from 5 min to 15 min?",
+      "repro_vars": "Temp at 5 min = 35C\nTemp at 15 min = 65C",
+      "repro_formula": "change = final - initial",
+      "repro_answer": "30C"
+    },
+    {
+      "lvl": 1,
+      "concept": "Identifying a Trend",
+      "passage": "Wing lift force at different air speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N",
+      "q": "As air speed increases, lift force:",
+      "choices": [
+        "Decreases",
+        "Stays the same",
+        "Increases",
+        "First increases then decreases"
+      ],
+      "correct": 2,
+      "exp": "Read lift values in order: 120, 270, 480, 750. Each is higher. Trend is increasing.",
+      "method": {},
+      "pattern": "To identify a trend, read values in order. Consistently going up means increasing.",
+      "repro_type": "math",
+      "repro_prompt": "What is the lift force at 60 mph?",
+      "repro_vars": "Speed = 60 mph",
+      "repro_formula": "Read from table",
+      "repro_answer": "270 N"
+    },
+    {
+      "lvl": 2,
+      "concept": "Non-Linear Trend",
+      "passage": "Wing lift force at different air speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N",
+      "q": "Which best describes the relationship between air speed and lift?",
+      "choices": [
+        "Lift decreases as speed increases.",
+        "Lift increases at the same rate each time.",
+        "Lift increases but the rate of increase grows larger.",
+        "Lift and speed are not related."
+      ],
+      "correct": 2,
+      "exp": "Lift goes up. Check the increases: 150, 210, 270. The gaps are growing. The rate accelerates.",
+      "method": {
+        "vars": "Lift: 120, 270, 480, 750",
+        "formula": "Differences between values",
+        "work": "270-120=150\n480-270=210\n750-480=270\nGrowing"
+      },
+      "pattern": "Equal differences = linear. Growing differences = nonlinear.",
+      "repro_type": "math",
+      "repro_prompt": "What is the lift at 80 mph divided by the air speed at 80 mph?",
+      "repro_vars": "lift = 480 N\nspeed = 80 mph",
+      "repro_formula": "ratio = lift / speed",
+      "repro_answer": "6 N/mph"
+    },
+    {
+      "lvl": 2,
+      "concept": "Calculating from Data",
+      "passage": "Fuel efficiency at different speeds:\n55 mph: 34 mpg\n65 mph: 29 mpg\n75 mph: 23 mpg\n85 mph: 18 mpg",
+      "q": "How many gallons are needed to travel 230 miles at 65 mph?",
+      "choices": [
+        "6.7 gallons",
+        "7.2 gallons",
+        "7.9 gallons",
+        "8.3 gallons"
+      ],
+      "correct": 2,
+      "exp": "At 65 mph fuel efficiency = 29 mpg. Gallons = 230 / 29 = 7.93.",
+      "method": {
+        "vars": "distance = 230\nmpg at 65 = 29",
+        "formula": "gallons = distance / mpg",
+        "work": "= 230 / 29\n= 7.93 gallons"
+      },
+      "pattern": "Read the correct value from the table. Then apply the formula.",
+      "repro_type": "math",
+      "repro_prompt": "How many gallons to travel 230 miles at 85 mph?",
+      "repro_vars": "distance = 230\nmpg at 85 = 18",
+      "repro_formula": "gallons = distance / mpg",
+      "repro_answer": "12.8 gallons"
+    },
+    {
+      "lvl": 2,
+      "concept": "Identifying Variables",
+      "passage": "Experiment testing drag force:\nCondition A: smooth, 60 mph: 200 N\nCondition B: rough, 60 mph: 310 N\nCondition C: smooth, 90 mph: 450 N\nCondition D: rough, 90 mph: 698 N",
+      "q": "In this experiment, what is the independent variable?",
+      "choices": [
+        "Drag force",
+        "Air speed only",
+        "Surface texture only",
+        "Both air speed and surface texture"
+      ],
+      "correct": 3,
+      "exp": "The experiment changes two things: texture and speed. Both are independent variables. Drag force is what is measured.",
+      "method": {},
+      "pattern": "Independent variable = what the experimenter changes. Dependent variable = what is measured.",
+      "repro_type": "read",
+      "repro_prompt": "Which condition produced the most drag and why?",
+      "repro_answer": "Condition D. Both factors that increase drag are at their maximum."
+    },
+    {
+      "lvl": 3,
+      "concept": "Comparing Conditions",
+      "passage": "Drag force on a car body:\nAngle 0, 60 mph: 200 N\nAngle 0, 90 mph: 450 N\nAngle 5, 60 mph: 260 N\nAngle 5, 90 mph: 585 N",
+      "q": "Which factor had a greater effect on drag: speed from 60 to 90 mph, or angle from 0 to 5 degrees?",
+      "choices": [
+        "Speed had a greater effect.",
+        "Angle had a greater effect.",
+        "Both had equal effects.",
+        "The data does not allow comparison."
+      ],
+      "correct": 0,
+      "exp": "Speed effect: (450-200)/200 x 100 = 125%. Angle effect: (260-200)/200 x 100 = 30%. Speed wins.",
+      "method": {
+        "vars": "Speed: 200 to 450\nAngle: 200 to 260",
+        "formula": "% change = (change/original) x 100",
+        "work": "Speed: 250/200 x 100 = 125%\nAngle: 60/200 x 100 = 30%"
+      },
+      "pattern": "To compare two factors: isolate each by holding the other constant. Calculate percent change for each.",
+      "repro_type": "math",
+      "repro_prompt": "What is the percent increase in drag when angle goes from 0 to 5 degrees at 90 mph?",
+      "repro_vars": "Drag at 0 deg, 90 mph = 450 N\nDrag at 5 deg, 90 mph = 585 N",
+      "repro_formula": "% change = (change/original) x 100",
+      "repro_answer": "30%"
+    },
+    {
+      "lvl": 3,
+      "concept": "Drawing Conclusions",
+      "passage": "Three fuel additives tested:\nAdditive A: +8% efficiency, -2% power\nAdditive B: +3% efficiency, +5% power\nAdditive C: +12% efficiency, -8% power\nNo additive: baseline",
+      "q": "A racing team needs maximum power and can sacrifice some efficiency. Which additive?",
+      "choices": [
+        "Additive A",
+        "Additive B",
+        "Additive C",
+        "No additive"
+      ],
+      "correct": 1,
+      "exp": "The team prioritizes power. Only Additive B increases power (+5%). A and C both decrease power.",
+      "method": {},
+      "pattern": "When given a specific goal, match the data to that goal directly.",
+      "repro_type": "read",
+      "repro_prompt": "Which additive for maximum efficiency and what is the tradeoff?",
+      "repro_answer": "Additive C gives highest efficiency (+12%) but the tradeoff is an 8% loss in power."
+    }
+  ],
+  "writing": [
+    {
+      "lvl": 1,
+      "concept": "Active Voice",
+      "q": "Which sentence is clearest and most direct?",
+      "choices": [
+        "The problem was solved by the engineer.",
+        "The engineer solved the problem.",
+        "The solving of the problem was done by the engineer.",
+        "It was the engineer who solved the problem."
+      ],
+      "correct": 1,
+      "exp": "The engineer solved the problem puts the subject doing the action. Active voice.",
+      "method": {},
+      "pattern": "Active: subject does the action. Choose active on the ACT.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite in active voice: 'The data was analyzed by the research team.'",
+      "repro_rule": "Put the doer first."
+    },
+    {
+      "lvl": 1,
+      "concept": "Concision",
+      "q": "Which revision best improves: 'Due to the fact that he studied, Alex passed the exam.'",
+      "choices": [
+        "Due to studying, Alex passed the exam.",
+        "Because he studied, Alex passed the exam.",
+        "Because of the fact of his studying, Alex passed the exam.",
+        "Alex passed the exam due to the fact that studying occurred."
+      ],
+      "correct": 1,
+      "exp": "Because he studied does the same job in three words instead of eight.",
+      "method": {},
+      "pattern": "Due to the fact that always becomes because.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite concisely: 'In the event that it rains, the test will be postponed.'",
+      "repro_rule": "In the event that equals if."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Words",
+      "q": "Best transition: 'The first engine design overheated. ___, the revised design ran perfectly.'",
+      "choices": [
+        "Therefore",
+        "However",
+        "Furthermore",
+        "Similarly"
+      ],
+      "correct": 1,
+      "exp": "Failure then success. These contrast. However signals contrast.",
+      "method": {},
+      "pattern": "Contrast: however. Cause-effect: therefore. Addition: furthermore.",
+      "repro_type": "eng",
+      "repro_prompt": "Choose: 'The car was fastest in qualifying. ___, it finished last in the race.'",
+      "repro_rule": "Contrast. Use However."
+    },
+    {
+      "lvl": 2,
+      "concept": "Word Choice",
+      "q": "Most precise word: 'The aerodynamic changes had a ___ effect on performance.'",
+      "choices": [
+        "big",
+        "large",
+        "significant",
+        "sizeable"
+      ],
+      "correct": 2,
+      "exp": "Significant is the most precise and formal. Big and large are informal.",
+      "method": {},
+      "pattern": "When four words have similar meanings, choose the most precise and formal for the context.",
+      "repro_type": "eng",
+      "repro_prompt": "Choose: 'The engineer made a ___ (smart/calculated) decision about the wing design.'",
+      "repro_rule": "Calculated is more precise for an engineer."
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy",
+      "q": "Which sentence eliminates unnecessary repetition?",
+      "choices": [
+        "The final end result was a faster car.",
+        "The end result was a faster car.",
+        "The result was a faster car.",
+        "The final result in the end was a faster car."
+      ],
+      "correct": 2,
+      "exp": "Result already means the outcome. Final and end repeat that idea.",
+      "method": {},
+      "pattern": "If a word's meaning is already in another word, one is redundant.",
+      "repro_type": "eng",
+      "repro_prompt": "Remove the redundancy: 'The basic fundamentals of aerodynamics are not complicated.'",
+      "repro_rule": "Basic and fundamentals mean the same thing. Remove one."
+    },
+    {
+      "lvl": 3,
+      "concept": "Sentence Combining",
+      "q": "Which best combines: 'The test was successful. The results exceeded all expectations.'",
+      "choices": [
+        "The test was successful, and the results exceeded all expectations.",
+        "The test was successful the results exceeded all expectations.",
+        "The test was successful; however, the results exceeded all expectations.",
+        "The test was successful being that the results exceeded expectations."
+      ],
+      "correct": 0,
+      "exp": "Two complete sentences can be joined with comma + and. Choice A does this. Choice B is a comma splice.",
+      "method": {},
+      "pattern": "Two agreeing sentences: comma + and. Two contrasting sentences: comma + but.",
+      "repro_type": "eng",
+      "repro_prompt": "Combine: 'The wind tunnel data was clear. The wing needed a complete redesign.'",
+      "repro_rule": "The ideas contrast in effect. Use comma + so, or a semicolon."
+    }
+  ]
+}
