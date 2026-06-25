@@ -1,0 +1,3628 @@
+{
+  "version": "2.0",
+  "math": [
+    {
+      "lvl": 1,
+      "concept": "Substitution Single Variable",
+      "q": "If v = 3, what is 4v + 5?",
+      "choices": [
+        "12",
+        "14",
+        "17",
+        "20"
+      ],
+      "correct": 2,
+      "exp": "Replace v with 3: 4(3) + 5 = 17.",
+      "method": {
+        "vars": "v=3",
+        "formula": "4v+5",
+        "work": "12+5=17"
+      },
+      "pattern": "Replace the variable, then follow order of operations.",
+      "repro_type": "math",
+      "repro_prompt": "If t = 6, what is 3t - 4?",
+      "repro_vars": "t=6",
+      "repro_formula": "3t-4",
+      "repro_answer": "14"
+    },
+    {
+      "lvl": 1,
+      "concept": "Substitution Two Variables",
+      "q": "If x = 2 and y = 5, what is 3x + 2y?",
+      "choices": [
+        "16",
+        "17",
+        "19",
+        "21"
+      ],
+      "correct": 0,
+      "exp": "3(2) + 2(5) = 6 + 10 = 16.",
+      "method": {
+        "vars": "x=2,y=5",
+        "formula": "3x+2y",
+        "work": "16"
+      },
+      "pattern": "Substitute each variable separately then combine.",
+      "repro_type": "math",
+      "repro_prompt": "If a = 4 and b = 3, what is 2a + 3b?",
+      "repro_vars": "a=4,b=3",
+      "repro_formula": "2a+3b",
+      "repro_answer": "17"
+    },
+    {
+      "lvl": 1,
+      "concept": "One-Step Equations Subtraction",
+      "q": "If x - 4 = 9, what is x?",
+      "choices": [
+        "5",
+        "13",
+        "14",
+        "36"
+      ],
+      "correct": 1,
+      "exp": "x = 9 + 4 = 13.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "x-4=9",
+        "work": "x=13"
+      },
+      "pattern": "Undo subtraction by adding to both sides.",
+      "repro_type": "math",
+      "repro_prompt": "If x - 7 = 11, what is x?",
+      "repro_vars": "x=unknown",
+      "repro_formula": "x-7=11",
+      "repro_answer": "18"
+    },
+    {
+      "lvl": 1,
+      "concept": "One-Step Equations Multiplication",
+      "q": "If 3x = 21, what is x?",
+      "choices": [
+        "7",
+        "8",
+        "18",
+        "63"
+      ],
+      "correct": 0,
+      "exp": "x = 21/3 = 7.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "3x=21",
+        "work": "x=7"
+      },
+      "pattern": "Undo multiplication by dividing both sides by the coefficient.",
+      "repro_type": "math",
+      "repro_prompt": "If 5x = 35, what is x?",
+      "repro_vars": "x=unknown",
+      "repro_formula": "5x=35",
+      "repro_answer": "7"
+    },
+    {
+      "lvl": 1,
+      "concept": "Percentages Find Part",
+      "q": "What is 40% of 50?",
+      "choices": [
+        "10",
+        "20",
+        "25",
+        "40"
+      ],
+      "correct": 1,
+      "exp": "0.40 x 50 = 20.",
+      "method": {
+        "vars": "pct=40%,whole=50",
+        "formula": "0.40 x 50",
+        "work": "20"
+      },
+      "pattern": "Convert percent to decimal then multiply.",
+      "repro_type": "math",
+      "repro_prompt": "What is 60% of 80?",
+      "repro_vars": "pct=60%,whole=80",
+      "repro_formula": "0.60 x 80",
+      "repro_answer": "48"
+    },
+    {
+      "lvl": 1,
+      "concept": "Percentages Find Percent",
+      "q": "15 is what percent of 60?",
+      "choices": [
+        "15%",
+        "20%",
+        "25%",
+        "40%"
+      ],
+      "correct": 2,
+      "exp": "15/60 x 100 = 25%.",
+      "method": {
+        "vars": "part=15,whole=60",
+        "formula": "(part/whole)x100",
+        "work": "25%"
+      },
+      "pattern": "To find what percent: divide part by whole then multiply by 100.",
+      "repro_type": "math",
+      "repro_prompt": "18 is what percent of 72?",
+      "repro_vars": "part=18,whole=72",
+      "repro_formula": "(18/72)x100",
+      "repro_answer": "25%"
+    },
+    {
+      "lvl": 1,
+      "concept": "Order of Operations No Parentheses",
+      "q": "What is 2 + 3 x 4 - 1?",
+      "choices": [
+        "13",
+        "19",
+        "15",
+        "11"
+      ],
+      "correct": 0,
+      "exp": "3 x 4 = 12 first. Then 2 + 12 - 1 = 13.",
+      "method": {
+        "vars": "expression",
+        "formula": "multiply before add",
+        "work": "13"
+      },
+      "pattern": "Multiply and divide before adding and subtracting.",
+      "repro_type": "math",
+      "repro_prompt": "What is 10 - 2 x 3 + 1?",
+      "repro_vars": "expression",
+      "repro_formula": "multiply first",
+      "repro_answer": "5"
+    },
+    {
+      "lvl": 1,
+      "concept": "Order of Operations With Parentheses",
+      "q": "What is (3 + 4) x 2?",
+      "choices": [
+        "10",
+        "11",
+        "14",
+        "24"
+      ],
+      "correct": 2,
+      "exp": "(3+4)=7. 7 x 2 = 14.",
+      "method": {
+        "vars": "(3+4)x2",
+        "formula": "parentheses first",
+        "work": "14"
+      },
+      "pattern": "Always do parentheses first.",
+      "repro_type": "math",
+      "repro_prompt": "What is (5 + 3) x 4?",
+      "repro_vars": "(5+3)x4",
+      "repro_formula": "parentheses first",
+      "repro_answer": "32"
+    },
+    {
+      "lvl": 1,
+      "concept": "Area Rectangle",
+      "q": "A wing panel is 8 ft long and 3 ft wide. What is its area?",
+      "choices": [
+        "11 sq ft",
+        "22 sq ft",
+        "24 sq ft",
+        "32 sq ft"
+      ],
+      "correct": 2,
+      "exp": "Area = 8 x 3 = 24 sq ft. Perimeter = 22, not area.",
+      "method": {
+        "vars": "l=8,w=3",
+        "formula": "Area=lxw",
+        "work": "24"
+      },
+      "pattern": "Area = l x w. Perimeter = 2(l+w). Read carefully.",
+      "repro_type": "math",
+      "repro_prompt": "Panel 7 ft x 5 ft. Area?",
+      "repro_vars": "l=7,w=5",
+      "repro_formula": "lxw",
+      "repro_answer": "35 sq ft"
+    },
+    {
+      "lvl": 1,
+      "concept": "Perimeter",
+      "q": "A track: 15 m long and 6 m wide. Perimeter?",
+      "choices": [
+        "21 m",
+        "42 m",
+        "90 m",
+        "63 m"
+      ],
+      "correct": 1,
+      "exp": "P = 2(15+6) = 42 m.",
+      "method": {
+        "vars": "l=15,w=6",
+        "formula": "P=2(l+w)",
+        "work": "42"
+      },
+      "pattern": "Perimeter = 2(l+w). Not l x w.",
+      "repro_type": "math",
+      "repro_prompt": "Field 20 m x 8 m. Perimeter?",
+      "repro_vars": "l=20,w=8",
+      "repro_formula": "2(l+w)",
+      "repro_answer": "56 m"
+    },
+    {
+      "lvl": 1,
+      "concept": "Ratios",
+      "q": "Fuel: 3 parts ethanol, 5 parts gasoline. Fraction that is ethanol?",
+      "choices": [
+        "3/5",
+        "3/8",
+        "5/8",
+        "1/3"
+      ],
+      "correct": 1,
+      "exp": "Total = 8. Ethanol = 3/8.",
+      "method": {
+        "vars": "ethanol=3,total=8",
+        "formula": "part/total",
+        "work": "3/8"
+      },
+      "pattern": "Fraction = part / total. Total = sum of all parts.",
+      "repro_type": "math",
+      "repro_prompt": "Paint: 2 red, 6 white. Fraction red?",
+      "repro_vars": "red=2,total=8",
+      "repro_formula": "2/8",
+      "repro_answer": "1/4"
+    },
+    {
+      "lvl": 1,
+      "concept": "Average",
+      "q": "Lap times: 48, 52, 45, 55 sec. Average?",
+      "choices": [
+        "48",
+        "50",
+        "52",
+        "55"
+      ],
+      "correct": 1,
+      "exp": "(48+52+45+55)/4 = 200/4 = 50.",
+      "method": {
+        "vars": "sum=200,n=4",
+        "formula": "sum/n",
+        "work": "50"
+      },
+      "pattern": "Average = sum / count.",
+      "repro_type": "math",
+      "repro_prompt": "Scores: 70,80,85,65. Average?",
+      "repro_vars": "n=4",
+      "repro_formula": "sum/4",
+      "repro_answer": "75"
+    },
+    {
+      "lvl": 1,
+      "concept": "Average Missing Value",
+      "q": "Average of four numbers is 12. Three are 10, 14, 8. Fourth?",
+      "choices": [
+        "12",
+        "14",
+        "16",
+        "18"
+      ],
+      "correct": 2,
+      "exp": "Total = 48. Known = 32. Fourth = 16.",
+      "method": {
+        "vars": "avg=12,n=4,known=32",
+        "formula": "fourth=(avgxn)-known",
+        "work": "48-32=16"
+      },
+      "pattern": "Total sum = average x count. Subtract known.",
+      "repro_type": "math",
+      "repro_prompt": "Average of 5 is 10. Four are 8,12,9,11. Fifth?",
+      "repro_vars": "total=50,known=40",
+      "repro_formula": "50-40",
+      "repro_answer": "10"
+    },
+    {
+      "lvl": 1,
+      "concept": "Exponents Cubed",
+      "q": "What is 4^3?",
+      "choices": [
+        "12",
+        "64",
+        "81",
+        "256"
+      ],
+      "correct": 1,
+      "exp": "4x4x4 = 64.",
+      "method": {
+        "vars": "base=4,exp=3",
+        "formula": "4x4x4",
+        "work": "64"
+      },
+      "pattern": "Exponent = multiply base by itself that many times.",
+      "repro_type": "math",
+      "repro_prompt": "What is 5^3?",
+      "repro_vars": "5x5x5",
+      "repro_formula": "",
+      "repro_answer": "125"
+    },
+    {
+      "lvl": 1,
+      "concept": "Exponents Higher Power",
+      "q": "What is 2^5?",
+      "choices": [
+        "10",
+        "16",
+        "32",
+        "64"
+      ],
+      "correct": 2,
+      "exp": "2x2x2x2x2 = 32.",
+      "method": {
+        "vars": "base=2,exp=5",
+        "formula": "2^5",
+        "work": "32"
+      },
+      "pattern": "Count multiplications carefully.",
+      "repro_type": "math",
+      "repro_prompt": "What is 3^4?",
+      "repro_vars": "3x3x3x3",
+      "repro_formula": "",
+      "repro_answer": "81"
+    },
+    {
+      "lvl": 1,
+      "concept": "Fractions Addition",
+      "q": "What is 1/4 + 1/2?",
+      "choices": [
+        "1/6",
+        "2/6",
+        "3/4",
+        "1/3"
+      ],
+      "correct": 2,
+      "exp": "1/2=2/4. 1/4+2/4=3/4.",
+      "method": {
+        "vars": "1/4 and 1/2",
+        "formula": "common denom",
+        "work": "3/4"
+      },
+      "pattern": "Add fractions: find common denominator first.",
+      "repro_type": "math",
+      "repro_prompt": "What is 1/3 + 1/6?",
+      "repro_vars": "denom=6",
+      "repro_formula": "2/6+1/6",
+      "repro_answer": "1/2"
+    },
+    {
+      "lvl": 1,
+      "concept": "Fractions Multiplication",
+      "q": "What is 2/3 x 3/4?",
+      "choices": [
+        "5/7",
+        "6/7",
+        "1/2",
+        "6/12"
+      ],
+      "correct": 2,
+      "exp": "6/12 = 1/2.",
+      "method": {
+        "vars": "2/3 x 3/4",
+        "formula": "multiply across",
+        "work": "6/12=1/2"
+      },
+      "pattern": "Multiply top x top, bottom x bottom, then simplify.",
+      "repro_type": "math",
+      "repro_prompt": "What is 3/5 x 5/6?",
+      "repro_vars": "3/5 x 5/6",
+      "repro_formula": "15/30",
+      "repro_answer": "1/2"
+    },
+    {
+      "lvl": 1,
+      "concept": "Distance Velocity Time",
+      "q": "Rocket at 400 mph for 3 hours. How far?",
+      "choices": [
+        "133",
+        "403",
+        "1200",
+        "1600"
+      ],
+      "correct": 2,
+      "exp": "d = 400 x 3 = 1200.",
+      "method": {
+        "vars": "v=400,t=3",
+        "formula": "d=vxt",
+        "work": "1200"
+      },
+      "pattern": "d = v x t.",
+      "repro_type": "math",
+      "repro_prompt": "Car at 65 mph for 2 hours. How far?",
+      "repro_vars": "v=65,t=2",
+      "repro_formula": "dxvxt",
+      "repro_answer": "130 miles"
+    },
+    {
+      "lvl": 1,
+      "concept": "Speed from Distance",
+      "q": "Car travels 240 miles in 4 hours. Speed?",
+      "choices": [
+        "40",
+        "60",
+        "80",
+        "960"
+      ],
+      "correct": 1,
+      "exp": "v = 240/4 = 60 mph.",
+      "method": {
+        "vars": "d=240,t=4",
+        "formula": "v=d/t",
+        "work": "60"
+      },
+      "pattern": "v = d/t.",
+      "repro_type": "math",
+      "repro_prompt": "Train: 350 miles in 5 hours. Speed?",
+      "repro_vars": "d=350,t=5",
+      "repro_formula": "v=d/t",
+      "repro_answer": "70 mph"
+    },
+    {
+      "lvl": 1,
+      "concept": "Negative Numbers Multiplication",
+      "q": "What is -4 x -3?",
+      "choices": [
+        "-12",
+        "-7",
+        "7",
+        "12"
+      ],
+      "correct": 3,
+      "exp": "Neg x neg = positive = 12.",
+      "method": {},
+      "pattern": "Negative x negative = positive.",
+      "repro_type": "math",
+      "repro_prompt": "What is -5 x -6?",
+      "repro_vars": "-5 x -6",
+      "repro_formula": "",
+      "repro_answer": "30"
+    },
+    {
+      "lvl": 1,
+      "concept": "Negative Numbers Addition",
+      "q": "What is -8 + 3?",
+      "choices": [
+        "-11",
+        "-5",
+        "5",
+        "11"
+      ],
+      "correct": 1,
+      "exp": "-8+3=-5.",
+      "method": {},
+      "pattern": "Adding positive to negative: subtract, keep sign of larger.",
+      "repro_type": "math",
+      "repro_prompt": "What is -12 + 7?",
+      "repro_vars": "-12+7",
+      "repro_formula": "",
+      "repro_answer": "-5"
+    },
+    {
+      "lvl": 1,
+      "concept": "Area Triangle",
+      "q": "Fin: base 10 cm, height 6 cm. Area?",
+      "choices": [
+        "16",
+        "30",
+        "60",
+        "32"
+      ],
+      "correct": 1,
+      "exp": "0.5 x 10 x 6 = 30.",
+      "method": {
+        "vars": "b=10,h=6",
+        "formula": "0.5xbxh",
+        "work": "30"
+      },
+      "pattern": "Triangle area = half base times height.",
+      "repro_type": "math",
+      "repro_prompt": "Triangle: base 8, height 5. Area?",
+      "repro_vars": "b=8,h=5",
+      "repro_formula": "0.5xbxh",
+      "repro_answer": "20 sq m"
+    },
+    {
+      "lvl": 1,
+      "concept": "GCF",
+      "q": "GCF of 24 and 36?",
+      "choices": [
+        "4",
+        "6",
+        "12",
+        "18"
+      ],
+      "correct": 2,
+      "exp": "Factors of both include 12. GCF=12.",
+      "method": {},
+      "pattern": "List factors of both. GCF is largest in both lists.",
+      "repro_type": "math",
+      "repro_prompt": "GCF of 18 and 30?",
+      "repro_vars": "18 and 30",
+      "repro_formula": "",
+      "repro_answer": "6"
+    },
+    {
+      "lvl": 1,
+      "concept": "LCM",
+      "q": "LCM of 4 and 6?",
+      "choices": [
+        "2",
+        "10",
+        "12",
+        "24"
+      ],
+      "correct": 2,
+      "exp": "Multiples of 4: 4,8,12. Multiples of 6: 6,12. LCM=12.",
+      "method": {},
+      "pattern": "List multiples of each. LCM = first in both lists.",
+      "repro_type": "math",
+      "repro_prompt": "LCM of 3 and 5?",
+      "repro_vars": "3 and 5",
+      "repro_formula": "",
+      "repro_answer": "15"
+    },
+    {
+      "lvl": 1,
+      "concept": "Proportions",
+      "q": "Car: 3 gal for 90 miles. Gallons for 150 miles?",
+      "choices": [
+        "4",
+        "5",
+        "6",
+        "50"
+      ],
+      "correct": 1,
+      "exp": "90/3=30 mpg. 150/30=5.",
+      "method": {
+        "vars": "mpg=30,miles=150",
+        "formula": "gallons=miles/mpg",
+        "work": "5"
+      },
+      "pattern": "Find unit rate, then apply.",
+      "repro_type": "math",
+      "repro_prompt": "Car gets 25 mpg. Gallons for 175 miles?",
+      "repro_vars": "mpg=25,miles=175",
+      "repro_formula": "175/25",
+      "repro_answer": "7"
+    },
+    {
+      "lvl": 1,
+      "concept": "Pythagorean Theorem",
+      "q": "Right triangle: legs 5 and 12. Hypotenuse?",
+      "choices": [
+        "13",
+        "17",
+        "60",
+        "169"
+      ],
+      "correct": 0,
+      "exp": "25+144=169. sqrt(169)=13.",
+      "method": {
+        "vars": "a=5,b=12",
+        "formula": "a^2+b^2=c^2",
+        "work": "13"
+      },
+      "pattern": "Memorize 3-4-5 and 5-12-13.",
+      "repro_type": "math",
+      "repro_prompt": "Right triangle: legs 8 and 15. Hypotenuse?",
+      "repro_vars": "a=8,b=15",
+      "repro_formula": "a^2+b^2=c^2",
+      "repro_answer": "17"
+    },
+    {
+      "lvl": 1,
+      "concept": "Pythagorean Missing Leg",
+      "q": "Right triangle: hyp=10, one leg=6. Other leg?",
+      "choices": [
+        "4",
+        "8",
+        "16",
+        "64"
+      ],
+      "correct": 1,
+      "exp": "a^2=100-36=64. a=8.",
+      "method": {
+        "vars": "c=10,b=6",
+        "formula": "a^2=c^2-b^2",
+        "work": "8"
+      },
+      "pattern": "When hypotenuse given: a^2 = c^2 - b^2.",
+      "repro_type": "math",
+      "repro_prompt": "Hyp=17, one leg=15. Other leg?",
+      "repro_vars": "c=17,b=15",
+      "repro_formula": "a^2=17^2-15^2",
+      "repro_answer": "8"
+    },
+    {
+      "lvl": 1,
+      "concept": "Probability",
+      "q": "Bag: 5 red, 3 blue. P(red)?",
+      "choices": [
+        "3/8",
+        "5/3",
+        "5/8",
+        "3/5"
+      ],
+      "correct": 2,
+      "exp": "P=5/8.",
+      "method": {
+        "vars": "red=5,total=8",
+        "formula": "P=fav/total",
+        "work": "5/8"
+      },
+      "pattern": "P = what you want / total possible.",
+      "repro_type": "math",
+      "repro_prompt": "Jar: 4 green, 6 yellow. P(green)?",
+      "repro_vars": "green=4,total=10",
+      "repro_formula": "4/10",
+      "repro_answer": "2/5"
+    },
+    {
+      "lvl": 1,
+      "concept": "Probability Dice",
+      "q": "Die rolled. P(greater than 4)?",
+      "choices": [
+        "1/6",
+        "1/3",
+        "1/2",
+        "2/3"
+      ],
+      "correct": 1,
+      "exp": "5 and 6 = 2 outcomes. P=2/6=1/3.",
+      "method": {},
+      "pattern": "Count outcomes meeting condition. 'Greater than' excludes the endpoint.",
+      "repro_type": "math",
+      "repro_prompt": "Die rolled. P(less than 3)?",
+      "repro_vars": "1,2=2 outcomes",
+      "repro_formula": "2/6",
+      "repro_answer": "1/3"
+    },
+    {
+      "lvl": 1,
+      "concept": "Two-Step Equations",
+      "q": "If 2x + 3 = 11, what is x?",
+      "choices": [
+        "4",
+        "5",
+        "7",
+        "8"
+      ],
+      "correct": 0,
+      "exp": "2x=8. x=4.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "2x+3=11",
+        "work": "x=4"
+      },
+      "pattern": "Two steps: undo add/subtract first, then divide.",
+      "repro_type": "math",
+      "repro_prompt": "3x - 5 = 16. What is x?",
+      "repro_vars": "x=unknown",
+      "repro_formula": "3x=21",
+      "repro_answer": "7"
+    },
+    {
+      "lvl": 1,
+      "concept": "Two-Step Equations Fraction",
+      "q": "If x/4 + 2 = 5, what is x?",
+      "choices": [
+        "3",
+        "7",
+        "12",
+        "28"
+      ],
+      "correct": 2,
+      "exp": "x/4=3. x=12.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "x/4+2=5",
+        "work": "x=12"
+      },
+      "pattern": "Undo addition first, then multiply to undo division.",
+      "repro_type": "math",
+      "repro_prompt": "x/3 - 1 = 4. What is x?",
+      "repro_vars": "x=unknown",
+      "repro_formula": "x/3=5",
+      "repro_answer": "15"
+    },
+    {
+      "lvl": 1,
+      "concept": "Scientific Notation",
+      "q": "Which equals 3.5 x 10^3?",
+      "choices": [
+        "350",
+        "3500",
+        "35000",
+        "0.0035"
+      ],
+      "correct": 1,
+      "exp": "10^3=1000. 3.5x1000=3500.",
+      "method": {},
+      "pattern": "Positive exponent: move decimal right that many places.",
+      "repro_type": "math",
+      "repro_prompt": "What is 2.4 x 10^4?",
+      "repro_vars": "move decimal right 4",
+      "repro_formula": "",
+      "repro_answer": "24000"
+    },
+    {
+      "lvl": 1,
+      "concept": "Unit Conversion Time",
+      "q": "Car at 60 mph. How far in 30 minutes?",
+      "choices": [
+        "15",
+        "30",
+        "60",
+        "120"
+      ],
+      "correct": 1,
+      "exp": "30 min=0.5 hr. 60x0.5=30.",
+      "method": {
+        "vars": "v=60,t=0.5",
+        "formula": "d=vxt",
+        "work": "30"
+      },
+      "pattern": "Convert time to hours before using d=vxt.",
+      "repro_type": "math",
+      "repro_prompt": "Car 90 mph. How far in 20 minutes?",
+      "repro_vars": "t=1/3 hr",
+      "repro_formula": "90x(1/3)",
+      "repro_answer": "30 miles"
+    },
+    {
+      "lvl": 1,
+      "concept": "Simple Interest",
+      "q": "$500 at 4% for 3 years. Simple interest?",
+      "choices": [
+        "$20",
+        "$60",
+        "$80",
+        "$560"
+      ],
+      "correct": 1,
+      "exp": "500x0.04x3=$60.",
+      "method": {
+        "vars": "P=500,r=0.04,t=3",
+        "formula": "I=Pxrxt",
+        "work": "$60"
+      },
+      "pattern": "Simple interest = principal x rate x time.",
+      "repro_type": "math",
+      "repro_prompt": "$800 at 5% for 2 years. Interest?",
+      "repro_vars": "P=800,r=0.05,t=2",
+      "repro_formula": "I=Pxrxt",
+      "repro_answer": "$80"
+    },
+    {
+      "lvl": 1,
+      "concept": "Number Patterns Multiply",
+      "q": "Next: 3, 6, 12, 24, ___?",
+      "choices": [
+        "30",
+        "36",
+        "48",
+        "72"
+      ],
+      "correct": 2,
+      "exp": "x2 each time. 24x2=48.",
+      "method": {},
+      "pattern": "Find the operation, apply to last term.",
+      "repro_type": "math",
+      "repro_prompt": "Next: 5, 15, 45, 135, ___?",
+      "repro_vars": "x3",
+      "repro_formula": "135x3",
+      "repro_answer": "405"
+    },
+    {
+      "lvl": 1,
+      "concept": "Number Patterns Subtract",
+      "q": "Next: 100, 95, 90, 85, ___?",
+      "choices": [
+        "75",
+        "80",
+        "82",
+        "88"
+      ],
+      "correct": 1,
+      "exp": "-5 each time. 85-5=80.",
+      "method": {},
+      "pattern": "Subtract the common difference from the last term.",
+      "repro_type": "math",
+      "repro_prompt": "Next: 50, 44, 38, 32, ___?",
+      "repro_vars": "-6",
+      "repro_formula": "32-6",
+      "repro_answer": "26"
+    },
+    {
+      "lvl": 1,
+      "concept": "Midpoint",
+      "q": "Midpoint of (2,4) and (8,10)?",
+      "choices": [
+        "(3,5)",
+        "(5,7)",
+        "(6,7)",
+        "(10,14)"
+      ],
+      "correct": 1,
+      "exp": "((2+8)/2,(4+10)/2)=(5,7).",
+      "method": {
+        "vars": "P1=(2,4),P2=(8,10)",
+        "formula": "((x1+x2)/2,(y1+y2)/2)",
+        "work": "(5,7)"
+      },
+      "pattern": "Midpoint: average x-coords, average y-coords.",
+      "repro_type": "math",
+      "repro_prompt": "Midpoint of (1,3) and (7,9)?",
+      "repro_vars": "(1,3)(7,9)",
+      "repro_formula": "average each",
+      "repro_answer": "(4,6)"
+    },
+    {
+      "lvl": 2,
+      "concept": "Linear Equations",
+      "q": "If 5x - 7 = 3x + 9, what is x?",
+      "choices": [
+        "1",
+        "8",
+        "16",
+        "2"
+      ],
+      "correct": 1,
+      "exp": "2x=16. x=8.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "5x-7=3x+9",
+        "work": "x=8"
+      },
+      "pattern": "Get all x on one side, numbers on other.",
+      "repro_type": "math",
+      "repro_prompt": "Solve: 4x + 3 = 2x + 11",
+      "repro_vars": "x=unknown",
+      "repro_formula": "2x=8",
+      "repro_answer": "4"
+    },
+    {
+      "lvl": 2,
+      "concept": "Linear Equations Distribution",
+      "q": "If 3(x + 4) = 21, what is x?",
+      "choices": [
+        "3",
+        "5",
+        "7",
+        "17"
+      ],
+      "correct": 0,
+      "exp": "3x+12=21. x=3.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "3(x+4)=21",
+        "work": "x=3"
+      },
+      "pattern": "Distribute first, then solve two-step.",
+      "repro_type": "math",
+      "repro_prompt": "Solve: 4(x - 2) = 20",
+      "repro_vars": "x=unknown",
+      "repro_formula": "4x-8=20",
+      "repro_answer": "7"
+    },
+    {
+      "lvl": 2,
+      "concept": "Slope",
+      "q": "Slope through (-1, 3) and (3, 11)?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 1,
+      "exp": "(11-3)/(3-(-1))=8/4=2.",
+      "method": {
+        "vars": "P1=(-1,3),P2=(3,11)",
+        "formula": "(y2-y1)/(x2-x1)",
+        "work": "2"
+      },
+      "pattern": "Watch negatives: 3-(-1) = 4.",
+      "repro_type": "math",
+      "repro_prompt": "Slope through (-2,1) and (4,13)?",
+      "repro_vars": "P1=(-2,1),P2=(4,13)",
+      "repro_formula": "(13-1)/(4-(-2))",
+      "repro_answer": "2"
+    },
+    {
+      "lvl": 2,
+      "concept": "Slope-Intercept",
+      "q": "Slope of y = -3x + 7?",
+      "choices": [
+        "-7",
+        "-3",
+        "3",
+        "7"
+      ],
+      "correct": 1,
+      "exp": "In y=mx+b, m is slope. m=-3.",
+      "method": {},
+      "pattern": "y=mx+b: m=slope, b=y-intercept.",
+      "repro_type": "math",
+      "repro_prompt": "Y-intercept of y = 4x - 9?",
+      "repro_vars": "y=4x-9",
+      "repro_formula": "y=mx+b",
+      "repro_answer": "-9"
+    },
+    {
+      "lvl": 2,
+      "concept": "Percentage Change Increase",
+      "q": "Efficiency: 60% to 75%. Percent increase?",
+      "choices": [
+        "15%",
+        "20%",
+        "25%",
+        "40%"
+      ],
+      "correct": 2,
+      "exp": "15/60x100=25%. Divide by original.",
+      "method": {
+        "vars": "orig=60,new=75,change=15",
+        "formula": "(change/orig)x100",
+        "work": "25%"
+      },
+      "pattern": "ALWAYS divide by the ORIGINAL. Most common error.",
+      "repro_type": "math",
+      "repro_prompt": "Price $80 to $100. Percent increase?",
+      "repro_vars": "orig=80,change=20",
+      "repro_formula": "20/80x100",
+      "repro_answer": "25%"
+    },
+    {
+      "lvl": 2,
+      "concept": "Percentage Change Decrease",
+      "q": "Weight: 1200 kg to 900 kg. Percent decrease?",
+      "choices": [
+        "25%",
+        "30%",
+        "33%",
+        "75%"
+      ],
+      "correct": 0,
+      "exp": "300/1200x100=25%.",
+      "method": {
+        "vars": "orig=1200,change=300",
+        "formula": "(300/1200)x100",
+        "work": "25%"
+      },
+      "pattern": "Percent decrease: divide reduction by original.",
+      "repro_type": "math",
+      "repro_prompt": "Speed: 200 to 150 mph. Percent decrease?",
+      "repro_vars": "orig=200,change=50",
+      "repro_formula": "50/200x100",
+      "repro_answer": "25%"
+    },
+    {
+      "lvl": 2,
+      "concept": "Functions",
+      "q": "If f(x) = x^2 - 3, what is f(4)?",
+      "choices": [
+        "13",
+        "16",
+        "19",
+        "1"
+      ],
+      "correct": 0,
+      "exp": "4^2-3=13.",
+      "method": {
+        "vars": "x=4",
+        "formula": "x^2-3",
+        "work": "13"
+      },
+      "pattern": "Substitute value, apply exponent before subtracting.",
+      "repro_type": "math",
+      "repro_prompt": "f(x)=2x^2+1. f(3)?",
+      "repro_vars": "x=3",
+      "repro_formula": "2(9)+1",
+      "repro_answer": "19"
+    },
+    {
+      "lvl": 2,
+      "concept": "Composite Functions",
+      "q": "If g(x) = 3x + 2, what is g(g(1))?",
+      "choices": [
+        "5",
+        "17",
+        "11",
+        "8"
+      ],
+      "correct": 1,
+      "exp": "g(1)=5. g(5)=17.",
+      "method": {
+        "vars": "x=1",
+        "formula": "apply g twice",
+        "work": "17"
+      },
+      "pattern": "Composite: work inside out.",
+      "repro_type": "math",
+      "repro_prompt": "f(x)=2x-1. f(f(3))?",
+      "repro_vars": "f(3)=5",
+      "repro_formula": "f(5)",
+      "repro_answer": "9"
+    },
+    {
+      "lvl": 2,
+      "concept": "Inequalities",
+      "q": "Which satisfy -2x + 6 > 2?",
+      "choices": [
+        "x>2",
+        "x<2",
+        "x>-2",
+        "x<-2"
+      ],
+      "correct": 1,
+      "exp": "-2x>-4. Divide by -2, flip: x<2.",
+      "method": {
+        "vars": "x=unknown",
+        "formula": "-2x+6>2",
+        "work": "x<2"
+      },
+      "pattern": "CRITICAL: dividing by negative FLIPS the inequality sign.",
+      "repro_type": "math",
+      "repro_prompt": "Solve: -3x + 9 > 0",
+      "repro_vars": "-3x>-9",
+      "repro_formula": "flip sign",
+      "repro_answer": "x<3"
+    },
+    {
+      "lvl": 2,
+      "concept": "Triangle Angles Isosceles",
+      "q": "Isosceles: two equal angles of 65. Third?",
+      "choices": [
+        "50",
+        "55",
+        "60",
+        "65"
+      ],
+      "correct": 0,
+      "exp": "180-65-65=50.",
+      "method": {
+        "vars": "two=65",
+        "formula": "180-65-65",
+        "work": "50"
+      },
+      "pattern": "Isosceles: two equal base angles. All three sum to 180.",
+      "repro_type": "math",
+      "repro_prompt": "Isosceles: base angles 72 each. Vertex?",
+      "repro_vars": "180-72-72",
+      "repro_formula": "",
+      "repro_answer": "36"
+    },
+    {
+      "lvl": 2,
+      "concept": "Right Triangle Angles",
+      "q": "Right triangle: one acute angle 35. Other?",
+      "choices": [
+        "35",
+        "45",
+        "55",
+        "65"
+      ],
+      "correct": 2,
+      "exp": "180-90-35=55.",
+      "method": {
+        "vars": "right=90,known=35",
+        "formula": "180-90-35",
+        "work": "55"
+      },
+      "pattern": "Right triangle: two acute angles always sum to 90.",
+      "repro_type": "math",
+      "repro_prompt": "Right triangle: one acute angle 28. Other?",
+      "repro_vars": "90-28",
+      "repro_formula": "",
+      "repro_answer": "62"
+    },
+    {
+      "lvl": 2,
+      "concept": "Pythagorean Applied",
+      "q": "Ladder 13 ft, base 5 ft from wall. Height?",
+      "choices": [
+        "8",
+        "10",
+        "12",
+        "18"
+      ],
+      "correct": 2,
+      "exp": "a^2=169-25=144. a=12.",
+      "method": {
+        "vars": "c=13,b=5",
+        "formula": "a^2=c^2-b^2",
+        "work": "12"
+      },
+      "pattern": "Draw diagram. Hypotenuse is the ladder.",
+      "repro_type": "math",
+      "repro_prompt": "17-ft ladder, base 8 ft from wall. Height?",
+      "repro_vars": "c=17,b=8",
+      "repro_formula": "a^2=17^2-8^2",
+      "repro_answer": "15 ft"
+    },
+    {
+      "lvl": 2,
+      "concept": "Area of Circle",
+      "q": "Piston diameter 10 cm. Area? (pi=3.14)",
+      "choices": [
+        "31.4",
+        "78.5",
+        "157",
+        "314"
+      ],
+      "correct": 1,
+      "exp": "r=5. 3.14x25=78.5.",
+      "method": {
+        "vars": "d=10,r=5",
+        "formula": "pir^2",
+        "work": "78.5"
+      },
+      "pattern": "Convert diameter to radius first. r=d/2.",
+      "repro_type": "math",
+      "repro_prompt": "Circle diameter 14. Area? (pi=3.14)",
+      "repro_vars": "r=7",
+      "repro_formula": "pix49",
+      "repro_answer": "153.86"
+    },
+    {
+      "lvl": 2,
+      "concept": "Circumference",
+      "q": "Track radius 8 m. Circumference? (pi=3.14)",
+      "choices": [
+        "25.12",
+        "50.24",
+        "200.96",
+        "64"
+      ],
+      "correct": 1,
+      "exp": "2x3.14x8=50.24.",
+      "method": {
+        "vars": "r=8",
+        "formula": "C=2xpixr",
+        "work": "50.24"
+      },
+      "pattern": "Circumference=2pir. Area=pir^2. Do not mix.",
+      "repro_type": "math",
+      "repro_prompt": "Circle radius 10. Circumference? (pi=3.14)",
+      "repro_vars": "r=10",
+      "repro_formula": "2xpixr",
+      "repro_answer": "62.8"
+    },
+    {
+      "lvl": 2,
+      "concept": "Systems Substitution",
+      "q": "y=2x and x+y=9. What is x?",
+      "choices": [
+        "2",
+        "3",
+        "6",
+        "9"
+      ],
+      "correct": 1,
+      "exp": "x+2x=9. 3x=9. x=3.",
+      "method": {
+        "vars": "y=2x,x+y=9",
+        "formula": "substitute y",
+        "work": "x=3"
+      },
+      "pattern": "Substitution: plug one equation into the other.",
+      "repro_type": "math",
+      "repro_prompt": "y=3x and x+y=20. x?",
+      "repro_vars": "x+3x=20",
+      "repro_formula": "4x=20",
+      "repro_answer": "5"
+    },
+    {
+      "lvl": 2,
+      "concept": "Exponent Division",
+      "q": "What is x^5 / x^2?",
+      "choices": [
+        "x^3",
+        "x^7",
+        "x^10",
+        "1/x^3"
+      ],
+      "correct": 0,
+      "exp": "Subtract exponents: x^3.",
+      "method": {
+        "vars": "base=x",
+        "formula": "x^a/x^b=x^(a-b)",
+        "work": "x^3"
+      },
+      "pattern": "Same base division: subtract exponents.",
+      "repro_type": "math",
+      "repro_prompt": "x^8 / x^3?",
+      "repro_vars": "8-3",
+      "repro_formula": "x^5",
+      "repro_answer": "x^5"
+    },
+    {
+      "lvl": 2,
+      "concept": "Exponent Power to Power",
+      "q": "What is (x^3)^4?",
+      "choices": [
+        "x^7",
+        "x^12",
+        "x^64",
+        "4x^3"
+      ],
+      "correct": 1,
+      "exp": "Multiply exponents: x^12.",
+      "method": {
+        "vars": "base=x",
+        "formula": "(x^a)^b=x^(ab)",
+        "work": "x^12"
+      },
+      "pattern": "Power to power: multiply exponents.",
+      "repro_type": "math",
+      "repro_prompt": "(x^2)^5?",
+      "repro_vars": "2x5",
+      "repro_formula": "x^10",
+      "repro_answer": "x^10"
+    },
+    {
+      "lvl": 2,
+      "concept": "Probability Multiple Events",
+      "q": "Coin flipped twice. P(heads both)?",
+      "choices": [
+        "1/4",
+        "1/3",
+        "1/2",
+        "3/4"
+      ],
+      "correct": 0,
+      "exp": "1/2x1/2=1/4.",
+      "method": {
+        "vars": "P(H)=1/2 each",
+        "formula": "multiply",
+        "work": "1/4"
+      },
+      "pattern": "Independent events: multiply probabilities.",
+      "repro_type": "math",
+      "repro_prompt": "Die rolled, coin flipped. P(6 and heads)?",
+      "repro_vars": "1/6 x 1/2",
+      "repro_formula": "",
+      "repro_answer": "1/12"
+    },
+    {
+      "lvl": 2,
+      "concept": "Factoring Common",
+      "q": "Factor: 6x^2 + 9x",
+      "choices": [
+        "3(2x^2+3x)",
+        "3x(2x+3)",
+        "6x(x+9)",
+        "x(6x+9)"
+      ],
+      "correct": 1,
+      "exp": "GCF=3x. 3x(2x+3).",
+      "method": {
+        "vars": "GCF=3x",
+        "formula": "factor out",
+        "work": "3x(2x+3)"
+      },
+      "pattern": "Pull out GCF. Verify by distributing back.",
+      "repro_type": "math",
+      "repro_prompt": "Factor: 8x^2 + 12x",
+      "repro_vars": "GCF=4x",
+      "repro_formula": "4x(2x+3)",
+      "repro_answer": "4x(2x+3)"
+    },
+    {
+      "lvl": 2,
+      "concept": "Absolute Value",
+      "q": "What is |5 - 9|?",
+      "choices": [
+        "-4",
+        "4",
+        "14",
+        "45"
+      ],
+      "correct": 1,
+      "exp": "5-9=-4. |-4|=4.",
+      "method": {},
+      "pattern": "Absolute value is always non-negative.",
+      "repro_type": "math",
+      "repro_prompt": "What is |3 - 11|?",
+      "repro_vars": "3-11=-8",
+      "repro_formula": "|\u22128|",
+      "repro_answer": "8"
+    },
+    {
+      "lvl": 2,
+      "concept": "Absolute Value Equation",
+      "q": "Solutions to |x| = 7?",
+      "choices": [
+        "x=7 only",
+        "x=-7 only",
+        "x=7 and x=-7",
+        "x=49"
+      ],
+      "correct": 2,
+      "exp": "x=7 or x=-7.",
+      "method": {},
+      "pattern": "Absolute value equations always have two solutions.",
+      "repro_type": "math",
+      "repro_prompt": "Solutions to |x| = 5?",
+      "repro_vars": "|x|=5",
+      "repro_formula": "",
+      "repro_answer": "x=5 and x=-5"
+    },
+    {
+      "lvl": 2,
+      "concept": "Weighted Average",
+      "q": "Score 80 (60% weight) and 70 (40% weight). Weighted avg?",
+      "choices": [
+        "75",
+        "76",
+        "77",
+        "78"
+      ],
+      "correct": 1,
+      "exp": "80(0.60)+70(0.40)=48+28=76.",
+      "method": {
+        "vars": "scores and weights",
+        "formula": "sum(score x weight)",
+        "work": "76"
+      },
+      "pattern": "Multiply each score by its weight. Weights must sum to 1.",
+      "repro_type": "math",
+      "repro_prompt": "Score 90 (70%) and 60 (30%). Weighted avg?",
+      "repro_vars": "90(0.70)+60(0.30)",
+      "repro_formula": "",
+      "repro_answer": "81"
+    },
+    {
+      "lvl": 2,
+      "concept": "Median",
+      "q": "Median of 3, 7, 2, 9, 5?",
+      "choices": [
+        "2",
+        "5",
+        "7",
+        "9"
+      ],
+      "correct": 1,
+      "exp": "Sort: 2,3,5,7,9. Middle=5.",
+      "method": {},
+      "pattern": "Median: sort first, find middle value.",
+      "repro_type": "math",
+      "repro_prompt": "Median of 4,8,1,6,3,9?",
+      "repro_vars": "sorted: 1,3,4,6,8,9",
+      "repro_formula": "average of 4 and 6",
+      "repro_answer": "5"
+    },
+    {
+      "lvl": 2,
+      "concept": "Similar Triangles",
+      "q": "Similar triangles: 3,4,5 and 6,8,x. x?",
+      "choices": [
+        "7",
+        "8",
+        "10",
+        "12"
+      ],
+      "correct": 2,
+      "exp": "Scale=2. x=5x2=10.",
+      "method": {
+        "vars": "ratio=2",
+        "formula": "x=5xratio",
+        "work": "10"
+      },
+      "pattern": "Find scale factor, apply to unknown side.",
+      "repro_type": "math",
+      "repro_prompt": "Similar: 5,12,13 and 10,24,x. x?",
+      "repro_vars": "scale=2",
+      "repro_formula": "13x2",
+      "repro_answer": "26"
+    },
+    {
+      "lvl": 2,
+      "concept": "Volume Cylinder",
+      "q": "Cylinder: r=3, h=10. Volume? (pi=3.14)",
+      "choices": [
+        "94.2",
+        "188.4",
+        "282.6",
+        "942"
+      ],
+      "correct": 2,
+      "exp": "3.14x9x10=282.6.",
+      "method": {
+        "vars": "r=3,h=10",
+        "formula": "V=pir^2h",
+        "work": "282.6"
+      },
+      "pattern": "V=pir^2h. Square radius first.",
+      "repro_type": "math",
+      "repro_prompt": "Cylinder r=2, h=7. Volume? (pi=3.14)",
+      "repro_vars": "r=2,h=7",
+      "repro_formula": "pix4x7",
+      "repro_answer": "87.92"
+    },
+    {
+      "lvl": 2,
+      "concept": "Volume Rectangular",
+      "q": "Tank: 4x3x2 m. Volume?",
+      "choices": [
+        "9",
+        "18",
+        "24",
+        "48"
+      ],
+      "correct": 2,
+      "exp": "4x3x2=24.",
+      "method": {
+        "vars": "l=4,w=3,h=2",
+        "formula": "V=lxwxh",
+        "work": "24"
+      },
+      "pattern": "Volume = all three dimensions multiplied.",
+      "repro_type": "math",
+      "repro_prompt": "Box 5x4x3. Volume?",
+      "repro_vars": "5x4x3",
+      "repro_formula": "",
+      "repro_answer": "60"
+    },
+    {
+      "lvl": 2,
+      "concept": "Work Rate",
+      "q": "Alex finishes in 3 hrs. Jamie in 6 hrs. Together?",
+      "choices": [
+        "1 hr",
+        "2 hrs",
+        "4.5 hrs",
+        "9 hrs"
+      ],
+      "correct": 1,
+      "exp": "1/3+1/6=1/2/hr. Time=2.",
+      "method": {
+        "vars": "rates: 1/3 and 1/6",
+        "formula": "add rates, time=1/combined",
+        "work": "2"
+      },
+      "pattern": "Work rate=1/time. Add rates. Time=1/combined.",
+      "repro_type": "math",
+      "repro_prompt": "A in 4 hrs, B in 12 hrs. Together?",
+      "repro_vars": "1/4+1/12=1/3",
+      "repro_formula": "time=3",
+      "repro_answer": "3 hours"
+    },
+    {
+      "lvl": 2,
+      "concept": "Proportional Reasoning",
+      "q": "8 engineers: 12 days. 16 engineers?",
+      "choices": [
+        "6",
+        "8",
+        "10",
+        "24"
+      ],
+      "correct": 0,
+      "exp": "96 work-days. 96/16=6.",
+      "method": {
+        "vars": "total=96",
+        "formula": "days=total/workers",
+        "work": "6"
+      },
+      "pattern": "Total work = workers x days. Hold constant.",
+      "repro_type": "math",
+      "repro_prompt": "6 workers, 10 days. 15 workers?",
+      "repro_vars": "total=60",
+      "repro_formula": "60/15",
+      "repro_answer": "4 days"
+    },
+    {
+      "lvl": 2,
+      "concept": "Quadratic Roots",
+      "q": "Solutions to x^2 - 9 = 0?",
+      "choices": [
+        "x=3 only",
+        "x=-3 only",
+        "x=3 and x=-3",
+        "x=9"
+      ],
+      "correct": 2,
+      "exp": "x^2=9. x=+/-3.",
+      "method": {
+        "vars": "x^2=9",
+        "formula": "x=+/-sqrt(9)",
+        "work": "x=3 or x=-3"
+      },
+      "pattern": "Square root always gives two answers.",
+      "repro_type": "math",
+      "repro_prompt": "Solve: x^2 - 16 = 0",
+      "repro_vars": "x^2=16",
+      "repro_formula": "x=+/-4",
+      "repro_answer": "x=4 and x=-4"
+    },
+    {
+      "lvl": 3,
+      "concept": "Systems Elimination",
+      "q": "2x+3y=12 and 4x-3y=6. x?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 2,
+      "exp": "Add: 6x=18. x=3.",
+      "method": {
+        "vars": "Eq1: 2x+3y=12, Eq2: 4x-3y=6",
+        "formula": "add to cancel y",
+        "work": "x=3"
+      },
+      "pattern": "Opposite y coefficients: add the equations.",
+      "repro_type": "math",
+      "repro_prompt": "3x+2y=14 and x-2y=2. x?",
+      "repro_vars": "add to cancel y",
+      "repro_formula": "4x=16",
+      "repro_answer": "4"
+    },
+    {
+      "lvl": 3,
+      "concept": "Systems Elimination 2",
+      "q": "x+y=10 and 2x+y=15. y?",
+      "choices": [
+        "2",
+        "3",
+        "5",
+        "7"
+      ],
+      "correct": 2,
+      "exp": "Subtract: x=5. 5+y=10. y=5.",
+      "method": {
+        "vars": "subtract Eq1 from Eq2",
+        "formula": "",
+        "work": "x=5,y=5"
+      },
+      "pattern": "Equal coefficients: subtract to eliminate that variable.",
+      "repro_type": "math",
+      "repro_prompt": "x+y=8 and 3x+y=18. y?",
+      "repro_vars": "x=5",
+      "repro_formula": "5+y=8",
+      "repro_answer": "y=3"
+    },
+    {
+      "lvl": 3,
+      "concept": "Quadratic Formula",
+      "q": "x^2+2x-8=0. Solutions?",
+      "choices": [
+        "x=2 and x=-4",
+        "x=4 and x=-2",
+        "x=-2 and x=4",
+        "x=2 and x=4"
+      ],
+      "correct": 0,
+      "exp": "(x+4)(x-2)=0. x=-4 or x=2.",
+      "method": {
+        "vars": "a=1,b=2,c=-8",
+        "formula": "factor or formula",
+        "work": "x=2 or x=-4"
+      },
+      "pattern": "Quadratic formula: x=(-b+/-sqrt(b^2-4ac))/2a.",
+      "repro_type": "math",
+      "repro_prompt": "Solve x^2-x-6=0.",
+      "repro_vars": "multiply to -6, add to -1",
+      "repro_formula": "(x-3)(x+2)=0",
+      "repro_answer": "x=3 and x=-2"
+    },
+    {
+      "lvl": 3,
+      "concept": "Discriminant",
+      "q": "x^2+4x+5=0. Real solutions?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "Cannot be determined"
+      ],
+      "correct": 0,
+      "exp": "b^2-4ac=16-20=-4. Negative=no real solutions.",
+      "method": {
+        "vars": "a=1,b=4,c=5",
+        "formula": "b^2-4ac",
+        "work": "-4"
+      },
+      "pattern": "Discriminant<0: no real solutions. =0: one. >0: two.",
+      "repro_type": "math",
+      "repro_prompt": "x^2-6x+9=0. Solutions?",
+      "repro_vars": "36-36=0",
+      "repro_formula": "",
+      "repro_answer": "One solution (x=3)"
+    },
+    {
+      "lvl": 3,
+      "concept": "Rational Expressions",
+      "q": "Simplify (x^2-4)/(x-2)",
+      "choices": [
+        "x+2",
+        "x-2",
+        "(x+2)(x-2)",
+        "x^2-2"
+      ],
+      "correct": 0,
+      "exp": "x^2-4=(x+2)(x-2). Cancel (x-2): x+2.",
+      "method": {
+        "vars": "numerator=(x+2)(x-2)",
+        "formula": "factor then cancel",
+        "work": "x+2"
+      },
+      "pattern": "Factor before canceling. x^2-n^2=(x+n)(x-n).",
+      "repro_type": "math",
+      "repro_prompt": "Simplify (x^2-9)/(x+3)",
+      "repro_vars": "x^2-9=(x+3)(x-3)",
+      "repro_formula": "cancel (x+3)",
+      "repro_answer": "x-3"
+    },
+    {
+      "lvl": 3,
+      "concept": "Logarithms",
+      "q": "log base 2 of 32?",
+      "choices": [
+        "2",
+        "4",
+        "5",
+        "16"
+      ],
+      "correct": 2,
+      "exp": "2^5=32. Answer=5.",
+      "method": {
+        "vars": "base=2,arg=32",
+        "formula": "log_b(x)=n means b^n=x",
+        "work": "5"
+      },
+      "pattern": "Convert log to exponent: what power of base gives the argument?",
+      "repro_type": "math",
+      "repro_prompt": "log base 3 of 81?",
+      "repro_vars": "3^?=81",
+      "repro_formula": "3^4=81",
+      "repro_answer": "4"
+    },
+    {
+      "lvl": 3,
+      "concept": "Trig Ratios Sin",
+      "q": "Right triangle: opp=5, hyp=13. sin(A)?",
+      "choices": [
+        "5/12",
+        "5/13",
+        "12/13",
+        "13/5"
+      ],
+      "correct": 1,
+      "exp": "sin=opp/hyp=5/13.",
+      "method": {
+        "vars": "opp=5,hyp=13",
+        "formula": "sin=opp/hyp",
+        "work": "5/13"
+      },
+      "pattern": "SOH CAH TOA: Sin=Opp/Hyp.",
+      "repro_type": "math",
+      "repro_prompt": "Same triangle (opp=5,adj=12,hyp=13). cos(A)?",
+      "repro_vars": "adj=12,hyp=13",
+      "repro_formula": "adj/hyp",
+      "repro_answer": "12/13"
+    },
+    {
+      "lvl": 3,
+      "concept": "Trig Ratios Tan",
+      "q": "Right triangle: legs 3 and 4, hyp 5. tan opposite leg 3?",
+      "choices": [
+        "3/5",
+        "4/5",
+        "3/4",
+        "4/3"
+      ],
+      "correct": 2,
+      "exp": "tan=opp/adj=3/4.",
+      "method": {
+        "vars": "opp=3,adj=4",
+        "formula": "tan=opp/adj",
+        "work": "3/4"
+      },
+      "pattern": "Tangent uses legs only, not hypotenuse.",
+      "repro_type": "math",
+      "repro_prompt": "Same triangle. tan opposite leg 4?",
+      "repro_vars": "opp=4,adj=3",
+      "repro_formula": "4/3",
+      "repro_answer": "4/3"
+    },
+    {
+      "lvl": 3,
+      "concept": "Arithmetic Sequences",
+      "q": "5th term=23, d=4. 1st term?",
+      "choices": [
+        "3",
+        "7",
+        "11",
+        "19"
+      ],
+      "correct": 1,
+      "exp": "a1=23-4(4)=7.",
+      "method": {
+        "vars": "a5=23,d=4",
+        "formula": "a1=a5-(n-1)d",
+        "work": "7"
+      },
+      "pattern": "nth term = a1+(n-1)d. Rearrange for a1.",
+      "repro_type": "math",
+      "repro_prompt": "8th term=43, d=5. 1st term?",
+      "repro_vars": "a8=43,d=5",
+      "repro_formula": "a1=43-7(5)",
+      "repro_answer": "8"
+    },
+    {
+      "lvl": 3,
+      "concept": "Geometric Sequences",
+      "q": "2, 6, 18, 54, ___. Next?",
+      "choices": [
+        "72",
+        "108",
+        "162",
+        "216"
+      ],
+      "correct": 2,
+      "exp": "Ratio=3. 54x3=162.",
+      "method": {
+        "vars": "ratio=3",
+        "formula": "next=currentxratio",
+        "work": "162"
+      },
+      "pattern": "Geometric: find ratio by dividing consecutive terms.",
+      "repro_type": "math",
+      "repro_prompt": "4, 12, 36, 108, ___. Next?",
+      "repro_vars": "ratio=3",
+      "repro_formula": "108x3",
+      "repro_answer": "324"
+    },
+    {
+      "lvl": 3,
+      "concept": "Compound Probability",
+      "q": "Two dice. P(both show 6)?",
+      "choices": [
+        "1/6",
+        "1/12",
+        "1/36",
+        "1/3"
+      ],
+      "correct": 2,
+      "exp": "1/6x1/6=1/36.",
+      "method": {
+        "vars": "P(6)=1/6 each",
+        "formula": "multiply",
+        "work": "1/36"
+      },
+      "pattern": "Independent events: multiply probabilities.",
+      "repro_type": "math",
+      "repro_prompt": "Bag: 3 red of 10. Draw, replace, draw. P(red both)?",
+      "repro_vars": "3/10 x 3/10",
+      "repro_formula": "",
+      "repro_answer": "9/100"
+    },
+    {
+      "lvl": 3,
+      "concept": "Permutations",
+      "q": "3-digit codes from 1-6, no repeats. How many?",
+      "choices": [
+        "18",
+        "20",
+        "120",
+        "216"
+      ],
+      "correct": 2,
+      "exp": "6x5x4=120.",
+      "method": {
+        "vars": "6 digits,3 positions",
+        "formula": "6x5x4",
+        "work": "120"
+      },
+      "pattern": "Without repeats: multiply decreasing choices.",
+      "repro_type": "math",
+      "repro_prompt": "4-letter codes from 7, no repeats?",
+      "repro_vars": "7x6x5x4",
+      "repro_formula": "",
+      "repro_answer": "840"
+    },
+    {
+      "lvl": 3,
+      "concept": "Rational Exponents",
+      "q": "27^(1/3)?",
+      "choices": [
+        "3",
+        "9",
+        "13",
+        "81"
+      ],
+      "correct": 0,
+      "exp": "Cube root of 27=3.",
+      "method": {
+        "vars": "27^(1/3)",
+        "formula": "x^(1/n)=nth root",
+        "work": "3"
+      },
+      "pattern": "Fractional exponent 1/n = nth root.",
+      "repro_type": "math",
+      "repro_prompt": "64^(1/3)?",
+      "repro_vars": "cube root of 64",
+      "repro_formula": "4^3=64",
+      "repro_answer": "4"
+    },
+    {
+      "lvl": 3,
+      "concept": "Parabola Vertex",
+      "q": "Vertex of y=(x-3)^2+5?",
+      "choices": [
+        "(-3,5)",
+        "(3,5)",
+        "(3,-5)",
+        "(-3,-5)"
+      ],
+      "correct": 1,
+      "exp": "Vertex form (h,k)=(3,5). (x-3) means h=+3.",
+      "method": {},
+      "pattern": "y=(x-h)^2+k: vertex=(h,k). Watch the sign.",
+      "repro_type": "math",
+      "repro_prompt": "Vertex of y=(x+2)^2-7?",
+      "repro_vars": "h=-2,k=-7",
+      "repro_formula": "(h,k)",
+      "repro_answer": "(-2,-7)"
+    },
+    {
+      "lvl": 3,
+      "concept": "Function Transformations",
+      "q": "f(x)=x^2. How does g(x)=x^2+4 compare?",
+      "choices": [
+        "Shifted right 4",
+        "Shifted left 4",
+        "Shifted up 4",
+        "Shifted down 4"
+      ],
+      "correct": 2,
+      "exp": "Adding a constant outside the function shifts the graph up 4 units.",
+      "method": {},
+      "pattern": "f(x)+k shifts UP. f(x)-k DOWN. f(x-h) RIGHT. f(x+h) LEFT.",
+      "repro_type": "math",
+      "repro_prompt": "How does g(x)=(x-3)^2 compare to f(x)=x^2?",
+      "repro_vars": "(x-3) inside",
+      "repro_formula": "",
+      "repro_answer": "Shifted 3 units right"
+    },
+    {
+      "lvl": 3,
+      "concept": "Inverse Functions",
+      "q": "f(x)=2x+6. f^-1(x)?",
+      "choices": [
+        "(x-6)/2",
+        "2x-6",
+        "(x+6)/2",
+        "1/(2x+6)"
+      ],
+      "correct": 0,
+      "exp": "Swap x and y: x=2y+6. y=(x-6)/2.",
+      "method": {
+        "vars": "f(x)=2x+6",
+        "formula": "swap x,y solve for y",
+        "work": "(x-6)/2"
+      },
+      "pattern": "Inverse: swap x and y, solve for y.",
+      "repro_type": "math",
+      "repro_prompt": "f(x)=3x-9. f^-1(x)?",
+      "repro_vars": "x=3y-9",
+      "repro_formula": "y=(x+9)/3",
+      "repro_answer": "(x+9)/3"
+    },
+    {
+      "lvl": 3,
+      "concept": "Exponential Growth",
+      "q": "Bacteria doubles each hour. Starts at 500. After 4 hours?",
+      "choices": [
+        "2000",
+        "4000",
+        "8000",
+        "16000"
+      ],
+      "correct": 2,
+      "exp": "500x2^4=8000.",
+      "method": {
+        "vars": "P0=500,r=2,t=4",
+        "formula": "P=P0xr^t",
+        "work": "8000"
+      },
+      "pattern": "Exponential growth: P = P0 x (factor)^time.",
+      "repro_type": "math",
+      "repro_prompt": "$1000 triples each year. After 3 years?",
+      "repro_vars": "P0=1000,r=3,t=3",
+      "repro_formula": "1000x27",
+      "repro_answer": "$27,000"
+    },
+    {
+      "lvl": 3,
+      "concept": "Absolute Value Equation",
+      "q": "Solutions to |2x-4|=6?",
+      "choices": [
+        "x=5 only",
+        "x=-1 only",
+        "x=5 and x=-1",
+        "x=1 and x=5"
+      ],
+      "correct": 2,
+      "exp": "Case 1: x=5. Case 2: x=-1.",
+      "method": {
+        "vars": "|2x-4|=6",
+        "formula": "two cases",
+        "work": "x=5 or x=-1"
+      },
+      "pattern": "Absolute value: always set up both positive and negative cases.",
+      "repro_type": "math",
+      "repro_prompt": "Solve |x+3|=5.",
+      "repro_vars": "two cases",
+      "repro_formula": "",
+      "repro_answer": "x=2 and x=-8"
+    },
+    {
+      "lvl": 3,
+      "concept": "Complex Numbers",
+      "q": "(2+3i)+(4-i)?",
+      "choices": [
+        "6+2i",
+        "6-2i",
+        "6+4i",
+        "2+2i"
+      ],
+      "correct": 0,
+      "exp": "Add real parts: 2+4=6. Add imaginary: 3i+(-i)=2i. Result: 6+2i.",
+      "method": {},
+      "pattern": "Complex addition: add real parts and imaginary parts separately.",
+      "repro_type": "math",
+      "repro_prompt": "(5+2i)-(3-4i)?",
+      "repro_vars": "real: 2, imaginary: 6i",
+      "repro_formula": "",
+      "repro_answer": "2+6i"
+    },
+    {
+      "lvl": 3,
+      "concept": "Line from Two Points",
+      "q": "Equation through (0,3) and (2,7)?",
+      "choices": [
+        "y=2x+3",
+        "y=3x+2",
+        "y=2x-3",
+        "y=4x+3"
+      ],
+      "correct": 0,
+      "exp": "slope=2, b=3. y=2x+3.",
+      "method": {
+        "vars": "P1=(0,3),P2=(2,7)",
+        "formula": "slope=(y2-y1)/(x2-x1), y=mx+b",
+        "work": "y=2x+3"
+      },
+      "pattern": "If one point has x=0, that y-value is the y-intercept directly.",
+      "repro_type": "math",
+      "repro_prompt": "Equation through (0,5) and (3,11)?",
+      "repro_vars": "slope=2,b=5",
+      "repro_formula": "y=mx+b",
+      "repro_answer": "y=2x+5"
+    }
+  ],
+  "english": [
+    {
+      "lvl": 1,
+      "concept": "Complete Sentences Identify",
+      "q": "Which is a complete sentence?",
+      "choices": [
+        "Running down the track.",
+        "The engineer tested the prototype successfully.",
+        "Fast and precise through the data.",
+        "After the wind tunnel experiment."
+      ],
+      "correct": 1,
+      "exp": "A complete sentence has a subject and a verb. 'The engineer tested' has both.",
+      "method": {},
+      "pattern": "Check: who is doing something, and what are they doing? Both must be present.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix this fragment: 'Calculating the aerodynamic drag.'",
+      "repro_rule": "Add a subject."
+    },
+    {
+      "lvl": 1,
+      "concept": "Complete Sentences Fragment",
+      "q": "Which is NOT a complete sentence?",
+      "choices": [
+        "The team built the engine.",
+        "Alex studied all night.",
+        "Before the race started.",
+        "Chiron trains young heroes."
+      ],
+      "correct": 2,
+      "exp": "'Before the race started' is a dependent clause and cannot stand alone.",
+      "method": {},
+      "pattern": "Dependent clauses start with: before, after, when, although, because. Cannot stand alone.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Although the car was fast.'",
+      "repro_rule": "Add a main clause after the comma."
+    },
+    {
+      "lvl": 1,
+      "concept": "Apostrophe Possession Singular",
+      "q": "'The ___ engine produced 800 hp.' (one car owns it)",
+      "choices": [
+        "cars",
+        "car's",
+        "cars'",
+        "car"
+      ],
+      "correct": 1,
+      "exp": "One car owns the engine. Singular: car's.",
+      "method": {},
+      "pattern": "Singular owner: add apostrophe + s.",
+      "repro_type": "eng",
+      "repro_prompt": "'The ___ wings were redesigned.' (one engineer owns them)",
+      "repro_rule": "Engineer's wings."
+    },
+    {
+      "lvl": 1,
+      "concept": "Apostrophe Possession Plural",
+      "q": "'The ___ test results were surprising.' (multiple engineers own them)",
+      "choices": [
+        "engineer's",
+        "engineers",
+        "engineers'",
+        "engineer"
+      ],
+      "correct": 2,
+      "exp": "Multiple engineers (plural ending in s): add apostrophe after the s. Engineers'.",
+      "method": {},
+      "pattern": "Plural owner ending in s: add apostrophe after the s only.",
+      "repro_type": "eng",
+      "repro_prompt": "'The ___ cars were aerodynamically optimized.' (multiple teams)",
+      "repro_rule": "Teams' cars."
+    },
+    {
+      "lvl": 1,
+      "concept": "Subject-Verb Agreement",
+      "q": "'The team of engineers ___ currently working around the clock.'",
+      "choices": [
+        "are",
+        "is",
+        "were",
+        "been"
+      ],
+      "correct": 1,
+      "exp": "Subject is 'team' -- singular. 'Currently' signals present tense. IS working.",
+      "method": {},
+      "pattern": "Cross out phrases between subject and verb. Team is singular. Present tense: is.",
+      "repro_type": "eng",
+      "repro_prompt": "'The set of results ___ (show/shows) a clear trend.'",
+      "repro_rule": "The set (singular) shows."
+    },
+    {
+      "lvl": 1,
+      "concept": "Subject-Verb Agreement Neither Nor",
+      "q": "'Neither the pilot nor the engineers ___ responsible.'",
+      "choices": [
+        "are",
+        "is",
+        "were",
+        "be"
+      ],
+      "correct": 0,
+      "exp": "Neither/nor: verb agrees with closest subject. 'Engineers' (plural) is closest. Are.",
+      "method": {},
+      "pattern": "Neither/nor, either/or: verb agrees with the subject CLOSEST to the verb.",
+      "repro_type": "eng",
+      "repro_prompt": "'Either the engine or the tires ___ (cause/causes) the vibration.'",
+      "repro_rule": "'Tires' is closest. Plural: cause."
+    },
+    {
+      "lvl": 1,
+      "concept": "Active Voice",
+      "q": "'The fuel was injected by the system.' Best revision?",
+      "choices": [
+        "The fuel was injected.",
+        "The system injected fuel into the engine.",
+        "Fuel injection was done by the system.",
+        "Into the engine, fuel was injected."
+      ],
+      "correct": 1,
+      "exp": "Active: subject does action. 'The system injected fuel.'",
+      "method": {},
+      "pattern": "Identify who does the action. Put that thing first as the subject.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'The data was collected by the research team.'",
+      "repro_rule": "The research team collected the data."
+    },
+    {
+      "lvl": 1,
+      "concept": "Active Voice Identify",
+      "q": "Which sentence is in active voice?",
+      "choices": [
+        "The award was won by Alex.",
+        "The trophy had been given to the team.",
+        "Alex won the award.",
+        "A new record was set by the car."
+      ],
+      "correct": 2,
+      "exp": "'Alex won' -- Alex is subject doing the action.",
+      "method": {},
+      "pattern": "Active: subject comes first and does the action.",
+      "repro_type": "eng",
+      "repro_prompt": "Write in active voice: 'A new lap record was set by the team.'",
+      "repro_rule": "The team set a new lap record."
+    },
+    {
+      "lvl": 1,
+      "concept": "Commas in a List",
+      "q": "Which uses commas correctly?",
+      "choices": [
+        "She studied English math and science.",
+        "She studied English, math and science.",
+        "She studied English, math, and science.",
+        "She studied, English, math, and science."
+      ],
+      "correct": 2,
+      "exp": "Three items: comma after each, including before 'and.' Oxford comma.",
+      "method": {},
+      "pattern": "Three+ items: item, item, and item. Comma before 'and' required.",
+      "repro_type": "eng",
+      "repro_prompt": "Add commas: 'The car had a new engine improved brakes and redesigned suspension.'",
+      "repro_rule": "engine, improved brakes, and redesigned suspension."
+    },
+    {
+      "lvl": 1,
+      "concept": "Commas in a Verb List",
+      "q": "Which sentence correctly avoids comma errors?",
+      "choices": [
+        "Alex ran tested and analyzed the data.",
+        "Alex ran, tested, and analyzed the data.",
+        "Alex, ran, tested, and analyzed the data.",
+        "Alex ran, tested and, analyzed the data."
+      ],
+      "correct": 1,
+      "exp": "Three verbs in a list: ran, tested, and analyzed. Oxford comma before 'and.' Never comma after subject.",
+      "method": {},
+      "pattern": "Never put a comma between the subject and its verb.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Alex ran tested and analyzed the data.'",
+      "repro_rule": "ran, tested, and analyzed."
+    },
+    {
+      "lvl": 1,
+      "concept": "Pronoun Case Object",
+      "q": "'The prize went to Alex and ___.'",
+      "choices": [
+        "he",
+        "him",
+        "they",
+        "his"
+      ],
+      "correct": 1,
+      "exp": "Pronoun receives action (went to). Object pronoun: him.",
+      "method": {},
+      "pattern": "Test alone: 'went to him' vs 'went to he.' Him sounds right.",
+      "repro_type": "eng",
+      "repro_prompt": "'The award was given to Maria and ___ (he/him).'",
+      "repro_rule": "Receives the action. Use him."
+    },
+    {
+      "lvl": 1,
+      "concept": "Pronoun Case Subject",
+      "q": "'___ and the engineer designed the wing.'",
+      "choices": [
+        "Him",
+        "He",
+        "His",
+        "They"
+      ],
+      "correct": 1,
+      "exp": "Pronoun is subject (doing the designing). Subject pronoun: he.",
+      "method": {},
+      "pattern": "Test alone: 'He designed' vs 'Him designed.' He is subject.",
+      "repro_type": "eng",
+      "repro_prompt": "'___ and Alex will present the findings.' (they/them)",
+      "repro_rule": "Subject of the verb. They."
+    },
+    {
+      "lvl": 1,
+      "concept": "Its vs It's",
+      "q": "'The rocket shed ___ outer casing at altitude.'",
+      "choices": [
+        "its",
+        "it's",
+        "its'",
+        "its's"
+      ],
+      "correct": 0,
+      "exp": "Its (no apostrophe) shows possession. It's = it is.",
+      "method": {},
+      "pattern": "Test: replace with 'it is.' If sentence still works, use it's. If not, use its.",
+      "repro_type": "eng",
+      "repro_prompt": "'The car lost ___ (its/it's) aerodynamic advantage.'",
+      "repro_rule": "Car owns the advantage. No apostrophe. Its."
+    },
+    {
+      "lvl": 1,
+      "concept": "Comma After Introductory Phrase",
+      "q": "Which is punctuated correctly?",
+      "choices": [
+        "After the wind tunnel test the engineers redesigned the wing.",
+        "After the wind tunnel test, the engineers redesigned the wing.",
+        "After the wind tunnel test the engineers, redesigned the wing.",
+        "After, the wind tunnel test the engineers redesigned the wing."
+      ],
+      "correct": 1,
+      "exp": "Introductory phrase + comma + main clause.",
+      "method": {},
+      "pattern": "Sentence starting with a phrase before the main clause: comma after the phrase.",
+      "repro_type": "eng",
+      "repro_prompt": "Add comma: 'During the final lap the driver felt a vibration.'",
+      "repro_rule": "Comma after 'lap.'"
+    },
+    {
+      "lvl": 1,
+      "concept": "Comma After Introductory Clause",
+      "q": "Which correctly punctuates the introductory clause?",
+      "choices": [
+        "Although the engine was powerful the car still lost.",
+        "Although the engine was powerful, the car still lost.",
+        "Although, the engine was powerful the car still lost.",
+        "Although the engine was powerful; the car still lost."
+      ],
+      "correct": 1,
+      "exp": "Although + clause + comma + main sentence.",
+      "method": {},
+      "pattern": "Although/because/when/if + clause + comma + main sentence.",
+      "repro_type": "eng",
+      "repro_prompt": "Add comma: 'Because the brakes failed the team withdrew.'",
+      "repro_rule": "Comma after 'failed.'"
+    },
+    {
+      "lvl": 2,
+      "concept": "Subject-Verb Fleet",
+      "q": "'A fleet of aircraft ___ scheduled for maintenance.'",
+      "choices": [
+        "are",
+        "is",
+        "were",
+        "have been"
+      ],
+      "correct": 1,
+      "exp": "Subject is 'fleet' -- singular. IS.",
+      "method": {},
+      "pattern": "Cross out the prepositional phrase. Real subject is before 'of.'",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The number of accidents have decreased.'",
+      "repro_rule": "The number (singular) HAS decreased."
+    },
+    {
+      "lvl": 2,
+      "concept": "Subject-Verb Everyone",
+      "q": "'Everyone on the racing teams ___ required to wear safety gear.'",
+      "choices": [
+        "are",
+        "is",
+        "were",
+        "have"
+      ],
+      "correct": 1,
+      "exp": "'Everyone' is always singular. IS.",
+      "method": {},
+      "pattern": "Everyone, anyone, someone, nobody, each = always singular.",
+      "repro_type": "eng",
+      "repro_prompt": "'Nobody in the departments ___ (know/knows) the answer.'",
+      "repro_rule": "Nobody = singular. Knows."
+    },
+    {
+      "lvl": 2,
+      "concept": "Comma Splice",
+      "q": "Which is correctly punctuated?",
+      "choices": [
+        "The engine overheated, the team replaced it.",
+        "The engine overheated; the team replaced it immediately.",
+        "The engine overheated the team replaced it.",
+        "The engine overheated, and the team replaced it, quickly."
+      ],
+      "correct": 1,
+      "exp": "Semicolon correctly joins two complete sentences. Comma alone = splice.",
+      "method": {},
+      "pattern": "Two complete sentences: semicolon, or comma + FANBOYS.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix the splice: 'Alex studied for weeks, he still felt underprepared.'",
+      "repro_rule": "Add 'but' after comma, or use semicolon."
+    },
+    {
+      "lvl": 2,
+      "concept": "Comma Splice Fix",
+      "q": "Which correctly fixes: 'The test failed, the data was corrupted.'",
+      "choices": [
+        "The test failed, and the data was corrupted.",
+        "The test failed; and the data was corrupted.",
+        "The test failed, the data, was corrupted.",
+        "The test failed because the data was corrupted."
+      ],
+      "correct": 0,
+      "exp": "Comma + 'and' (FANBOYS) correctly joins two independent clauses.",
+      "method": {},
+      "pattern": "Never use semicolon before and/but/or/so. Semicolon stands alone.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The car was fastest, it still ran out of fuel.'",
+      "repro_rule": "Add 'but' after the comma."
+    },
+    {
+      "lvl": 2,
+      "concept": "Parallel Structure",
+      "q": "'Alex likes designing engines, to test aerodynamics, and building models.' Best revision?",
+      "choices": [
+        "designing engines, testing aerodynamics, and building models",
+        "to design engines, testing aerodynamics, and building models",
+        "designing engines, to test aerodynamics, and building models",
+        "designing engines, test aerodynamics, and to build models"
+      ],
+      "correct": 0,
+      "exp": "All -ing: designing, testing, building.",
+      "method": {},
+      "pattern": "In a list, all items must have the same grammatical form.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The engineer is responsible for designing, to test, and builds the prototype.'",
+      "repro_rule": "All -ing: designing, testing, and building."
+    },
+    {
+      "lvl": 2,
+      "concept": "Parallel Structure Adjectives",
+      "q": "'The car was fast, reliable, and handled well.' Best revision?",
+      "choices": [
+        "fast, reliable, and handled well",
+        "fast, reliable, and well-handling",
+        "fast, reliable, and efficient",
+        "fast, reliably, and handling well"
+      ],
+      "correct": 2,
+      "exp": "List should use matching adjectives: fast, reliable, efficient.",
+      "method": {},
+      "pattern": "Match the form: adjective, adjective, and adjective.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'She is smart, hardworking, and has creativity.'",
+      "repro_rule": "All adjectives: smart, hardworking, and creative."
+    },
+    {
+      "lvl": 2,
+      "concept": "Pronoun Agreement Each",
+      "q": "'Each pilot must check ___ equipment before takeoff.'",
+      "choices": [
+        "their",
+        "our",
+        "his or her",
+        "its"
+      ],
+      "correct": 2,
+      "exp": "'Each' is singular. Use 'his or her.'",
+      "method": {},
+      "pattern": "Each, every, anyone, someone = singular. Use his or her.",
+      "repro_type": "eng",
+      "repro_prompt": "'Neither engineer submitted ___ (their/his or her) report.'",
+      "repro_rule": "Neither = singular. His or her."
+    },
+    {
+      "lvl": 2,
+      "concept": "Pronoun Agreement Collective",
+      "q": "'The committee made ___ decision after hours.'",
+      "choices": [
+        "their",
+        "its",
+        "our",
+        "his"
+      ],
+      "correct": 1,
+      "exp": "Committee is collective -- singular. Its.",
+      "method": {},
+      "pattern": "Collective nouns (team, committee, group, jury) = singular. It/its.",
+      "repro_type": "eng",
+      "repro_prompt": "'The jury reached ___ (their/its) verdict.'",
+      "repro_rule": "Jury = collective = singular. Its."
+    },
+    {
+      "lvl": 2,
+      "concept": "Semicolons",
+      "q": "Which uses a semicolon correctly?",
+      "choices": [
+        "The test was conclusive; but we need more data.",
+        "The test was conclusive; we need more data, however.",
+        "The test was conclusive; however, we need more data.",
+        "The test was conclusive; needing more data."
+      ],
+      "correct": 2,
+      "exp": "Semicolon + however + comma is correct.",
+      "method": {},
+      "pattern": "Semicolons join complete sentences. 'However' after semicolon takes a comma.",
+      "repro_type": "eng",
+      "repro_prompt": "Correct or not? 'Alex studied all night; he was still nervous.'",
+      "repro_rule": "Correct. Complete sentence on both sides."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Contrast",
+      "q": "'The prototype was expensive. ___, it performed beyond expectations.'",
+      "choices": [
+        "Furthermore",
+        "However",
+        "Therefore",
+        "Similarly"
+      ],
+      "correct": 1,
+      "exp": "Expensive (negative) but exceeded expectations (positive). Contrast = However.",
+      "method": {},
+      "pattern": "Contrast: however. Addition: furthermore. Cause-effect: therefore.",
+      "repro_type": "eng",
+      "repro_prompt": "'Alex trained hard. ___, he won.' Transition?",
+      "repro_rule": "Cause-effect. Therefore."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Addition",
+      "q": "'First test was promising. ___, second test confirmed results.'",
+      "choices": [
+        "However",
+        "Nevertheless",
+        "Furthermore",
+        "In contrast"
+      ],
+      "correct": 2,
+      "exp": "Two positive results building = addition. Furthermore.",
+      "method": {},
+      "pattern": "Same direction (both positive): furthermore, moreover, in addition.",
+      "repro_type": "eng",
+      "repro_prompt": "'Car was aerodynamic. ___, it had excellent fuel economy.' Transition?",
+      "repro_rule": "Two positives adding. Furthermore."
+    },
+    {
+      "lvl": 2,
+      "concept": "Who vs Whom Subject",
+      "q": "'The engineer ___ designed the rocket won the award.'",
+      "choices": [
+        "whom",
+        "who",
+        "which",
+        "that"
+      ],
+      "correct": 1,
+      "exp": "Replace: 'He designed.' He = who.",
+      "method": {},
+      "pattern": "Replace with he/him. 'He' = who. 'Him' = whom.",
+      "repro_type": "eng",
+      "repro_prompt": "'Give the award to ___ (who/whom) deserves it most.'",
+      "repro_rule": "'He deserves it.' He = who."
+    },
+    {
+      "lvl": 2,
+      "concept": "Who vs Whom Preposition",
+      "q": "'To ___ should the report be submitted?'",
+      "choices": [
+        "who",
+        "whom",
+        "which",
+        "whoever"
+      ],
+      "correct": 1,
+      "exp": "'To him' -- him = whom.",
+      "method": {},
+      "pattern": "Whom always follows prepositions: to whom, for whom, with whom.",
+      "repro_type": "eng",
+      "repro_prompt": "'___ did you see?' (who/whom)",
+      "repro_rule": "'I saw him.' Him = whom."
+    },
+    {
+      "lvl": 2,
+      "concept": "Unnecessary Commas That vs Which",
+      "q": "Which sentence has an unnecessary comma?",
+      "choices": [
+        "The car, which was red, crossed the finish line.",
+        "Alex studied, and he improved.",
+        "The car, that finished first, set a record.",
+        "After the race, the team celebrated."
+      ],
+      "correct": 2,
+      "exp": "'That' introduces essential information and should never have commas around it. 'The car that finished first' is correct. Using commas with 'that' is always wrong.",
+      "method": {},
+      "pattern": "That = essential = no commas. Which = nonessential = commas around it.",
+      "repro_type": "eng",
+      "repro_prompt": "Correct or not? 'The engine, that powers the rocket, uses hydrogen.'",
+      "repro_rule": "Incorrect. Use 'which' with commas, or 'that' without."
+    },
+    {
+      "lvl": 2,
+      "concept": "Verb Tense Consistency",
+      "q": "'Alex opened his notebook, studied the formulas, and closes it.' Error?",
+      "choices": [
+        "No error",
+        "'Studied' should be 'studies'",
+        "'Closes' should be 'closed'",
+        "'Opened' should be 'opens'"
+      ],
+      "correct": 2,
+      "exp": "Opened and studied are past. Closes must match: closed.",
+      "method": {},
+      "pattern": "List of actions: all verbs must be in the same tense.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'She entered the lab, collects samples, and left.'",
+      "repro_rule": "All past: entered, collected, and left."
+    },
+    {
+      "lvl": 3,
+      "concept": "Misplaced Modifier",
+      "q": "Which has NO modifier error?",
+      "choices": [
+        "Running at full speed, the curve was difficult for the car.",
+        "The car, running at full speed, navigated the curve perfectly.",
+        "At full speed running, the car took the curve.",
+        "Running, the full speed car took the curve."
+      ],
+      "correct": 1,
+      "exp": "'Running at full speed' describes the car. 'The car' must follow immediately.",
+      "method": {},
+      "pattern": "Opening -ing phrase + comma: VERY NEXT noun must be doing that action.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Having analyzed the data, the conclusion was clear.'",
+      "repro_rule": "Having analyzed the data, the team reached a clear conclusion."
+    },
+    {
+      "lvl": 3,
+      "concept": "Misplaced Modifier 2",
+      "q": "'Covered in carbon fiber, the engineers tested the prototype.' What is wrong?",
+      "choices": [
+        "Nothing is wrong",
+        "'Covered in carbon fiber' modifies 'engineers' incorrectly",
+        "Needs a semicolon",
+        "'Prototype' should come first"
+      ],
+      "correct": 1,
+      "exp": "Engineers are not covered in carbon fiber -- the prototype is.",
+      "method": {},
+      "pattern": "The noun right after the modifier must be the thing the modifier describes.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'After winning the race, the trophy was presented to Alex.'",
+      "repro_rule": "After winning the race, Alex received the trophy."
+    },
+    {
+      "lvl": 3,
+      "concept": "Colons",
+      "q": "Which correctly uses a colon?",
+      "choices": [
+        "The team needed: fuel, tires, and oil.",
+        "The team needed three things: fuel, tires, and oil.",
+        "The team: needed fuel, tires, and oil.",
+        "The team needed fuel: tires, and oil."
+      ],
+      "correct": 1,
+      "exp": "Colon must follow a complete sentence. 'The team needed three things' is complete.",
+      "method": {},
+      "pattern": "Colon test: is what comes before it a complete sentence?",
+      "repro_type": "eng",
+      "repro_prompt": "Correct or not? 'The engineer recommended: a new engine and better brakes.'",
+      "repro_rule": "Incorrect. 'The engineer recommended' is not complete."
+    },
+    {
+      "lvl": 3,
+      "concept": "Colons Incorrect Usage",
+      "q": "Which sentence uses a colon incorrectly?",
+      "choices": [
+        "The engineer had one goal: build a faster car.",
+        "Alex needed three things: focus, time, and practice.",
+        "The results were clear: the new wing worked.",
+        "She studied: English, math, and science."
+      ],
+      "correct": 3,
+      "exp": "'She studied' is not a complete sentence -- a colon cannot follow an incomplete sentence. All others have a complete sentence before the colon.",
+      "method": {},
+      "pattern": "Colon test: is what comes before it a complete sentence? 'She studied' needs an object to be complete.",
+      "repro_type": "eng",
+      "repro_prompt": "Write a sentence using a colon to introduce a list of three topics.",
+      "repro_rule": "'The test covered three areas: grammar, algebra, and reading.'"
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy",
+      "q": "Best revision: 'The unexpected surprise shocked everyone present.'",
+      "choices": [
+        "The unexpected surprise shocked everyone present.",
+        "The surprise shocked everyone unexpectedly.",
+        "The surprise shocked everyone.",
+        "Everyone present was shocked unexpectedly."
+      ],
+      "correct": 2,
+      "exp": "Surprise is always unexpected. Remove 'unexpected.' 'Present' also implied.",
+      "method": {},
+      "pattern": "If a modifier's meaning is already in the noun, it is redundant. Remove it.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The final conclusion at the end was published.'",
+      "repro_rule": "The conclusion was published."
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy The Reason",
+      "q": "Which eliminates redundancy: 'The reason is because he failed to prepare.'",
+      "choices": [
+        "The reason is because he failed to prepare.",
+        "The reason is that he failed to prepare.",
+        "He failed to prepare because of the reason.",
+        "Because he failed to prepare is the reason."
+      ],
+      "correct": 1,
+      "exp": "'The reason is because' = always wrong. Use 'The reason is that.'",
+      "method": {},
+      "pattern": "'The reason is because' is redundant. Use 'because' alone or 'the reason is that.'",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The reason the car is fast is because of aerodynamics.'",
+      "repro_rule": "The car is fast because of aerodynamics."
+    },
+    {
+      "lvl": 3,
+      "concept": "Concision",
+      "q": "Most concise: 'In the event that it rains, the test will be postponed.'",
+      "choices": [
+        "In the event that it rains, the test will be postponed.",
+        "If it rains, the test will be postponed.",
+        "Should it happen to rain, the test will be postponed.",
+        "In the case of rain occurring, the test will be postponed."
+      ],
+      "correct": 1,
+      "exp": "'If' replaces 'In the event that.'",
+      "method": {},
+      "pattern": "'In the event that'=if. 'Due to the fact that'=because. 'At this point in time'=now.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'At this point in time, we are unable to proceed.'",
+      "repro_rule": "Now, we cannot proceed."
+    },
+    {
+      "lvl": 3,
+      "concept": "Concision Give Summary",
+      "q": "Most concise: 'He gave a summary of the results of the experiment.'",
+      "choices": [
+        "He gave a summary of the results of the experiment.",
+        "He summarized the experimental results.",
+        "He gave a summary of the experiment's results.",
+        "He provided a summary of what the results were."
+      ],
+      "correct": 1,
+      "exp": "'Gave a summary of'=summarized. Cuts from 10 words to 4.",
+      "method": {},
+      "pattern": "'Give a summary of'=summarize. 'Make a decision'=decide.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'We need to make a decision about the engine.'",
+      "repro_rule": "We need to decide about the engine."
+    },
+    {
+      "lvl": 3,
+      "concept": "Comparative vs Superlative",
+      "q": "'Between the two engines, this one is ___ efficient.'",
+      "choices": [
+        "most",
+        "more",
+        "the most",
+        "much"
+      ],
+      "correct": 1,
+      "exp": "Two items = comparative: more.",
+      "method": {},
+      "pattern": "Two things: more/better/faster. Three or more: most/best/fastest.",
+      "repro_type": "eng",
+      "repro_prompt": "'Of all the cars, the red one was ___ (faster/fastest).'",
+      "repro_rule": "'Of all' = three or more. Fastest."
+    },
+    {
+      "lvl": 3,
+      "concept": "Dangling Modifier",
+      "q": "'Having studied aerodynamics for years, the textbook seemed simple.' What is wrong?",
+      "choices": [
+        "Nothing is wrong",
+        "The textbook did not study aerodynamics",
+        "'For years' should be removed",
+        "Needs a semicolon"
+      ],
+      "correct": 1,
+      "exp": "The textbook did not study aerodynamics. The subject who studied is never named.",
+      "method": {},
+      "pattern": "If the noun after the modifier cannot logically do that action, the modifier dangles.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Having scored 30 on the ACT, Harvard's acceptance letter arrived.'",
+      "repro_rule": "Having scored 30, Alex received Harvard's acceptance letter."
+    },
+    {
+      "lvl": 3,
+      "concept": "Sentence Combining Contrast",
+      "q": "Best combination: 'The car was aerodynamic. It still lost.'",
+      "choices": [
+        "The car was aerodynamic, and it still lost.",
+        "The car was aerodynamic; it still lost.",
+        "Although the car was aerodynamic, it still lost.",
+        "The car was aerodynamic, but however it still lost."
+      ],
+      "correct": 2,
+      "exp": "'Although' signals contrast within one sentence. 'But however' = redundant.",
+      "method": {},
+      "pattern": "Contrasting ideas in one sentence: although/even though + clause + comma + main.",
+      "repro_type": "eng",
+      "repro_prompt": "Combine: 'Alex practiced for months. He still felt nervous.'",
+      "repro_rule": "Although Alex practiced for months, he still felt nervous."
+    },
+    {
+      "lvl": 3,
+      "concept": "Verb Tense List",
+      "q": "'The engineers designed the engine, built the prototype, and run the tests.' Error?",
+      "choices": [
+        "No error",
+        "'Designed' should be 'design'",
+        "'Run' should be 'ran'",
+        "'Built' should be 'build'"
+      ],
+      "correct": 2,
+      "exp": "Designed and built are past. Run must match: ran.",
+      "method": {},
+      "pattern": "Check every verb in a list. All must be in the same tense.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'Alex opens his notebook, studied the formulas, and will close it.'",
+      "repro_rule": "All past: opened, studied, and closed."
+    },
+    {
+      "lvl": 3,
+      "concept": "Logical Relevance",
+      "q": "Paragraph about jet engine history ends: 'Many aerospace engineers also enjoy rock climbing.' Keep or delete?",
+      "choices": [
+        "Keep -- shows engineers are well-rounded",
+        "Keep -- provides useful contrast",
+        "Delete -- irrelevant to jet engine history",
+        "Delete -- engineers should not have hobbies"
+      ],
+      "correct": 2,
+      "exp": "A sentence belongs only if it directly supports the paragraph's main idea.",
+      "method": {},
+      "pattern": "Ask: does this sentence directly support the paragraph's topic? Interesting is not enough.",
+      "repro_type": "eng",
+      "repro_prompt": "Fuel efficiency paragraph: 'The car was painted bright red.' Keep or delete?",
+      "repro_rule": "Delete. Paint color is irrelevant to fuel efficiency."
+    },
+    {
+      "lvl": 3,
+      "concept": "Sentence Placement",
+      "q": "Where to insert: 'This discovery changed aviation forever.'\nS1: Early planes had flat wings.\nS2: Researchers found curved wings generate lift.\nS3: Modern planes all use curved wings.\nS4: The curve creates pressure differences.",
+      "choices": [
+        "Before S1",
+        "After S2",
+        "After S3",
+        "After S4"
+      ],
+      "correct": 1,
+      "exp": "The discovery (S2) should be immediately followed by its significance.",
+      "method": {},
+      "pattern": "Transition sentence belongs after the event it responds to, before the consequence.",
+      "repro_type": "read",
+      "repro_prompt": "Which sentence describes the consequence of the discovery?",
+      "repro_answer": "S3 -- modern planes all use curved wings."
+    }
+  ],
+  "reading": [
+    {
+      "lvl": 1,
+      "concept": "Finding Information",
+      "passage": "Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-designed car shape reduces air resistance, allowing the car to reach higher speeds while using less fuel.",
+      "q": "According to the passage, what do race car engineers use aerodynamics for?",
+      "choices": [
+        "To design engines",
+        "To make cars faster and more stable",
+        "To reduce car weight",
+        "To improve fuel quality"
+      ],
+      "correct": 1,
+      "exp": "The passage states directly: engineers use aerodynamics to make cars faster and more stable.",
+      "method": {},
+      "pattern": "Direct questions: find the exact sentence. Answer restates it.",
+      "repro_type": "read",
+      "repro_prompt": "What does a well-designed car shape do?",
+      "repro_answer": "Reduces air resistance, allowing higher speeds with less fuel."
+    },
+    {
+      "lvl": 1,
+      "concept": "Finding a Detail",
+      "passage": "The Wright Brothers made their first powered flight on December 17, 1903, at Kitty Hawk, North Carolina. The flight lasted 12 seconds and covered 120 feet. By 1905, they had built a practical airplane capable of flying for over 30 minutes.",
+      "q": "How long did the Wright Brothers' first flight last?",
+      "choices": [
+        "30 minutes",
+        "120 seconds",
+        "12 seconds",
+        "17 minutes"
+      ],
+      "correct": 2,
+      "exp": "The passage states: 12 seconds. Watch for decoy numbers.",
+      "method": {},
+      "pattern": "Detail questions: find the specific fact. Watch for decoy numbers elsewhere in passage.",
+      "repro_type": "read",
+      "repro_prompt": "How far did the first flight travel?",
+      "repro_answer": "120 feet."
+    },
+    {
+      "lvl": 1,
+      "concept": "Vocabulary in Context",
+      "passage": "Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-designed car shape reduces air resistance, allowing the car to reach higher speeds while using less fuel.",
+      "q": "As used in the passage, 'resistance' most nearly means:",
+      "choices": [
+        "engine power",
+        "a force that opposes motion",
+        "the car's weight",
+        "speed"
+      ],
+      "correct": 1,
+      "exp": "Resistance is something reduced to allow higher speeds -- a force that opposes motion.",
+      "method": {},
+      "pattern": "Vocab in context: read the full sentence. Pick definition fitting the context.",
+      "repro_type": "read",
+      "repro_prompt": "What does 'stable' mean in 'make cars faster and more stable at high speeds'?",
+      "repro_answer": "Steady, balanced, controlled."
+    },
+    {
+      "lvl": 1,
+      "concept": "Vocabulary Contrast",
+      "passage": "The Wright Brothers took a systematic approach to flight. They built a wind tunnel, collected data on hundreds of wing shapes, and used measurements to design their aircraft. Their method was methodical where earlier inventors had relied on guesswork.",
+      "q": "As used, 'systematic' most nearly means:",
+      "choices": [
+        "random",
+        "expensive",
+        "organized and methodical",
+        "dangerous"
+      ],
+      "correct": 2,
+      "exp": "Contrasted with 'guesswork.' Systematic means organized.",
+      "method": {},
+      "pattern": "When a word is contrasted with another, use the contrast to define it.",
+      "repro_type": "read",
+      "repro_prompt": "What does 'methodical' mean?",
+      "repro_answer": "Organized, following a careful step-by-step process."
+    },
+    {
+      "lvl": 2,
+      "concept": "Main Idea",
+      "passage": "For decades, engineers assumed heavier cars were safer. Crash tests in the 1970s seemed to confirm this. But modern research tells a different story. Lightweight materials like carbon fiber absorb crash energy more effectively than steel, protecting the driver while also improving speed.",
+      "q": "The main idea of this passage is:",
+      "choices": [
+        "1970s crash tests proved heavy cars are safer",
+        "Modern materials can be both safer and faster than heavy ones",
+        "Carbon fiber is the most expensive material",
+        "Engineers have always known lighter cars are safer"
+      ],
+      "correct": 1,
+      "exp": "Passage introduces old belief, argues modern research overturns it.",
+      "method": {},
+      "pattern": "Main idea covers the whole passage. Answers 'what is the overall point.'",
+      "repro_type": "read",
+      "repro_prompt": "What old belief does the passage challenge?",
+      "repro_answer": "That heavier cars are safer."
+    },
+    {
+      "lvl": 2,
+      "concept": "Main Idea Renewables",
+      "passage": "Renewable energy critics argue solar and wind are unreliable. What critics overlook is that energy storage is advancing rapidly. A decade ago, batteries powering a neighborhood were theoretical. Today they are commercially available. The trajectory is clear.",
+      "q": "The author's main point is:",
+      "choices": [
+        "Renewables are completely reliable today",
+        "Energy storage is improving rapidly, making renewables more viable",
+        "Critics of renewables are always wrong",
+        "Batteries were theoretical a decade ago"
+      ],
+      "correct": 1,
+      "exp": "Author acknowledges criticism but argues storage technology is the answer.",
+      "method": {},
+      "pattern": "When author says 'what critics overlook,' the author's point is what follows.",
+      "repro_type": "read",
+      "repro_prompt": "What does the author say critics overlook?",
+      "repro_answer": "That energy storage technology is advancing rapidly."
+    },
+    {
+      "lvl": 2,
+      "concept": "Inference Wright Brothers",
+      "passage": "Early aircraft designers relied on intuition and trial and error. The Wright Brothers took a different approach. They built a wind tunnel, collected systematic data, and used measurements to design their aircraft. Their first flight lasted 12 seconds. Within two years they flew for 38 minutes.",
+      "q": "The passage implies the Wright Brothers' rapid improvement was due to:",
+      "choices": [
+        "Better funding",
+        "Data-driven design rather than intuition",
+        "Better weather conditions",
+        "More experience"
+      ],
+      "correct": 1,
+      "exp": "Passage contrasts intuition with systematic data. Improvement follows the data-driven approach.",
+      "method": {},
+      "pattern": "Inference: answer must be supported by the passage. Nothing from outside.",
+      "repro_type": "read",
+      "repro_prompt": "What does the jump from 12 seconds to 38 minutes imply?",
+      "repro_answer": "Their systematic approach was working rapidly."
+    },
+    {
+      "lvl": 2,
+      "concept": "Inference Coach",
+      "passage": "When the new coach arrived, the team's win rate had been 30% for three seasons. By his second year, the team won 70% of games. The coach had introduced daily film review, eliminated late-night dinners, and restructured practice.",
+      "q": "The passage most strongly implies:",
+      "choices": [
+        "Previous coach was incompetent",
+        "New practices contributed to improvement",
+        "Film review alone explains improvement",
+        "Team was simply unlucky before"
+      ],
+      "correct": 1,
+      "exp": "Specific changes followed by improved results implies changes caused improvement.",
+      "method": {},
+      "pattern": "Implication: look for before/after structure. Cause is usually the change between them.",
+      "repro_type": "read",
+      "repro_prompt": "What specific changes did the coach make?",
+      "repro_answer": "Daily film review, eliminated late-night dinners, restructured practice."
+    },
+    {
+      "lvl": 2,
+      "concept": "Cause and Effect",
+      "passage": "When engineers added downforce to the rear wing, the car gained stability in corners but lost top speed on straightaways. To compensate, the team reduced engine weight. This lowered the center of gravity, which improved cornering further without sacrificing speed.",
+      "q": "What was the direct result of reducing engine weight?",
+      "choices": [
+        "The car gained more downforce",
+        "The center of gravity was lowered",
+        "The rear wing was adjusted",
+        "Top speed increased"
+      ],
+      "correct": 1,
+      "exp": "Passage states: reducing engine weight lowered the center of gravity.",
+      "method": {},
+      "pattern": "Cause-and-effect: trace the chain. Answer is the immediate next step.",
+      "repro_type": "read",
+      "repro_prompt": "What happened as a result of lowering the center of gravity?",
+      "repro_answer": "Cornering improved without sacrificing speed."
+    },
+    {
+      "lvl": 2,
+      "concept": "Vocabulary Cavalier",
+      "passage": "Some aviation pioneers were cavalier about safety, treating crashes as inevitable. Others were meticulous -- spending months on ground tests before a single flight. The meticulous ones tended to survive long enough to contribute meaningfully.",
+      "q": "As used, 'cavalier' most nearly means:",
+      "choices": [
+        "careful and thorough",
+        "dismissively unconcerned",
+        "brave and bold",
+        "technically skilled"
+      ],
+      "correct": 1,
+      "exp": "Cavalier contrasted with meticulous. Since meticulous=careful, cavalier=dismissively unconcerned.",
+      "method": {},
+      "pattern": "When a word is contrasted with another, use the contrast to define it.",
+      "repro_type": "read",
+      "repro_prompt": "What does 'meticulous' mean?",
+      "repro_answer": "Extremely careful and thorough."
+    },
+    {
+      "lvl": 3,
+      "concept": "Author's Purpose EV",
+      "passage": "Critics of electric vehicles focus on current battery limitations. What they miss is that battery technology is improving at a rate mirroring early internal combustion engine development. In 1910, gasoline engines were crude and unreliable. Today they power the global economy. Electric motors are on the same trajectory.",
+      "q": "The author's primary purpose is:",
+      "choices": [
+        "To explain how combustion engines work",
+        "To argue EVs will eventually succeed",
+        "To criticize gasoline supporters",
+        "To present a balanced view"
+      ],
+      "correct": 1,
+      "exp": "Author compares EVs to early gasoline engines to argue EVs will follow the same path.",
+      "method": {},
+      "pattern": "Author's purpose: Inform=neutral, Persuade=argues for position, Describe=paints picture.",
+      "repro_type": "read",
+      "repro_prompt": "What historical comparison does the author use, and why?",
+      "repro_answer": "Compares EVs to early gasoline engines -- both started crude and improved."
+    },
+    {
+      "lvl": 3,
+      "concept": "Author's Purpose Aviation",
+      "passage": "The history of aviation is often told as the story of bold pioneers defying gravity. This framing is romantic but incomplete. The real story is one of incremental data collection, systematic testing, and institutional knowledge-sharing among engineers who rarely made headlines. Heroism matters less than method.",
+      "q": "The author's primary purpose is to:",
+      "choices": [
+        "Celebrate daring pioneers",
+        "Argue method matters more than heroism",
+        "Prove teamwork is most important",
+        "Explain technical details of early aircraft"
+      ],
+      "correct": 1,
+      "exp": "Author explicitly states: 'Heroism matters less than method.'",
+      "method": {},
+      "pattern": "When author uses 'but' or 'in reality' to challenge common view, that challenge IS the purpose.",
+      "repro_type": "read",
+      "repro_prompt": "What common narrative does the author challenge?",
+      "repro_answer": "That aviation is about bold pioneers -- the real story is method and data."
+    },
+    {
+      "lvl": 3,
+      "concept": "Tone and Attitude",
+      "passage": "Some engineers dismiss CFD as a shortcut producing imprecise results. This view is understandable -- early models were crude. But dismissing CFD today is like refusing a calculator because slide rules built character. Modern CFD predicts airflow with remarkable accuracy and is indispensable to Formula 1 teams worldwide.",
+      "q": "The author's attitude toward CFD is:",
+      "choices": [
+        "Cautious and uncertain",
+        "Strongly supportive while acknowledging early limits",
+        "Neutral and informational",
+        "Critical of overreliance on it"
+      ],
+      "correct": 1,
+      "exp": "Author acknowledges early limits but strongly defends modern CFD as accurate and indispensable.",
+      "method": {},
+      "pattern": "Tone: attitude words (remarkable, indispensable) signal the author's stance.",
+      "repro_type": "read",
+      "repro_prompt": "What comparison does the author use to defend CFD?",
+      "repro_answer": "Refusing a calculator because slide rules built character."
+    },
+    {
+      "lvl": 3,
+      "concept": "Comparing Viewpoints",
+      "passage": "Some historians credit Apollo's success to American engineering genius. Others argue credit belongs to thousands of unknown workers -- machinists, seamstresses, technicians -- whose names appear in no history book. Both views miss the deeper truth: the mission succeeded because these groups worked in precise coordination, each dependent on the other.",
+      "q": "With which statement would the author most agree?",
+      "choices": [
+        "Famous engineers deserve most credit",
+        "Unknown workers deserve most credit",
+        "Success required coordination among all groups",
+        "Historians have fully explained Apollo's success"
+      ],
+      "correct": 2,
+      "exp": "Author says 'both views miss the deeper truth' and names coordination as the real reason.",
+      "method": {},
+      "pattern": "When author rejects both views, correct answer is the synthesis the author argues for.",
+      "repro_type": "read",
+      "repro_prompt": "What do both groups of historians miss?",
+      "repro_answer": "That success required precise coordination between all groups."
+    }
+  ],
+  "science": [
+    {
+      "lvl": 1,
+      "concept": "Reading a Table",
+      "passage": "Engine temperature at different RPM:\n1000 RPM: 80C\n2000 RPM: 120C\n3000 RPM: 165C\n4000 RPM: 215C",
+      "q": "Temperature at 2000 RPM?",
+      "choices": [
+        "80C",
+        "120C",
+        "165C",
+        "215C"
+      ],
+      "correct": 1,
+      "exp": "Find 2000 RPM and read: 120C.",
+      "method": {
+        "vars": "RPM=2000",
+        "formula": "read from table",
+        "work": "120C"
+      },
+      "pattern": "Direct reading: find the row, read the value. Do not calculate.",
+      "repro_type": "math",
+      "repro_prompt": "Temperature increase from 1000 to 3000 RPM?",
+      "repro_vars": "165-80",
+      "repro_formula": "difference",
+      "repro_answer": "85C"
+    },
+    {
+      "lvl": 1,
+      "concept": "Reading a Table Reverse",
+      "passage": "Drag force on car:\n40 mph: 150 N\n60 mph: 340 N\n80 mph: 600 N\n100 mph: 940 N",
+      "q": "At what speed is drag 340 N?",
+      "choices": [
+        "40 mph",
+        "60 mph",
+        "80 mph",
+        "100 mph"
+      ],
+      "correct": 1,
+      "exp": "Find 340 N and read speed: 60 mph.",
+      "method": {},
+      "pattern": "Reverse lookup: find the value, read the corresponding input.",
+      "repro_type": "math",
+      "repro_prompt": "Drag difference: 100 mph vs 40 mph?",
+      "repro_vars": "940-150",
+      "repro_formula": "",
+      "repro_answer": "790 N"
+    },
+    {
+      "lvl": 1,
+      "concept": "Identifying Trend Up",
+      "passage": "Wing lift force at different speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N",
+      "q": "As speed increases, lift force:",
+      "choices": [
+        "Decreases",
+        "Stays constant",
+        "Increases",
+        "First increases then decreases"
+      ],
+      "correct": 2,
+      "exp": "120, 270, 480, 750 -- each higher. Increasing.",
+      "method": {},
+      "pattern": "Read values in order. All going up = increasing trend.",
+      "repro_type": "math",
+      "repro_prompt": "Lift at 60 mph?",
+      "repro_vars": "60 mph",
+      "repro_formula": "read",
+      "repro_answer": "270 N"
+    },
+    {
+      "lvl": 1,
+      "concept": "Identifying Trend Down",
+      "passage": "Fuel efficiency vs speed:\n40 mph: 38 mpg\n55 mph: 32 mpg\n70 mph: 25 mpg\n85 mph: 18 mpg",
+      "q": "As speed increases, fuel efficiency:",
+      "choices": [
+        "Increases",
+        "Stays constant",
+        "Decreases",
+        "Cannot be determined"
+      ],
+      "correct": 2,
+      "exp": "38, 32, 25, 18 -- decreasing.",
+      "method": {},
+      "pattern": "All going down = decreasing trend.",
+      "repro_type": "math",
+      "repro_prompt": "Fuel efficiency at 55 mph?",
+      "repro_vars": "55 mph",
+      "repro_formula": "read",
+      "repro_answer": "32 mpg"
+    },
+    {
+      "lvl": 2,
+      "concept": "Non-Linear Trend",
+      "passage": "Wing lift force at different speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N",
+      "q": "Which best describes the lift-speed relationship?",
+      "choices": [
+        "Lift decreases as speed increases",
+        "Lift increases at constant rate",
+        "Lift increases but rate of increase grows",
+        "Lift and speed are unrelated"
+      ],
+      "correct": 2,
+      "exp": "Differences: 150, 210, 270. Growing = nonlinear.",
+      "method": {
+        "vars": "differences",
+        "formula": "compare consecutive differences",
+        "work": "growing"
+      },
+      "pattern": "Equal differences = linear. Growing differences = nonlinear.",
+      "repro_type": "math",
+      "repro_prompt": "Lift increase from 80 to 100 mph?",
+      "repro_vars": "750-480",
+      "repro_formula": "",
+      "repro_answer": "270 N"
+    },
+    {
+      "lvl": 2,
+      "concept": "Calculating from Data",
+      "passage": "Fuel efficiency vs speed:\n40 mph: 38 mpg\n55 mph: 32 mpg\n70 mph: 25 mpg\n85 mph: 18 mpg",
+      "q": "Gallons for 224 miles at 70 mph?",
+      "choices": [
+        "6.4",
+        "7.0",
+        "8.0",
+        "8.96"
+      ],
+      "correct": 3,
+      "exp": "At 70 mph: 25 mpg. 224/25=8.96.",
+      "method": {
+        "vars": "mpg=25,miles=224",
+        "formula": "gallons=miles/mpg",
+        "work": "8.96"
+      },
+      "pattern": "Read correct mpg from table. Then apply gallons=miles/mpg.",
+      "repro_type": "math",
+      "repro_prompt": "Gallons for 180 miles at 55 mph?",
+      "repro_vars": "mpg=32,miles=180",
+      "repro_formula": "180/32",
+      "repro_answer": "5.625 gallons"
+    },
+    {
+      "lvl": 2,
+      "concept": "Calculating Difference",
+      "passage": "Brake stopping distance vs speed:\n30 mph: 45 ft\n45 mph: 100 ft\n60 mph: 180 ft\n75 mph: 280 ft",
+      "q": "How much longer to stop at 60 vs 30 mph?",
+      "choices": [
+        "45 ft",
+        "100 ft",
+        "135 ft",
+        "180 ft"
+      ],
+      "correct": 2,
+      "exp": "180-45=135 ft.",
+      "method": {
+        "vars": "60mph=180,30mph=45",
+        "formula": "difference",
+        "work": "135"
+      },
+      "pattern": "'How much more/longer' = subtract smaller from larger.",
+      "repro_type": "math",
+      "repro_prompt": "Longer to stop: 75 vs 45 mph?",
+      "repro_vars": "280-100",
+      "repro_formula": "",
+      "repro_answer": "180 ft"
+    },
+    {
+      "lvl": 2,
+      "concept": "Identifying Variables",
+      "passage": "Experiment: Wing angle and speed on lift.\nA: 0 deg, 60 mph: 200 N\nB: 5 deg, 60 mph: 310 N\nC: 0 deg, 90 mph: 450 N\nD: 5 deg, 90 mph: 698 N",
+      "q": "What is the dependent variable?",
+      "choices": [
+        "Wing angle",
+        "Speed",
+        "Lift force",
+        "Both angle and speed"
+      ],
+      "correct": 2,
+      "exp": "Lift is what is measured. Angle and speed are what the experimenter changes.",
+      "method": {},
+      "pattern": "Dependent = measured/observed. Independent = changed by experimenter.",
+      "repro_type": "read",
+      "repro_prompt": "What are the two independent variables?",
+      "repro_answer": "Wing angle and speed."
+    },
+    {
+      "lvl": 2,
+      "concept": "Controlled Experiment",
+      "passage": "A student tests whether fuel type affects engine power. She runs 5 trials with regular and 5 with premium, using the same engine, driver, temperature, and rpm each time. Regular: 180 hp. Premium: 195 hp.",
+      "q": "Why did she keep temperature and rpm constant?",
+      "choices": [
+        "To make it faster",
+        "To control variables that might affect results",
+        "To save fuel",
+        "They do not matter"
+      ],
+      "correct": 1,
+      "exp": "Controlling variables ensures the only difference is fuel type.",
+      "method": {},
+      "pattern": "Controlled variables are held constant so only the independent variable changes.",
+      "repro_type": "read",
+      "repro_prompt": "What was the dependent variable?",
+      "repro_answer": "Engine power (hp)."
+    },
+    {
+      "lvl": 3,
+      "concept": "Comparing Conditions",
+      "passage": "Drag force:\n0 deg, 60 mph: 200 N\n0 deg, 90 mph: 450 N\n5 deg, 60 mph: 260 N\n5 deg, 90 mph: 585 N",
+      "q": "Speed increase or angle increase: which had greater effect on drag?",
+      "choices": [
+        "Speed",
+        "Angle",
+        "Equal",
+        "Cannot compare"
+      ],
+      "correct": 0,
+      "exp": "Speed effect: 125%. Angle effect: 30%. Speed wins.",
+      "method": {
+        "vars": "Speed: 200 to 450, Angle: 200 to 260",
+        "formula": "% change=(change/orig)x100",
+        "work": "Speed:125%, Angle:30%"
+      },
+      "pattern": "To compare factors: isolate each by holding other constant. Calculate % change.",
+      "repro_type": "math",
+      "repro_prompt": "% increase in drag: 0 to 5 degrees at 90 mph?",
+      "repro_vars": "585-450=135,orig=450",
+      "repro_formula": "135/450x100",
+      "repro_answer": "30%"
+    },
+    {
+      "lvl": 3,
+      "concept": "Drawing Conclusions",
+      "passage": "Three fuel additives:\nA: +8% efficiency, -2% power\nB: +3% efficiency, +5% power\nC: +12% efficiency, -8% power\nControl: baseline",
+      "q": "Team needs max power, can sacrifice efficiency. Which?",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "Control"
+      ],
+      "correct": 1,
+      "exp": "Only B increases power (+5%). A and C both decrease power.",
+      "method": {},
+      "pattern": "Match data to stated goal. Ignore metrics the question says are less important.",
+      "repro_type": "read",
+      "repro_prompt": "Which maximizes efficiency and what is the power tradeoff?",
+      "repro_answer": "Additive C: +12% efficiency, -8% power."
+    },
+    {
+      "lvl": 3,
+      "concept": "Evaluating a Hypothesis",
+      "passage": "Hypothesis: Higher altitude reduces engine power due to less oxygen.\nSea level: 450 hp\n5000 ft: 382 hp\n10000 ft: 318 hp\n15000 ft: 261 hp",
+      "q": "Do the data support the hypothesis?",
+      "choices": [
+        "Yes -- power decreases consistently",
+        "No -- power increases",
+        "Yes -- only up to 10000 ft",
+        "No -- decrease too small"
+      ],
+      "correct": 0,
+      "exp": "Power decreases at every step: consistent with hypothesis.",
+      "method": {},
+      "pattern": "Evaluate hypothesis: does data trend match what it predicts?",
+      "repro_type": "read",
+      "repro_prompt": "Power lost from sea level to 15,000 feet?",
+      "repro_answer": "450 - 261 = 189 hp."
+    },
+    {
+      "lvl": 3,
+      "concept": "Interpolation",
+      "passage": "Braking distance:\n30 mph: 45 ft\n60 mph: 180 ft\n90 mph: 405 ft\n120 mph: 720 ft",
+      "q": "Approximately how far to stop at 45 mph?",
+      "choices": [
+        "90 ft",
+        "112 ft",
+        "135 ft",
+        "160 ft"
+      ],
+      "correct": 1,
+      "exp": "Nonlinear relationship. ~112 ft is approximately correct.",
+      "method": {},
+      "pattern": "Interpolation = estimating between known values. Check if linear or nonlinear first.",
+      "repro_type": "math",
+      "repro_prompt": "Is braking distance linear or nonlinear? How do you know?",
+      "repro_answer": "Nonlinear. Differences: 135, 225, 315 -- growing, not constant."
+    }
+  ],
+  "writing": [
+    {
+      "lvl": 1,
+      "concept": "Active Voice",
+      "q": "'The prototype was tested by the engineering team.' Best revision?",
+      "choices": [
+        "The prototype was tested.",
+        "The engineering team tested the prototype.",
+        "Testing was done by the team.",
+        "By the team, the prototype was tested."
+      ],
+      "correct": 1,
+      "exp": "Active: 'The engineering team tested the prototype.'",
+      "method": {},
+      "pattern": "Active: subject does action.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'The award was given to Alex by the committee.'",
+      "repro_rule": "The committee gave the award to Alex."
+    },
+    {
+      "lvl": 1,
+      "concept": "Active Voice Identify",
+      "q": "Which is active voice?",
+      "choices": [
+        "The engine was rebuilt by the mechanics.",
+        "A new record was set by the team.",
+        "The mechanics rebuilt the engine.",
+        "The results were analyzed by Alex."
+      ],
+      "correct": 2,
+      "exp": "'The mechanics rebuilt' -- mechanics does the action.",
+      "method": {},
+      "pattern": "Active: subject comes first and does the action.",
+      "repro_type": "eng",
+      "repro_prompt": "Active voice: 'The report was submitted by the team.'",
+      "repro_rule": "The team submitted the report."
+    },
+    {
+      "lvl": 1,
+      "concept": "Concision Because",
+      "q": "Most concise: 'Due to the fact that the engine failed, the race ended.'",
+      "choices": [
+        "Due to the fact that the engine failed, the race ended.",
+        "Because the engine failed, the race ended.",
+        "In light of the fact that the engine failed, the race ended.",
+        "As a result of the engine failing, the race ended."
+      ],
+      "correct": 1,
+      "exp": "'Because' replaces 'due to the fact that.'",
+      "method": {},
+      "pattern": "'Due to the fact that' = because. Always.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'In the event that the test fails, we will redesign.'",
+      "repro_rule": "If the test fails, we will redesign."
+    },
+    {
+      "lvl": 1,
+      "concept": "Word Precision",
+      "q": "Best word: 'The changes had a ___ impact on performance.'",
+      "choices": [
+        "big",
+        "large",
+        "significant",
+        "sizeable"
+      ],
+      "correct": 2,
+      "exp": "'Significant' is most precise and formal.",
+      "method": {},
+      "pattern": "When similar words are choices, pick the most precise and formal.",
+      "repro_type": "eng",
+      "repro_prompt": "'The engineer made a ___ (smart/calculated) decision.'",
+      "repro_rule": "'Calculated' is more precise -- implies deliberate analysis."
+    },
+    {
+      "lvl": 1,
+      "concept": "Eliminating Wordiness Give Summary",
+      "q": "Most concise: 'He gave a summary of the results.'",
+      "choices": [
+        "He gave a summary of the results.",
+        "He summarized the results.",
+        "He provided a summary of the results.",
+        "He gave a brief summary of what the results were."
+      ],
+      "correct": 1,
+      "exp": "'Gave a summary of' = 'summarized.'",
+      "method": {},
+      "pattern": "'Give a summary of'=summarize, 'make a decision'=decide.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'We need to make a decision about the engine design.'",
+      "repro_rule": "We need to decide about the engine design."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Contrast",
+      "q": "Best transition: 'The engine was powerful. ___, it consumed too much fuel.'",
+      "choices": [
+        "Furthermore",
+        "However",
+        "Therefore",
+        "Similarly"
+      ],
+      "correct": 1,
+      "exp": "Powerful (positive), too much fuel (negative). Contrast = However.",
+      "method": {},
+      "pattern": "Contrast: however. Addition: furthermore. Cause-effect: therefore.",
+      "repro_type": "eng",
+      "repro_prompt": "'Alex trained hard. ___, he won.' Transition?",
+      "repro_rule": "Cause-effect. Therefore."
+    },
+    {
+      "lvl": 2,
+      "concept": "Transition Addition",
+      "q": "'Test one was promising. ___, test two confirmed results.'",
+      "choices": [
+        "However",
+        "Nevertheless",
+        "Furthermore",
+        "In contrast"
+      ],
+      "correct": 2,
+      "exp": "Two positive results building = addition. Furthermore.",
+      "method": {},
+      "pattern": "Same direction: furthermore, moreover, in addition.",
+      "repro_type": "eng",
+      "repro_prompt": "'Car was aerodynamic. ___, it had excellent fuel economy.'",
+      "repro_rule": "Two positives. Furthermore."
+    },
+    {
+      "lvl": 2,
+      "concept": "Sentence Combining Addition",
+      "q": "Best combination: 'The engine was powerful. The suspension was precise.'",
+      "choices": [
+        "The engine was powerful, and the suspension was precise.",
+        "The engine was powerful; however, the suspension was precise.",
+        "The engine was powerful the suspension was precise.",
+        "The engine was powerful, the suspension was precise."
+      ],
+      "correct": 0,
+      "exp": "Two agreeing ideas = comma + and.",
+      "method": {},
+      "pattern": "Agreeing ideas: comma + and. Contrasting: comma + but. Never comma alone.",
+      "repro_type": "eng",
+      "repro_prompt": "Combine: 'Data was collected. Analysis was completed.'",
+      "repro_rule": "The data was collected, and the analysis was completed."
+    },
+    {
+      "lvl": 2,
+      "concept": "Avoiding Wordiness Now",
+      "q": "Most concise: 'At this point in time, we cannot proceed.'",
+      "choices": [
+        "At this point in time, we cannot proceed.",
+        "Currently, we cannot proceed.",
+        "Now, we cannot proceed.",
+        "At this present moment, we cannot proceed."
+      ],
+      "correct": 2,
+      "exp": "'Now' replaces 'at this point in time.'",
+      "method": {},
+      "pattern": "'At this point in time'=now, 'in the near future'=soon.",
+      "repro_type": "eng",
+      "repro_prompt": "Rewrite: 'In the near future, we will release the results.'",
+      "repro_rule": "Soon, we will release the results."
+    },
+    {
+      "lvl": 2,
+      "concept": "Word Choice Meticulous",
+      "q": "'The engineer showed ___ attention to detail.' (Most precise)",
+      "choices": [
+        "great",
+        "a lot of",
+        "meticulous",
+        "high"
+      ],
+      "correct": 2,
+      "exp": "'Meticulous' = extremely careful and thorough. Precise.",
+      "method": {},
+      "pattern": "Precise vocabulary rewarded on ACT. Vague words (great, a lot, high) usually wrong.",
+      "repro_type": "eng",
+      "repro_prompt": "More precise: 'The pilot made a(n) ___ (skillful/adept) landing.'",
+      "repro_rule": "'Adept' = highly skilled in a specific area."
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy Surprise",
+      "q": "Best revision: 'The unexpected surprise shocked everyone present.'",
+      "choices": [
+        "The unexpected surprise shocked everyone present.",
+        "The surprise shocked everyone unexpectedly.",
+        "The surprise shocked everyone.",
+        "Everyone present was shocked unexpectedly."
+      ],
+      "correct": 2,
+      "exp": "Surprise = unexpected by definition. 'Present' implied. Remove both.",
+      "method": {},
+      "pattern": "If modifier repeats what noun already means, remove it.",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The final conclusion at the end was published.'",
+      "repro_rule": "The conclusion was published."
+    },
+    {
+      "lvl": 3,
+      "concept": "Redundancy Reason",
+      "q": "Which eliminates redundancy: 'The reason is because he failed to prepare.'",
+      "choices": [
+        "The reason is because he failed to prepare.",
+        "The reason is that he failed to prepare.",
+        "He failed to prepare because of the reason.",
+        "Because he failed to prepare is the reason."
+      ],
+      "correct": 1,
+      "exp": "'The reason is because' = always wrong. Use 'The reason is that.'",
+      "method": {},
+      "pattern": "'The reason is because' is redundant. Use 'because' alone or 'the reason is that.'",
+      "repro_type": "eng",
+      "repro_prompt": "Fix: 'The reason the car is fast is because of aerodynamics.'",
+      "repro_rule": "The car is fast because of aerodynamics."
+    },
+    {
+      "lvl": 3,
+      "concept": "Logical Relevance",
+      "q": "Paragraph about wing design ends: 'Many pilots enjoy photography as a hobby.' Keep or delete?",
+      "choices": [
+        "Keep -- shows pilots are well-rounded",
+        "Keep -- provides contrast",
+        "Delete -- irrelevant to wing design",
+        "Delete -- pilots should not have hobbies"
+      ],
+      "correct": 2,
+      "exp": "Wing design paragraph. Pilot hobbies are irrelevant.",
+      "method": {},
+      "pattern": "A sentence belongs only if it directly supports the paragraph's topic.",
+      "repro_type": "eng",
+      "repro_prompt": "Fuel efficiency paragraph: 'The car was painted metallic blue.' Keep or delete?",
+      "repro_rule": "Delete. Paint is irrelevant to fuel efficiency."
+    },
+    {
+      "lvl": 3,
+      "concept": "Sentence Combining Contrast",
+      "q": "Best combination: 'The car was aerodynamic. It still lost.'",
+      "choices": [
+        "The car was aerodynamic, and it still lost.",
+        "The car was aerodynamic; it still lost.",
+        "Although the car was aerodynamic, it still lost.",
+        "The car was aerodynamic, but however it still lost."
+      ],
+      "correct": 2,
+      "exp": "'Although' signals contrast. 'But however' = redundant.",
+      "method": {},
+      "pattern": "Contrasting ideas in one sentence: although + clause + comma + main.",
+      "repro_type": "eng",
+      "repro_prompt": "Combine: 'Alex practiced for months. He still felt nervous.'",
+      "repro_rule": "Although Alex practiced for months, he still felt nervous."
+    },
+    {
+      "lvl": 3,
+      "concept": "Sentence Placement",
+      "q": "Insert 'This discovery changed aviation forever.' Where?\nS1: Early planes had flat wings.\nS2: Researchers found curved wings generate lift.\nS3: Modern planes all use curved wings.\nS4: The curve creates pressure differences.",
+      "choices": [
+        "Before S1",
+        "After S2",
+        "After S3",
+        "After S4"
+      ],
+      "correct": 1,
+      "exp": "Discovery (S2) followed by its significance.",
+      "method": {},
+      "pattern": "Transition sentence: after the event it responds to, before the consequence.",
+      "repro_type": "read",
+      "repro_prompt": "Which sentence is the consequence of the discovery?",
+      "repro_answer": "S3 -- modern planes use curved wings as a result."
+    }
+  ]
+}
