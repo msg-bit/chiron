@@ -606,10 +606,7 @@ function checkPw(){
     // Admin reset
     if(confirm('RESET ALL CHIRON DATA?\n\nClears missions, XP, streak, scores, and test date.\nAlex will see the setup screen on next login.\n\nCannot be undone.')){
       try{localStorage.removeItem('chiron_v5');sessionStorage.removeItem('chiron_auth');}catch(e){}
-      document.getElementById('pw-error').textContent='';
-      document.getElementById('pw-input').value='';
-      document.getElementById('pw-error').style.color='var(--ok)';
-      document.getElementById('pw-error').textContent='Reset complete. Enter 6253 to continue.';
+      location.reload();
     }else{
       document.getElementById('pw-input').value='';
       document.getElementById('pw-input').focus();
@@ -668,7 +665,7 @@ function selectAns(idx){if(Q.phase!=='answer')return;Q.phase='feedback';const q=
 
 function showCorrect(q,wasWrong){const panel=document.getElementById('correct-panel');panel.classList.add('show');const title=document.getElementById('correct-title');title.textContent=wasWrong?`Correct answer — ${q.concept||TL[q.topic]}`:`Correct — ${q.concept||TL[q.topic]}`;title.style.color=wasWrong?'var(--warn)':'var(--ok)';document.getElementById('correct-text').textContent=q.exp||'';document.getElementById('correct-pattern').textContent=q.pattern||'';}
 
-function showCoaching(q,wrongIdx){document.getElementById('coaching-panel').classList.add('show');document.getElementById('diag-title').textContent=`Not quite — ${q.concept||TL[q.topic]}`;document.getElementById('diag-text').textContent=q.exp||'';document.getElementById('diag-step').textContent=`You chose: "${q.choices[wrongIdx]}" — here is where the sequence went wrong.`;const m=q.method||{};const hasM=m.vars||m.formula||m.work;document.getElementById('demo-grid').innerHTML=hasM?`<div class="demo-col"><div class="dl">What we know</div><div class="dv">${m.vars||'—'}</div></div><div class="demo-col"><div class="dl">Formula</div><div class="dv">${m.formula||m.form||'—'}</div></div>`:'<div style="font-size:12px;color:var(--muted)">Apply the rule directly.</div>';document.getElementById('demo-work').innerHTML=hasM&&m.work?`<div class="demo-col" style="margin-top:8px"><div class="dl">Work</div><div class="dv">${m.work}</div></div>`:'';document.getElementById('demo-pattern').textContent=q.pattern||'';buildRepro(q);}
+function showCoaching(q,wrongIdx){document.getElementById('coaching-panel').classList.add('show');document.getElementById('diag-title').textContent=`Not quite — ${q.concept||TL[q.topic]}`;document.getElementById('diag-text').textContent=q.exp||'';document.getElementById('diag-step').textContent=`You chose: "${(q._shuffledChoices||q.choices)[wrongIdx]}" — here is where the sequence went wrong.`;const m=q.method||{};const hasM=m.vars||m.formula||m.work;document.getElementById('demo-grid').innerHTML=hasM?`<div class="demo-col"><div class="dl">What we know</div><div class="dv">${m.vars||'—'}</div></div><div class="demo-col"><div class="dl">Formula</div><div class="dv">${m.formula||m.form||'—'}</div></div>`:'<div style="font-size:12px;color:var(--muted)">Apply the rule directly.</div>';document.getElementById('demo-work').innerHTML=hasM&&m.work?`<div class="demo-col" style="margin-top:8px"><div class="dl">Work</div><div class="dv">${m.work}</div></div>`:'';document.getElementById('demo-pattern').textContent=q.pattern||'';buildRepro(q);}
 
 function buildRepro(q){const rt=q.repro_type||'eng';document.getElementById('repro-desc').textContent='Work through this from scratch using the correct sequence.';let html='';if(rt==='math'){html=`<div class="repro-scaffold"><div class="repro-grid"><div class="repro-col"><label>What I know</label><textarea id="r-vars" placeholder="${q.repro_vars||'List the values'}"></textarea></div><div class="repro-col"><label>Formula</label><textarea id="r-form" placeholder="${q.repro_formula||'Write the formula'}"></textarea></div></div><div class="repro-work"><label>Work</label><textarea id="r-work" placeholder="Show every step"></textarea></div><div class="repro-answer"><label>My answer</label><input type="text" id="r-answer" placeholder="Final answer"/></div></div><div style="font-size:11px;color:var(--faint);margin-top:6px">Problem: ${q.repro_prompt||q.q}</div>`;}else{html=`<div class="eng-repro"><div class="eng-repro-prompt">${q.repro_prompt||'Apply the rule.'}</div>${q.repro_rule?`<div style="font-size:11px;color:var(--gold);margin-bottom:8px">Hint: ${q.repro_rule}</div>`:''}<textarea class="eng-repro-input" id="r-answer" placeholder="Write your answer..." style="height:70px"></textarea></div>`;}document.getElementById('repro-content').innerHTML=html;document.getElementById('repro-feedback').classList.remove('show');document.getElementById('repro-submit').disabled=false;document.getElementById('repro-submit').textContent='Submit my work';}
 
@@ -705,27 +702,14 @@ function initStars(){const c=document.getElementById('stars');const ctx=c.getCon
 
 async function loadBank(){
   try{
-    // Try manifest first; fall back to single file
-    let files=['questions.json'];
-    try{
-      const mRes=await fetch('manifest.json?v='+Date.now());
-      if(mRes.ok){const m=await mRes.json();if(Array.isArray(m)&&m.length)files=m;}
-    }catch(e){}
-    // Reset bank so we don't double-load on retry
-    ['math','english','reading','science','writing'].forEach(t=>{BANK[t]=[];});
-    for(const file of files){
-      try{
-        const res=await fetch(file+'?v='+Date.now());
-        if(!res.ok)continue;
-        const data=await res.json();
-        ['math','english','reading','science','writing'].forEach(t=>{
-          if(data[t]&&Array.isArray(data[t])){BANK[t]=(BANK[t]||[]).concat(data[t]);}
-        });
-        console.log('Loaded '+file);
-      }catch(e){console.warn('Could not load '+file,e);}
-    }
+    const res=await fetch('questions.json?v='+Date.now());
+    if(!res.ok)throw new Error('fetch failed');
+    const data=await res.json();
+    ['math','english','reading','science','writing'].forEach(t=>{
+      if(data[t]&&Array.isArray(data[t]))BANK[t]=data[t];
+    });
     const total=Object.values(BANK).reduce((a,b)=>a+b.length,0);
-    console.log('Bank ready: '+total+' questions across '+files.length+' file(s)');
+    console.log('Bank ready: '+total+' questions');
   }catch(e){console.warn('Bank load error',e);}
 }
 
