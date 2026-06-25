@@ -40,6 +40,8 @@ body{font-family:'Inter',sans-serif;background:var(--night);color:var(--star);mi
 .ob-btn{width:100%;background:var(--gold);color:var(--night);border:none;border-radius:var(--r);padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.5px;transition:all .18s}
 .ob-btn:hover{background:var(--gold-l)}
 .ob-note{font-size:10px;color:var(--faint);margin-top:14px;line-height:1.6}
+#pack-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,10,18,.92);z-index:9999;display:none;align-items:center;justify-content:center}
+.pack-modal-box{background:var(--card);border:.5px solid var(--gold);border-radius:var(--rl);padding:36px 32px;text-align:center;max-width:360px;width:90%}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;border-bottom:.5px solid var(--border);margin-bottom:22px}
 .logo{display:flex;align-items:center;gap:11px}
 .logo h1{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold);letter-spacing:3px}
@@ -270,6 +272,12 @@ body{font-family:'Inter',sans-serif;background:var(--night);color:var(--star);mi
   </div>
 </div>
 
+<div id="pack-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,10,18,.92);z-index:9999;align-items:center;justify-content:center">
+  <div class="pack-modal-box">
+    <div id="pack-modal-body"></div>
+  </div>
+</div>
+
 <div id="onboard-screen" style="display:none;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--night);z-index:9998">
   <div class="ob-box">
     <div style="margin-bottom:18px;font-size:36px">⚡</div>
@@ -492,6 +500,20 @@ body{font-family:'Inter',sans-serif;background:var(--night);color:var(--star);mi
   </div>
 </div>
 <div id="screen-progress" class="screen">
+  <div id="pack-status-bar" style="background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-family:'Cinzel',serif;font-size:10px;color:var(--gold);letter-spacing:1.5px">ACTIVE MISSION</span>
+      <span style="font-size:10px;color:var(--muted)" id="pack-name-display">Foundation</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+      <span style="font-size:10px;color:var(--muted)">Advance at 85% overall</span>
+      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold)" id="pack-pct-display">0%</span>
+    </div>
+    <div style="background:var(--surface2,#1a1f2e);border-radius:2px;height:4px;overflow:hidden">
+      <div id="pack-advance-bar" style="height:100%;background:linear-gradient(90deg,var(--bronze),var(--gold));border-radius:2px;transition:width 1s;width:0%"></div>
+    </div>
+    <div id="pack-next-label" style="font-size:9px;color:var(--faint);margin-top:5px;text-align:right"></div>
+  </div>
   <canvas id="constellation"></canvas>
   <div class="chiron-note"><div class="cn-lbl">Chiron's Assessment</div><div class="cn-txt" id="ch-assess">Complete your first mission and Chiron will assess your strengths.</div></div>
   <div class="stitle">Mission History</div>
@@ -580,12 +602,61 @@ let drillTimer=null,drillSec=90,drillQs=[],drillIdx=0,drillCorrect=0;
 // ── CHIRON CONFIG ── edit these two lines only ─────────────────────────────
 const MISSION_START = '2026-06-24'; // date Alex started Chiron (YYYY-MM-DD)
 const TARGET_DATE   = '2026-09-13'; // ACT test date (YYYY-MM-DD)
+// manifest.json format: [{"file":"questions.json","name":"Foundation","threshold":85},
+//                        {"file":"questions2.json","name":"Advanced","threshold":85}]
 // ──────────────────────────────────────────────────────────────────────────
 
 function save(){try{localStorage.setItem('chiron_v5',JSON.stringify(S));}catch(e){}}
 function load(){try{const d=localStorage.getItem('chiron_v5');if(d){const p=JSON.parse(d);S={...S,...p};TOPICS.forEach(t=>{if(!S.topicScores[t.id])S.topicScores[t.id]=[];if(!S.topicLevels[t.id])S.topicLevels[t.id]=1;});}}catch(e){}}
 function topicPct(id){const a=S.topicScores[id]||[];if(!a.length)return 0;const r=a.slice(-20);return Math.round(r.reduce((x,y)=>x+y,0)/r.length*100);}
-function updateLevels(){TOPICS.forEach(t=>{const pct=topicPct(t.id),cnt=S.topicScores[t.id].length;if(cnt>=8&&pct>=72&&S.topicLevels[t.id]===1)S.topicLevels[t.id]=2;if(cnt>=16&&pct>=76&&S.topicLevels[t.id]===2)S.topicLevels[t.id]=3;});}
+function updateLevels(){
+  TOPICS.forEach(t=>{
+    const pct=topicPct(t.id),cnt=S.topicScores[t.id].length;
+    if(cnt>=8&&pct>=72&&S.topicLevels[t.id]===1)S.topicLevels[t.id]=2;
+    if(cnt>=16&&pct>=76&&S.topicLevels[t.id]===2)S.topicLevels[t.id]=3;
+  });
+  checkPackAdvance();
+}
+function overallL2Pct(){
+  // Average L2+ accuracy across all topics with enough data
+  const scored=TOPICS.filter(t=>(S.topicScores[t.id]||[]).length>=8);
+  if(scored.length<3)return 0;
+  return Math.round(scored.reduce((sum,t)=>sum+topicPct(t.id),0)/scored.length);
+}
+function checkPackAdvance(){
+  const packs=window.PACKS||[];
+  const activePack=window.ACTIVE_PACK||0;
+  if(activePack>=packs.length-1)return; // already on last pack
+  const threshold=window.ADVANCE_THRESHOLD||85;
+  const pct=overallL2Pct();
+  if(pct>=threshold&&!S.packAdvanceNotified){
+    S.packAdvanceNotified=true;
+    save();
+    showPackAdvanceModal(pct,packs[activePack+1]);
+  }
+}
+function advanceToPack(){
+  const newPack=(window.ACTIVE_PACK||0)+1;
+  S.activePack=newPack;
+  S.packAdvanceNotified=false;
+  // Reset topic levels so new pack builds from scratch
+  TOPICS.forEach(t=>{S.topicLevels[t.id]=1;S.topicScores[t.id]=[];});
+  save();
+  document.getElementById('pack-modal').style.display='none';
+  location.reload(); // reload to fetch new pack
+}
+function showPackAdvanceModal(pct,nextPack){
+  const name=nextPack?nextPack.name:'Advanced';
+  document.getElementById('pack-modal-body').innerHTML=`
+    <div style="font-size:36px;margin-bottom:12px">⚡</div>
+    <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold);letter-spacing:2px;margin-bottom:8px">MISSION COMPLETE</div>
+    <div style="font-size:13px;color:var(--star);margin-bottom:6px">Overall accuracy: <strong style="color:var(--gold)">${pct}%</strong></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">You have hit the 85% threshold.<br>Foundation is locked in. Time to advance.</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:16px">NEXT: ${name.toUpperCase()}</div>
+    <button class="ob-btn" onclick="advanceToPack()">Advance Mission</button>
+    <div style="margin-top:12px"><button onclick="document.getElementById('pack-modal').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer">Stay on current pack</button></div>`;
+  document.getElementById('pack-modal').style.display='flex';
+}
 function projScore(){
   if(S.totalQ<15)return null;
   let wCorrect=0,wTotal=0;
@@ -694,7 +765,23 @@ async function gradeTeach(){const input=document.getElementById('teach-input').v
 
 function startDive(){document.getElementById('ch-home').style.display='none';document.getElementById('ch-dive').style.display='block';const weak=TOPICS.slice().sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const b=BANK[weak.id]||BANK.math;const sh=[...b].sort(()=>Math.random()-.5).slice(0,8);let idx=0,correct=0;const L=['A','B','C','D'];function render(){if(idx>=sh.length){S.xp+=correct*8;save();document.getElementById('dive-area').innerHTML=`<div class="rcard" style="margin:0"><div class="rscore">${correct}/${sh.length}</div><div class="rlabel">Deep Dive - ${weak.name}</div><div class="chiron-msg">You chose to go deeper. That separates the engineers who get there from the ones who almost do.</div></div>`;return;}const q=sh[idx];document.getElementById('dive-area').innerHTML=`<div class="qcard"><div class="qmeta"><span class="qbadge">${weak.name}</span><span class="qlvl">Level ${q.lvl||1}</span><span class="qconcept">${q.concept||''}</span><span class="qnum">Q${idx+1}/${sh.length}</span></div>${q.passage?`<div class="passage">${q.passage}</div>`:''}<div class="qtext">${q.q||q.question}</div><div class="ans-list">${q.choices.map((c,i)=>`<button class="abtn" id="da${i}" onclick="diveAns(${i})"><span class="aletter">${L[i]}</span><span>${c}</span></button>`).join('')}</div></div><div class="correct-panel" id="dive-exp" style="margin-top:10px"><div class="correct-text" id="dive-exp-txt"></div><div style="margin-top:10px"><button class="btn" onclick="diveNext()" style="font-size:12px;padding:9px 16px">Next</button></div></div>`;window.diveAns=function(i){const right=i===q.correct;if(right)correct++;S.topicScores[weak.id]=S.topicScores[weak.id]||[];S.topicScores[weak.id].push(right?1:0);S.totalQ++;if(right)S.totalCorrect++;S.xp+=right?8:2;save();document.querySelectorAll('.abtn').forEach((b,j)=>{b.disabled=true;if(j===q.correct)b.classList.add('correct');if(j===i&&!right)b.classList.add('wrong');});document.getElementById('dive-exp-txt').textContent=q.exp||'';document.getElementById('dive-exp').classList.add('show');};window.diveNext=function(){idx++;render();};}render();}
 
-function renderProgress(){const weak=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const strong=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(b.id)-topicPct(a.id))[0];const note=document.getElementById('ch-assess');if(S.totalQ<10)note.textContent='Complete your first mission and Chiron will assess your strengths.';else if(weak&&strong&&weak.id!==strong.id)note.textContent=`Your ${strong.name} is your current foundation. Your ${weak.name} is where the points are being left behind. Tomorrow\'s mission will prioritize it.`;else if(weak)note.textContent=`${weak.name} needs the most attention right now.`;else note.textContent='Showing consistency. Keep the streak alive.';const histEl=document.getElementById('hist-list');histEl.innerHTML=S.history.length===0?'<div style="color:var(--faint);font-size:12px;text-align:center;padding:18px">No missions completed yet.</div>':S.history.map(h=>{const col=h.pct>=80?'#4caf7d':h.pct>=60?'#c9a84c':'#e06060';const ml=h.mode==='saturday'?'SATURDAY':'DAILY';return`<div class="hist-row"><span style="font-size:11px;color:var(--muted)">${h.date}</span><span style="font-size:9px;color:var(--faint);letter-spacing:1.5px;text-transform:uppercase">${ml}</span><span style="font-family:'Cinzel',serif;font-size:12px;color:${col}">${h.score} - ${h.pct}%</span><span style="font-size:10px;color:var(--gold)">+${h.xp} XP</span></div>`;}).join('');renderTopicGrid('tgrid-prog');drawConstellation();}
+function renderProgress(){
+  // Update pack advance bar
+  const pct=overallL2Pct();
+  const packEl=document.getElementById('pack-advance-bar');
+  const pctEl=document.getElementById('pack-pct-display');
+  const nameEl=document.getElementById('pack-name-display');
+  const nextEl=document.getElementById('pack-next-label');
+  if(packEl){packEl.style.width=Math.min(100,pct)+'%';}
+  if(pctEl){pctEl.textContent=pct+'%';}
+  if(nameEl){nameEl.textContent=window.ACTIVE_PACK_NAME||'Foundation';}
+  const packs=window.PACKS||[];
+  const activePack=window.ACTIVE_PACK||0;
+  if(nextEl){
+    if(activePack>=packs.length-1){nextEl.textContent='Final mission active';}
+    else if(pct>=85){nextEl.textContent='Ready to advance — complete a mission to unlock';}
+    else{const rem=85-pct;nextEl.textContent=rem+'% more accuracy needed to unlock '+(packs[activePack+1]?packs[activePack+1].name:'next pack');}
+  }const weak=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const strong=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(b.id)-topicPct(a.id))[0];const note=document.getElementById('ch-assess');if(S.totalQ<10)note.textContent='Complete your first mission and Chiron will assess your strengths.';else if(weak&&strong&&weak.id!==strong.id)note.textContent=`Your ${strong.name} is your current foundation. Your ${weak.name} is where the points are being left behind. Tomorrow\'s mission will prioritize it.`;else if(weak)note.textContent=`${weak.name} needs the most attention right now.`;else note.textContent='Showing consistency. Keep the streak alive.';const histEl=document.getElementById('hist-list');histEl.innerHTML=S.history.length===0?'<div style="color:var(--faint);font-size:12px;text-align:center;padding:18px">No missions completed yet.</div>':S.history.map(h=>{const col=h.pct>=80?'#4caf7d':h.pct>=60?'#c9a84c':'#e06060';const ml=h.mode==='saturday'?'SATURDAY':'DAILY';return`<div class="hist-row"><span style="font-size:11px;color:var(--muted)">${h.date}</span><span style="font-size:9px;color:var(--faint);letter-spacing:1.5px;text-transform:uppercase">${ml}</span><span style="font-family:'Cinzel',serif;font-size:12px;color:${col}">${h.score} - ${h.pct}%</span><span style="font-size:10px;color:var(--gold)">+${h.xp} XP</span></div>`;}).join('');renderTopicGrid('tgrid-prog');drawConstellation();}
 
 function drawConstellation(){const canvas=document.getElementById('constellation');if(!canvas)return;const ctx=canvas.getContext('2d');const dpr=window.devicePixelRatio||1;canvas.width=canvas.offsetWidth*dpr;canvas.height=canvas.offsetHeight*dpr;ctx.scale(dpr,dpr);const w=canvas.offsetWidth,h=canvas.offsetHeight;ctx.clearRect(0,0,w,h);const stars=[{x:w*.12,y:h*.35,topic:'english'},{x:w*.32,y:h*.72,topic:'math'},{x:w*.54,y:h*.22,topic:'reading'},{x:w*.74,y:h*.68,topic:'science'},{x:w*.90,y:h*.30,topic:'writing'}];for(let i=0;i<stars.length-1;i++){const p1=topicPct(stars[i].topic),p2=topicPct(stars[i+1].topic);if(p1>15&&p2>15){ctx.strokeStyle=`rgba(201,168,76,${Math.min(.35,(p1+p2)/400)})`;ctx.lineWidth=.5;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(stars[i].x,stars[i].y);ctx.lineTo(stars[i+1].x,stars[i+1].y);ctx.stroke();ctx.setLineDash([]);}}stars.forEach(s=>{const pct=topicPct(s.topic),r=3+pct/15,col=TC[s.topic];ctx.beginPath();ctx.arc(s.x,s.y,r,0,Math.PI*2);ctx.fillStyle=pct>0?col:'rgba(255,255,255,.07)';ctx.fill();if(pct>0){ctx.beginPath();ctx.arc(s.x,s.y,r+5,0,Math.PI*2);ctx.strokeStyle=col+'22';ctx.lineWidth=1;ctx.stroke();}ctx.fillStyle='rgba(240,230,200,.5)';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(TL[s.topic],s.x,s.y+r+13);if(pct>0){ctx.fillStyle=col;ctx.font='9px Inter,sans-serif';ctx.fillText(pct+'%',s.x,s.y-r-5);}});}
 
@@ -702,14 +789,29 @@ function initStars(){const c=document.getElementById('stars');const ctx=c.getCon
 
 async function loadBank(){
   try{
-    const res=await fetch('questions.json?v='+Date.now());
+    // Load manifest to get pack list
+    let packs=[{file:'questions.json',name:'Foundation',threshold:85}];
+    try{
+      const mRes=await fetch('manifest.json?v='+Date.now());
+      if(mRes.ok){const m=await mRes.json();if(Array.isArray(m)&&m.length)packs=m;}
+    }catch(e){}
+    window.PACKS=packs;
+    // Determine active pack index from saved state
+    const saved=JSON.parse(localStorage.getItem('chiron_v5')||'{}');
+    const activePack=Math.min(saved.activePack||0,packs.length-1);
+    const pack=packs[activePack];
+    // Load only the active pack
+    const res=await fetch(pack.file+'?v='+Date.now());
     if(!res.ok)throw new Error('fetch failed');
     const data=await res.json();
     ['math','english','reading','science','writing'].forEach(t=>{
       if(data[t]&&Array.isArray(data[t]))BANK[t]=data[t];
     });
+    window.ACTIVE_PACK=activePack;
+    window.ACTIVE_PACK_NAME=pack.name||('Pack '+(activePack+1));
+    window.ADVANCE_THRESHOLD=pack.threshold||85;
     const total=Object.values(BANK).reduce((a,b)=>a+b.length,0);
-    console.log('Bank ready: '+total+' questions');
+    console.log('Pack loaded: '+window.ACTIVE_PACK_NAME+' ('+total+' questions)');
   }catch(e){console.warn('Bank load error',e);}
 }
 

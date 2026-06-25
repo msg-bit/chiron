@@ -1,1 +1,3 @@
-["questions1.json"]
+[
+  {"file": "questions.json", "name": "Foundation", "threshold": 85}
+]
