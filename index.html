@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiron — ACT Prep · Alex Gerber</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#080b11;--surface:#111620;--card:#161d2a;
+  --border:rgba(180,150,80,.18);--border2:rgba(180,150,80,.07);
+  --gold:#c9a84c;--gold-l:#e8c97a;--gold-dim:rgba(201,168,76,.11);
+  --bronze:#8b6914;--star:#f0e6c8;--muted:rgba(240,230,200,.5);--faint:rgba(240,230,200,.2);
+  --ok:#4caf7d;--ok-dim:rgba(76,175,125,.11);
+  --err:#e06060;--err-dim:rgba(224,96,96,.11);
+  --purple:#9b6fd4;--purple-dim:rgba(155,111,212,.11);
+  --warn:#e09060;--warn-dim:rgba(224,144,96,.11);
+  --r:10px;--rl:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--night);color:var(--star);min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
+.app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 18px 100px}
+#pw-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--night);z-index:9999;display:flex;align-items:center;justify-content:center}
+.pw-box{background:var(--card);border:.5px solid var(--border);border-radius:var(--rl);padding:40px 36px;text-align:center;max-width:360px;width:90%}
+.pw-title{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);letter-spacing:3px;margin-bottom:6px}
+.pw-sub{font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:28px}
+.pw-input{width:100%;background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);color:var(--star);font-family:'JetBrains Mono',monospace;font-size:22px;padding:14px;text-align:center;letter-spacing:6px;outline:none;margin-bottom:10px}
+.pw-input:focus{border-color:var(--gold)}
+.pw-error{font-size:12px;color:var(--err);margin-bottom:10px;min-height:18px}
+.pw-btn{width:100%;background:var(--gold);color:var(--night);border:none;border-radius:var(--r);padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.pw-btn:hover{background:var(--gold-l)}
+#onboard-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--night);z-index:9998;display:none;align-items:center;justify-content:center}
+.ob-box{background:var(--card);border:.5px solid var(--border);border-radius:var(--rl);padding:40px 36px;text-align:center;max-width:380px;width:90%}
+.ob-title{font-family:'Cinzel',serif;font-size:20px;color:var(--gold);letter-spacing:3px;margin-bottom:6px}
+.ob-sub{font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:28px;line-height:1.6}
+.ob-label{font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:block;text-align:left}
+.ob-date{width:100%;background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);color:var(--star);font-family:'Inter',sans-serif;font-size:16px;padding:13px 14px;outline:none;margin-bottom:20px}
+.ob-date:focus{border-color:var(--gold)}
+.ob-btn{width:100%;background:var(--gold);color:var(--night);border:none;border-radius:var(--r);padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.5px;transition:all .18s}
+.ob-btn:hover{background:var(--gold-l)}
+.ob-note{font-size:10px;color:var(--faint);margin-top:14px;line-height:1.6}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 0 16px;border-bottom:.5px solid var(--border);margin-bottom:22px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo h1{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold);letter-spacing:3px}
+.logo p{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.hdr-r{display:flex;gap:11px;align-items:center}
+.pill{display:flex;flex-direction:column;align-items:center;background:var(--gold-dim);border:.5px solid var(--border);border-radius:var(--r);padding:7px 12px}
+.pill .n{font-family:'Cinzel',serif;font-size:18px;color:var(--gold-l);line-height:1}
+.pill .l{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.cdown .d{font-family:'Cinzel',serif;font-size:25px;color:var(--gold);line-height:1;text-align:right}
+.cdown .l{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+.tabs{display:flex;gap:3px;background:var(--surface);border-radius:var(--r);padding:4px;margin-bottom:20px;border:.5px solid var(--border)}
+.tab{flex:1;padding:9px 4px;background:none;border:none;border-radius:7px;color:var(--muted);font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;letter-spacing:.5px}
+.tab.active{background:var(--gold-dim);color:var(--gold-l);border:.5px solid var(--border)}
+.tab:hover:not(.active){color:var(--star)}
+.screen{display:none}.screen.active{display:block}
+.btn{background:var(--gold);color:var(--night);border:none;border-radius:var(--r);padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-out{background:none;color:var(--gold);border:.5px solid var(--border);border-radius:var(--r);padding:9px 15px;font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.btn-out:hover{background:var(--gold-dim)}
+.btn-p{background:var(--purple-dim);color:#c4a0f0;border:.5px solid rgba(155,111,212,.3);border-radius:var(--r);padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.btn-p:hover{background:rgba(155,111,212,.2);transform:translateY(-1px)}
+.btn-ok{background:var(--ok-dim);color:var(--ok);border:.5px solid rgba(76,175,125,.3);border-radius:var(--r);padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.btn-ok:hover{background:rgba(76,175,125,.2)}
+.btn-warn{background:var(--warn-dim);color:var(--warn);border:.5px solid rgba(224,144,96,.3);border-radius:var(--r);padding:11px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.btn-warn:hover{background:rgba(224,144,96,.2)}
+.stitle{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.stitle::after{content:'';flex:1;height:.5px;background:var(--border)}
+.mission-card{background:var(--card);border:.5px solid var(--border);border-radius:var(--rl);padding:22px 24px;margin-bottom:15px;position:relative;overflow:hidden}
+.mission-card::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.lvl-badge{display:inline-flex;align-items:center;gap:5px;background:var(--gold-dim);border:.5px solid var(--border);border-radius:20px;padding:4px 11px;font-size:10px;color:var(--gold-l);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.xp-track{height:4px;background:var(--surface);border-radius:2px;overflow:hidden;border:.5px solid var(--border2);margin-bottom:15px}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--bronze),var(--gold));border-radius:2px;transition:width .8s ease}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:15px}
+.sc{background:var(--surface);border:.5px solid var(--border2);border-radius:var(--r);padding:12px;text-align:center}
+.sc .n{font-family:'Cinzel',serif;font-size:20px;color:var(--gold-l);line-height:1;margin-bottom:3px}
+.sc .l{font-size:9px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase}
+.score-box{background:var(--surface);border:.5px solid var(--border);border-radius:var(--rl);padding:17px 21px;margin-bottom:15px}
+.score-row{display:flex;align-items:flex-end;gap:13px;margin-bottom:11px}
+.score-cur{font-family:'Cinzel',serif;font-size:46px;font-weight:700;color:var(--gold-l);line-height:1}
+.score-tgt{font-family:'Cinzel',serif;font-size:46px;font-weight:700;color:var(--gold);opacity:.28;line-height:1}
+.score-track{height:6px;background:rgba(255,255,255,.04);border-radius:3px;border:.5px solid var(--border2);position:relative}
+.score-fill{height:100%;background:linear-gradient(90deg,#5a3a08,var(--bronze),var(--gold),var(--gold-l));border-radius:3px;transition:width 1.2s;position:relative}
+.score-fill::after{content:'';position:absolute;right:-5px;top:-3px;width:12px;height:12px;background:var(--gold-l);border-radius:50%;border:2px solid var(--night)}
+.ms-row{display:flex;justify-content:space-between;margin-top:5px}
+.ms{font-size:9px;color:var(--faint)}.ms.on{color:var(--gold)}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+.tc{background:var(--surface);border:.5px solid var(--border2);border-radius:var(--r);padding:12px 14px}
+.tc-hdr{display:flex;justify-content:space-between;margin-bottom:7px}
+.tc-name{font-size:11px;font-weight:500;color:var(--star)}
+.tc-pct{font-family:'Cinzel',serif;font-size:12px}
+.tc-track{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.tc-fill{height:100%;border-radius:2px;transition:width 1s}
+.tc-sub{font-size:9px;color:var(--faint)}
+.notice{background:var(--gold-dim);border:.5px solid var(--border);border-radius:var(--r);padding:12px 15px;margin-bottom:13px;display:none}
+.notice.show{display:block}
+.notice p{font-size:13px;color:var(--gold-l);line-height:1.6}
+.notice small{font-size:11px;color:var(--muted)}
+.sat-banner{background:var(--warn-dim);border:.5px solid rgba(224,144,96,.3);border-radius:var(--rl);padding:18px 22px;margin-bottom:15px;display:none}
+.sat-banner.show{display:block}
+.sat-eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--warn);margin-bottom:5px}
+.sat-title{font-family:'Cinzel',serif;font-size:17px;color:var(--star);margin-bottom:6px}
+.sat-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.qhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.qpt{font-size:11px;color:var(--muted)}
+.qptrack{width:160px;height:3px;background:var(--surface);border-radius:2px;overflow:hidden;margin-top:5px}
+.qpfill{height:100%;background:var(--gold);border-radius:2px;transition:width .3s}
+.qxp{font-family:'Cinzel',serif;font-size:13px;color:var(--gold)}
+.timer-bar{background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);padding:10px 14px;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between}
+.timer-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.timer-display{font-family:'Cinzel',serif;font-size:20px;color:var(--gold)}
+.timer-display.urgent{color:var(--err)}
+.timer-track{flex:1;height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin:0 14px}
+.timer-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 1s linear}
+.timer-fill.urgent{background:var(--err)}
+.scaffold{background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);padding:15px;margin-bottom:12px}
+.scaffold.locked{opacity:.5;pointer-events:none}
+.sc-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.sc-hint{font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:11px}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:9px}
+.sc-col label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.sc-col textarea,.sc-solve textarea{width:100%;background:var(--card);border:.5px solid var(--border);border-radius:7px;color:var(--star);font-family:'JetBrains Mono',monospace;font-size:12px;padding:9px 10px;resize:none;line-height:1.5}
+.sc-col textarea:focus,.sc-solve textarea:focus{outline:none;border-color:var(--gold)}
+.sc-col textarea{height:68px}
+.sc-solve label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.sc-solve textarea{height:44px}
+.qcard{background:var(--card);border:.5px solid var(--border);border-radius:var(--rl);padding:23px;margin-bottom:12px}
+.qmeta{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.qbadge{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);border:.5px solid var(--border);border-radius:20px;padding:3px 9px}
+.qbadge.c{color:#c4a0f0;background:var(--purple-dim);border-color:rgba(155,111,212,.3)}
+.qbadge.sat{color:var(--warn);background:var(--warn-dim);border-color:rgba(224,144,96,.3)}
+.qlvl{font-size:9px;color:var(--faint)}
+.qconcept{font-size:9px;color:var(--faint)}
+.qnum{font-size:10px;color:var(--faint);margin-left:auto}
+.passage{font-size:12px;line-height:1.85;color:var(--muted);background:var(--surface);border-left:2px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:11px 13px;margin-bottom:15px;font-style:italic}
+.qtext{font-size:14px;line-height:1.7;color:var(--star);margin-bottom:17px;white-space:pre-wrap}
+.ans-list{display:flex;flex-direction:column;gap:7px}
+.abtn{display:flex;align-items:flex-start;gap:10px;background:var(--surface);border:.5px solid rgba(180,150,80,.1);border-radius:var(--r);padding:11px 13px;cursor:pointer;text-align:left;transition:all .18s;color:var(--star);font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;width:100%}
+.abtn:hover:not(:disabled){border-color:var(--gold);background:var(--gold-dim)}
+.abtn.correct{border-color:var(--ok);background:var(--ok-dim)}
+.abtn.wrong{border-color:var(--err);background:var(--err-dim);color:var(--muted)}
+.abtn:disabled{cursor:default}
+.aletter{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.05);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--muted);margin-top:1px}
+.abtn.correct .aletter{background:var(--ok);border-color:var(--ok);color:#fff}
+.abtn.wrong .aletter{background:var(--err);border-color:var(--err);color:#fff}
+.coaching-panel{border-radius:var(--r);overflow:hidden;margin-top:12px;display:none}
+.coaching-panel.show{display:block}
+.diag-card{background:var(--err-dim);border:.5px solid rgba(224,96,96,.3);border-radius:var(--r);padding:16px 18px;margin-bottom:10px}
+.diag-hdr{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.diag-icon{width:24px;height:24px;border-radius:50%;background:rgba(224,96,96,.25);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.diag-title{font-size:12px;font-weight:600;color:var(--err)}
+.diag-text{font-size:12px;line-height:1.75;color:var(--muted)}
+.diag-step{font-size:11px;color:var(--err);margin-top:8px;font-style:italic}
+.demo-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:10px}
+.demo-hdr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.demo-col .dl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.demo-col .dv{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;white-space:pre-wrap}
+.pattern-box{background:var(--gold-dim);border:.5px solid var(--border);border-radius:var(--r);padding:9px 12px;margin-top:8px}
+.pattern-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.pattern-txt{font-size:12px;color:var(--star);line-height:1.6}
+.repro-card{background:var(--gold-dim);border:.5px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:10px}
+.repro-hdr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.repro-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.repro-scaffold{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.repro-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.repro-col label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.repro-col textarea,.repro-work textarea{width:100%;background:var(--surface);border:.5px solid var(--border);border-radius:7px;color:var(--star);font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 10px;resize:none;line-height:1.5;height:60px}
+.repro-col textarea:focus,.repro-work textarea:focus{outline:none;border-color:var(--gold)}
+.repro-work label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.repro-work textarea{height:40px}
+.repro-answer{margin-top:8px}
+.repro-answer label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.repro-answer input{width:100%;background:var(--surface);border:.5px solid var(--border);border-radius:7px;color:var(--star);font-family:'JetBrains Mono',monospace;font-size:13px;padding:9px 11px;outline:none}
+.repro-answer input:focus{border-color:var(--gold)}
+.eng-repro{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:10px}
+.eng-repro-prompt{font-size:13px;color:var(--star);margin-bottom:8px;line-height:1.6}
+.eng-repro-input{width:100%;background:var(--surface);border:.5px solid var(--border);border-radius:7px;color:var(--star);font-family:'Inter',sans-serif;font-size:13px;padding:9px 11px;outline:none;line-height:1.5}
+.eng-repro-input:focus{border-color:var(--gold)}
+.repro-feedback{border-radius:var(--r);padding:14px 16px;margin-top:10px;display:none}
+.repro-feedback.show{display:block}
+.repro-feedback.good{background:var(--ok-dim);border:.5px solid rgba(76,175,125,.3)}
+.repro-feedback.retry{background:var(--err-dim);border:.5px solid rgba(224,96,96,.2)}
+.repro-feedback-text{font-size:12px;line-height:1.75;color:var(--star)}
+.xppop{display:inline-flex;align-items:center;gap:4px;background:var(--gold-dim);border:.5px solid var(--border);border-radius:20px;padding:3px 10px;font-size:10px;color:var(--gold-l);margin-top:9px}
+.correct-panel{background:var(--ok-dim);border:.5px solid rgba(76,175,125,.3);border-radius:var(--r);padding:15px 17px;margin-top:12px;display:none}
+.correct-panel.show{display:block}
+.correct-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.correct-icon{width:24px;height:24px;border-radius:50%;background:rgba(76,175,125,.25);display:flex;align-items:center;justify-content:center;font-size:12px}
+.correct-title{font-size:12px;font-weight:600}
+.correct-text{font-size:12px;line-height:1.75;color:var(--muted)}
+.correct-pattern{background:var(--gold-dim);border:.5px solid var(--border);border-radius:var(--r);padding:8px 11px;margin-top:9px}
+.correct-pattern-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.correct-pattern-txt{font-size:12px;color:var(--star);line-height:1.55}
+.qacts{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;gap:13px}
+.spin{width:31px;height:31px;border:1.5px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loadtxt{font-size:12px;color:var(--muted);letter-spacing:1px;text-align:center;line-height:1.8}
+.rcard{background:var(--card);border:.5px solid var(--border);border-radius:var(--rl);padding:26px;text-align:center;margin-bottom:15px}
+.rscore{font-family:'Cinzel',serif;font-size:54px;font-weight:700;color:var(--gold-l);line-height:1;margin-bottom:5px}
+.rlabel{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:15px}
+.chiron-msg{font-size:14px;line-height:1.7;color:var(--star);font-style:italic;max-width:450px;margin:0 auto 17px;border-left:2px solid var(--gold);padding-left:13px;text-align:left}
+.racts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.ping-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-top:15px}
+.ping-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.ping-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.ping-sent{font-size:12px;color:var(--ok);display:none}
+.next-sat-card{background:var(--warn-dim);border:.5px solid rgba(224,144,96,.35);border-radius:var(--r);padding:16px 18px;margin-top:12px;display:none}
+.next-sat-card.show{display:block}
+.next-sat-title{font-family:'Cinzel',serif;font-size:14px;color:var(--warn);margin-bottom:6px}
+.next-sat-text{font-size:12px;color:var(--muted);line-height:1.65}
+.ch-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
+.chmode{background:var(--surface);border:.5px solid rgba(155,111,212,.2);border-radius:var(--r);padding:15px 10px;cursor:pointer;text-align:center;transition:all .18s;color:var(--star)}
+.chmode:hover{border-color:var(--purple);background:rgba(155,111,212,.07)}
+.chmode .icon{font-size:20px;margin-bottom:5px}
+.chmode .name{font-size:11px;font-weight:500;display:block;margin-bottom:2px}
+.chmode .desc{font-size:9px;color:var(--muted)}
+.drill-timer{font-family:'Cinzel',serif;font-size:38px;color:var(--gold);text-align:center;margin-bottom:14px}
+.drill-timer.urgent{color:var(--err)}
+.teach-area{width:100%;background:var(--card);border:.5px solid var(--border);border-radius:var(--r);color:var(--star);font-family:'Inter',sans-serif;font-size:13px;padding:12px;resize:none;height:110px;line-height:1.6;margin-bottom:11px}
+.teach-area:focus{outline:none;border-color:var(--gold)}
+.chiron-note{background:var(--surface);border:.5px solid var(--border);border-left:2.5px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:12px 16px;margin-bottom:15px}
+.cn-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.cn-txt{font-size:13px;line-height:1.65;color:var(--muted);font-style:italic}
+.hist-row{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--surface);border:.5px solid var(--border2);border-radius:var(--r);margin-bottom:6px}
+#constellation{width:100%;height:125px;border-radius:var(--r);background:var(--surface);border:.5px solid var(--border2);display:block;margin-bottom:15px}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+@media(max-width:600px){
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .tgrid{grid-template-columns:1fr}
+  .ch-modes{grid-template-columns:1fr}
+  .sc-grid,.demo-grid,.repro-grid{grid-template-columns:1fr}
+  .score-cur,.score-tgt{font-size:34px}
+  .qptrack{width:100px}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div id="pw-screen">
+  <div class="pw-box">
+    <div style="margin-bottom:18px">
+      <svg width="52" height="52" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#c9a84c" stroke-width=".5" opacity=".35"/>
+        <g opacity=".9">
+          <ellipse cx="20" cy="12.5" rx="3.2" ry="4.2" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+          <circle cx="20" cy="7" r="2.3" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="16.8" y1="12" x2="11" y2="16" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="23.2" y1="12" x2="29" y2="8.5" stroke="#c9a84c" stroke-width=".9"/>
+          <path d="M11 16 Q20 19.5 29 8.5" fill="none" stroke="#c9a84c" stroke-width=".5" stroke-dasharray="2,1.5"/>
+          <ellipse cx="20" cy="26" rx="7" ry="4.2" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="14" y1="29.5" x2="12" y2="36" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="17" y1="30.5" x2="16" y2="37" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="23" y1="30.5" x2="24" y2="37" stroke="#c9a84c" stroke-width=".9"/>
+          <line x1="26" y1="29.5" x2="28" y2="36" stroke="#c9a84c" stroke-width=".9"/>
+          <path d="M27 25 Q32 22.5 30 28" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+        </g>
+      </svg>
+    </div>
+    <div class="pw-title">CHIRON</div>
+    <div class="pw-sub">ACT Prep · Alex Gerber</div>
+    <input class="pw-input" type="password" id="pw-input" maxlength="4" placeholder="····" autofocus/>
+    <div class="pw-error" id="pw-error"></div>
+    <button class="pw-btn" onclick="checkPw()">Enter</button>
+  </div>
+</div>
+
+<div id="onboard-screen" style="display:none;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--night);z-index:9998">
+  <div class="ob-box">
+    <div style="margin-bottom:18px;font-size:36px">⚡</div>
+    <div class="ob-title">MISSION BRIEFING</div>
+    <div class="ob-sub">One question before we begin.<br>Chiron needs your target date.</div>
+    <label class="ob-label" for="ob-date-input">When is your ACT test?</label>
+    <input class="ob-date" type="date" id="ob-date-input" />
+    <button class="ob-btn" onclick="completeOnboarding()">Begin Training</button>
+    <div class="ob-note">This sets your countdown clock.<br>You can change it later by resetting with code 0000.</div>
+  </div>
+</div>
+
+<div class="app">
+<div class="hdr">
+  <div class="logo">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="19" stroke="#c9a84c" stroke-width=".5" opacity=".35"/>
+      <g opacity=".9">
+        <ellipse cx="20" cy="12.5" rx="3.2" ry="4.2" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+        <circle cx="20" cy="7" r="2.3" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="16.8" y1="12" x2="11" y2="16" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="23.2" y1="12" x2="29" y2="8.5" stroke="#c9a84c" stroke-width=".9"/>
+        <path d="M11 16 Q20 19.5 29 8.5" fill="none" stroke="#c9a84c" stroke-width=".5" stroke-dasharray="2,1.5"/>
+        <ellipse cx="20" cy="26" rx="7" ry="4.2" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="14" y1="29.5" x2="12" y2="36" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="17" y1="30.5" x2="16" y2="37" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="23" y1="30.5" x2="24" y2="37" stroke="#c9a84c" stroke-width=".9"/>
+        <line x1="26" y1="29.5" x2="28" y2="36" stroke="#c9a84c" stroke-width=".9"/>
+        <path d="M27 25 Q32 22.5 30 28" fill="none" stroke="#c9a84c" stroke-width=".9"/>
+      </g>
+    </svg>
+    <div><h1>CHIRON</h1><p>ACT Prep · Alex Gerber</p></div>
+  </div>
+  <div class="hdr-r">
+    <div class="pill"><span class="n" id="streak">0</span><span class="l">Streak</span></div>
+    <div class="cdown"><div class="d" id="cdown">85</div><div class="l">Days to Sept 15</div></div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="go('dashboard')">Mission HQ</button>
+  <button class="tab" onclick="go('quiz')">Daily Mission</button>
+  <button class="tab" onclick="go('challenge')">Challenge</button>
+  <button class="tab" onclick="go('progress')">Battle Map</button>
+</div>
+<div id="screen-dashboard" class="screen active">
+  <div class="sat-banner" id="sat-banner">
+    <div class="sat-eyebrow">Saturday Benchmark</div>
+    <div class="sat-title" id="sat-title">Operation: Benchmark Alpha</div>
+    <div class="sat-desc" id="sat-desc">40 questions. 45 minutes. Every topic. This is where you measure real progress.</div>
+    <button class="btn-warn" onclick="initMission('saturday')">Start Benchmark →</button>
+  </div>
+  <div class="mission-card">
+    <div class="eyebrow">Today's Mission</div>
+    <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--star);margin-bottom:6px" id="m-name">Operation: First Contact</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.65;max-width:500px;margin-bottom:15px" id="m-desc">Every engineer starts somewhere. Today Chiron learns how you think.</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+      <button class="btn" id="start-btn" onclick="initMission('daily')">Begin Mission</button>
+      <span id="done-msg" style="font-size:12px;color:var(--ok);display:none">Mission complete today</span>
+    </div>
+  </div>
+  <div class="notice" id="limit-notice">
+    <p>Today's mission is done. Rest is where the learning happens.</p>
+    <small>Challenge Mode is open if you want more.</small>
+  </div>
+  <div class="lvl-badge">⚡ <span id="lvl-name">Gaining Ground</span></div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+    <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)">Experience Points</span>
+    <span style="font-family:'Cinzel',serif;font-size:12px;color:var(--gold)" id="xp-val">0 XP</span>
+  </div>
+  <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
+  <div class="sgrid">
+    <div class="sc"><div class="n" id="s-m">0</div><div class="l">Missions</div></div>
+    <div class="sc"><div class="n" id="s-q">0</div><div class="l">Questions</div></div>
+    <div class="sc"><div class="n" id="s-a">—</div><div class="l">Accuracy</div></div>
+    <div class="sc"><div class="n" id="s-r">0</div><div class="l">Reproductions</div></div>
+  </div>
+  <div class="score-box">
+    <div class="stitle">ACT Score Projection</div>
+    <div class="score-row">
+      <div><div class="score-cur" id="proj">—</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px">Projection</div></div>
+      <div style="font-size:20px;color:var(--faint);padding-bottom:6px">→</div>
+      <div><div class="score-tgt">30</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px">Target</div></div>
+    </div>
+    <div class="score-track"><div class="score-fill" id="sbar" style="width:0%"></div></div>
+    <div class="ms-row">
+      <span class="ms" id="ms1">Baseline</span><span class="ms" id="ms2">Gaining</span>
+      <span class="ms" id="ms3">On Track</span><span class="ms" id="ms4">Closing In</span><span class="ms" id="ms5">Target</span>
+    </div>
+  </div>
+  <div class="stitle">Topic Mastery</div>
+  <div class="tgrid" id="tgrid-dash"></div>
+</div>
+<div id="screen-quiz" class="screen">
+  <div id="q-idle" style="text-align:center;padding:60px 20px">
+    <div style="font-family:'Cinzel',serif;font-size:17px;color:var(--gold);margin-bottom:10px">Your mission awaits.</div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Return to Mission HQ to begin.</p>
+    <button class="btn-out" onclick="go('dashboard')">Back to HQ</button>
+  </div>
+  <div id="q-loading" class="loading" style="display:none">
+    <div class="spin"></div>
+    <div class="loadtxt" id="load-msg">Chiron is preparing your mission...</div>
+  </div>
+  <div id="q-active" style="display:none">
+    <div class="timer-bar" id="timer-bar" style="display:none">
+      <span class="timer-label">Time Remaining</span>
+      <div class="timer-track"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+      <span class="timer-display" id="timer-display">45:00</span>
+    </div>
+    <div class="qhdr">
+      <div>
+        <div class="qpt" id="qpt">Question 1 of 20</div>
+        <div class="qptrack"><div class="qpfill" id="qpf" style="width:5%"></div></div>
+      </div>
+      <div class="qxp" id="qxp">+0 XP</div>
+    </div>
+    <div class="scaffold" id="scaffold" style="display:none">
+      <div class="sc-title">Set up the problem first</div>
+      <div class="sc-hint" id="sc-hint">Write down what you know and the formula before touching the answer choices.</div>
+      <div class="sc-grid">
+        <div class="sc-col"><label>What I know</label><textarea id="sc-vars" placeholder="e.g. v = 60 mph&#10;     t = 3 hours&#10;     d = ?"></textarea></div>
+        <div class="sc-col"><label>Formula</label><textarea id="sc-form" placeholder="e.g. d = v x t"></textarea></div>
+      </div>
+      <div class="sc-solve"><label>Work step by step</label><textarea id="sc-work" placeholder="Show every step."></textarea></div>
+      <div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--border2)">
+        <label style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px">My answer</label>
+        <div style="display:flex;gap:9px;align-items:center">
+          <input type="text" id="sc-commit" placeholder="Write your answer before seeing the choices" style="flex:1;background:var(--card);border:.5px solid var(--border);border-radius:7px;color:var(--star);font-family:'JetBrains Mono',monospace;font-size:13px;padding:9px 11px;outline:none"/>
+          <button class="btn-out" style="font-size:11px;padding:8px 13px;white-space:nowrap" onclick="commitAndReveal()">Commit</button>
+        </div>
+        <div style="font-size:10px;color:var(--faint);margin-top:5px">Write your answer first. Then see the choices.</div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qmeta">
+        <span class="qbadge" id="qbadge">English</span>
+        <span class="qlvl" id="qlvl">Level 1</span>
+        <span class="qconcept" id="qconcept"></span>
+        <span class="qnum" id="qnum">Q1</span>
+      </div>
+      <div class="passage" id="qpassage" style="display:none"></div>
+      <div class="qtext" id="qtext">Loading...</div>
+      <div class="ans-list" id="qans"></div>
+    </div>
+    <div class="coaching-panel" id="coaching-panel">
+      <div class="diag-card"><div class="diag-hdr"><div class="diag-icon">x</div><div class="diag-title" id="diag-title">Not quite</div></div><div class="diag-text" id="diag-text"></div><div class="diag-step" id="diag-step"></div></div>
+      <div class="demo-card"><div class="demo-hdr">The correct sequence</div><div class="demo-grid" id="demo-grid"></div><div id="demo-work"></div><div class="pattern-box"><div class="pattern-lbl">The pattern to lock in</div><div class="pattern-txt" id="demo-pattern"></div></div></div>
+      <div class="repro-card"><div class="repro-hdr">Now you do it</div><div class="repro-desc" id="repro-desc">Work through this from scratch.</div><div id="repro-content"></div><div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="btn-ok" id="repro-submit" onclick="submitRepro()">Submit my work</button></div><div class="repro-feedback" id="repro-feedback"><div class="repro-feedback-text" id="repro-feedback-text"></div><div class="xppop" id="repro-xp">+7 XP</div></div></div>
+    </div>
+    <div class="correct-panel" id="correct-panel">
+      <div class="correct-hdr"><div class="correct-icon">v</div><div class="correct-title" id="correct-title" style="color:var(--ok)">Correct</div></div>
+      <div class="correct-text" id="correct-text"></div>
+      <div class="correct-pattern"><div class="correct-pattern-lbl">Pattern confirmed</div><div class="correct-pattern-txt" id="correct-pattern"></div></div>
+    </div>
+    <div class="qacts">
+      <button class="btn-out" onclick="saveExit()" style="font-size:11px;padding:7px 11px">Save and Exit</button>
+      <button class="btn" id="next-btn" onclick="nextQ()" style="display:none">Next</button>
+    </div>
+  </div>
+  <div id="q-results" style="display:none">
+    <div class="rcard">
+      <div class="rscore" id="rscore">0/20</div>
+      <div class="rlabel" id="rlabel">Mission Complete</div>
+      <div class="chiron-msg" id="cmsg">Assessing...</div>
+      <div class="racts">
+        <button class="btn" onclick="reviewMission()">Review Answers</button>
+        <button class="btn-p" onclick="go('challenge')">Challenge Mode</button>
+        <button class="btn-out" onclick="go('dashboard')">HQ</button>
+      </div>
+    </div>
+    <div class="ping-card" id="ping-card">
+      <div class="ping-label">Mission Report</div>
+      <div class="ping-desc">Tap below to send your completion report. This tells Jarvis you are done and builds your weekly progress summary.</div>
+      <a id="ping-link" href="#"><button class="btn-ok" style="font-size:12px;padding:9px 18px">Send Mission Complete</button></a>
+      <div class="ping-sent" id="ping-sent">Report sent. Jarvis has been notified.</div>
+    </div>
+    <div class="next-sat-card" id="next-sat-card">
+      <div class="next-sat-title">Next Saturday: Full Simulation</div>
+      <div class="next-sat-text">Four sections. Real time limits. Treat it like the actual test. English 45 min, Math 60 min, Reading 35 min, Science 35 min. No coaching loop. Just you and the clock.</div>
+    </div>
+    <div id="r-breakdown"></div>
+  </div>
+</div>
+<div id="screen-challenge" class="screen">
+  <div id="ch-home">
+    <div class="chiron-note" style="border-left-color:var(--purple)"><div class="cn-lbl" style="color:#c4a0f0">Challenge Mode</div><div class="cn-txt">Bonus sessions. Different formats. No streak pressure.</div></div>
+    <div class="ch-modes">
+      <div class="chmode" onclick="startDrill()"><div class="icon">z</div><span class="name">Speed Drill</span><span class="desc">10 math questions 90 sec</span></div>
+      <div class="chmode" onclick="startTeach()"><div class="icon">G</div><span class="name">Teach It Back</span><span class="desc">Explain a concept Chiron grades it</span></div>
+      <div class="chmode" onclick="startDive()"><div class="icon">T</div><span class="name">Deep Dive</span><span class="desc">8 questions on your weakest topic</span></div>
+    </div>
+    <div class="chiron-note"><div class="cn-lbl">A word from Chiron</div><div class="cn-txt">Challenge Mode earns bonus XP. It does not replace rest. Sleep is where your brain consolidates what you learned today. Come back tomorrow sharper.</div></div>
+  </div>
+  <div id="ch-drill" style="display:none">
+    <div class="stitle">Speed Drill</div>
+    <div class="drill-timer" id="d-timer">1:30</div>
+    <div id="d-area"></div>
+    <div id="d-results" style="display:none;text-align:center;padding:26px">
+      <div style="font-family:'Cinzel',serif;font-size:38px;color:var(--gold-l)" id="d-score">0/10</div>
+      <div style="font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin:7px 0 16px">Speed Drill Complete</div>
+      <button class="btn-out" onclick="chHome()">Back</button>
+    </div>
+  </div>
+  <div id="ch-teach" style="display:none">
+    <div class="stitle">Teach It Back</div>
+    <div class="qcard">
+      <div class="qmeta"><span class="qbadge c">Concept Challenge</span></div>
+      <div class="qtext" id="teach-prompt">Loading...</div>
+      <textarea class="teach-area" id="teach-input" placeholder="Explain this in your own words. Imagine you are teaching a friend who has never seen it before."></textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn-out" onclick="chHome()" style="font-size:11px;padding:7px 11px">Back</button>
+        <button class="btn-p" onclick="gradeTeach()" id="grade-btn">Submit to Chiron</button>
+      </div>
+      <div class="correct-panel" id="teach-exp" style="margin-top:11px"><div class="correct-text" id="teach-exp-text"></div><div class="xppop" id="teach-xp">+15 XP</div></div>
+    </div>
+  </div>
+  <div id="ch-dive" style="display:none">
+    <div class="stitle">Deep Dive</div>
+    <div id="dive-area"></div>
+    <div style="margin-top:12px"><button class="btn-out" onclick="chHome()" style="font-size:11px;padding:7px 11px">Back</button></div>
+  </div>
+</div>
+<div id="screen-progress" class="screen">
+  <canvas id="constellation"></canvas>
+  <div class="chiron-note"><div class="cn-lbl">Chiron's Assessment</div><div class="cn-txt" id="ch-assess">Complete your first mission and Chiron will assess your strengths.</div></div>
+  <div class="stitle">Mission History</div>
+  <div id="hist-list"><div style="color:var(--faint);font-size:12px;text-align:center;padding:18px">No missions yet.</div></div>
+  <div class="stitle" style="margin-top:16px">Topic Breakdown</div>
+  <div class="tgrid" id="tgrid-prog"></div>
+</div>
+</div><script>
+const BANK={
+english:[
+{lvl:1,concept:'Complete Sentences',q:'Which of the following is a complete sentence?',choices:['Running down the track.','The engineer ran the test successfully.','Fast and carefully through the data.','After the long experiment.'],correct:1,exp:'A complete sentence needs a subject and a verb. "The engineer ran the test" has both. The others are fragments.',method:{},pattern:'Check for two things: a subject and a verb. If either is missing, it is a fragment.',repro_type:'eng',repro_prompt:'Fix this fragment: "Studying late into the night."',repro_rule:'Add a subject (who is studying) and a complete verb.'},
+{lvl:1,concept:'Apostrophe Possession',q:"Select the correct sentence:",choices:["Alex borrowed Mikes notebook.","Alex borrowed Mike's notebook.","Alex borrowed Mikes' notebook.","Alex borrowed Mikes's notebook."],correct:1,exp:"Mike's shows one person owns the notebook. Add apostrophe then s after a singular name.",method:{},pattern:"Singular owner: apostrophe + s. Mike's notebook. The engineer's report.",repro_type:'eng',repro_prompt:"Add the correct apostrophe: \"The race car aerodynamics were tested.\"",repro_rule:'The race car (singular) owns the aerodynamics. Add apostrophe + s after car.'},
+{lvl:1,concept:'Subject-Verb Agreement',q:'The race car ___ around the track at 180 mph.',choices:['go','goes','going','gone'],correct:1,exp:'"Race car" is singular. Singular subjects use singular verbs. "Goes" is singular.',method:{},pattern:'One subject equals singular verb. More than one equals plural verb.',repro_type:'eng',repro_prompt:'Choose the correct verb: "The team of engineers ___ (meet/meets) every Monday."',repro_rule:'Cross out "of engineers." The team (singular) meets.'},
+{lvl:1,concept:'Active Voice',q:'Which sentence is clearest and most direct?',choices:['The problem was solved by the engineer.','The engineer solved the problem.','The solving of the problem was done by the engineer.','It was the engineer who solved the problem.'],correct:1,exp:'"The engineer solved the problem" puts the subject doing the action. Active voice. Shorter and clearer.',method:{},pattern:'Active: subject does the action. Choose active voice on the ACT.',repro_type:'eng',repro_prompt:'Rewrite in active voice: "The data was analyzed by the research team."',repro_rule:'Put the doer first.'},
+{lvl:1,concept:'Commas in a List',q:'Which sentence uses commas correctly?',choices:['Alex studied math English and science.','Alex studied math, English and science.','Alex studied math, English, and science.','Alex studied, math, English, and science.'],correct:2,exp:'Three or more items need commas between them, including a comma before the final "and." This is the Oxford comma.',method:{},pattern:'Three or more items: comma after each item, including before and.',repro_type:'eng',repro_prompt:'Add the correct commas: "The car has a powerful engine excellent brakes and precise steering."',repro_rule:'Three items need commas between them and before and.'},
+{lvl:1,concept:'Pronoun Case',q:'Which sentence uses the correct pronoun?',choices:['Him and Alex studied together.','Alex and him studied together.','Alex and he studied together.','He and him studied together.'],correct:2,exp:'"He" is a subject pronoun. "Him" is an object pronoun. Since these are the subject (they studied), use "he."',method:{},pattern:'Test it alone: say "He studied" not "Him studied." Use the same form when combining.',repro_type:'eng',repro_prompt:'Choose the correct pronoun: "The award went to Alex and ___ (he/him)."',repro_rule:'The pronoun receives the action. Use him.'},
+{lvl:2,concept:'Subject-Verb Agreement Tricky',q:'Choose the grammatically correct sentence:',choices:['The team of engineers are working on the project.','The team of engineers is working on the project.','The team of engineers were working on the projects.','The teams of engineer is working on the project.'],correct:1,exp:'The subject is "team," one team, singular. Words "of engineers" describe but do not change the subject.',method:{},pattern:'Cross out everything between subject and verb. The team is. Not engineers.',repro_type:'eng',repro_prompt:'Fix the verb: "The collection of test results show a clear pattern."',repro_rule:'The collection (singular) shows.'},
+{lvl:2,concept:'Comma Splice',q:'Which sentence is punctuated correctly?',choices:['The wind tunnel test failed, the team redesigned the wing.','The wind tunnel test failed the team redesigned the wing.','The wind tunnel test failed, but the team redesigned the wing.','The wind tunnel test failed; the team redesigned the wing, too.'],correct:2,exp:'Two complete sentences cannot be joined with just a comma. You need a comma plus a connecting word or a semicolon.',method:{},pattern:'Two complete sentences need more than a comma. Add but/and/so, or use a semicolon.',repro_type:'eng',repro_prompt:'Fix the comma splice: "The car was too slow, the engineers added a new engine."',repro_rule:'Add so after the comma, or replace the comma with a semicolon.'},
+{lvl:2,concept:'Parallel Structure',q:'Which sentence uses parallel structure correctly?',choices:['The engineer likes calculating drag, to test prototypes, and running simulations.','The engineer likes to calculate drag, testing, and to run simulations.','The engineer likes calculating drag, testing prototypes, and running simulations.','The engineer likes calculated drag, testing, and to run simulations.'],correct:2,exp:'When listing actions, every item must use the same form. In choice C all three end in -ing.',method:{},pattern:'Find the list. Check the first item form. Make every other item match it exactly.',repro_type:'eng',repro_prompt:'Fix the parallel structure error: "Alex enjoys reading, to study, and working on problems."',repro_rule:'First item is reading (-ing). Change others: studying, working.'},
+{lvl:2,concept:'Pronoun Agreement',q:'"Each of the engineers must submit ___ report by Friday."',choices:['their','our','his or her','its'],correct:2,exp:'"Each" is singular. The ACT expects "his or her" for a singular unknown person.',method:{},pattern:'Each, every, anyone, nobody are always singular on the ACT. Use his or her.',repro_type:'eng',repro_prompt:'Fill in: "Everyone on the team did ___ best work."',repro_rule:'"Everyone" is singular. Choose his or her.'},
+{lvl:2,concept:'Semicolons',q:'Which sentence uses a semicolon correctly?',choices:['The engine was powerful; but the brakes needed work.','The engine was powerful; the brakes, however, needed work.','The engine was; powerful the brakes needed work.','The engine was powerful; needing better brakes.'],correct:1,exp:'A semicolon joins two complete sentences. Both sides here are complete. Never use a semicolon before and/but/so.',method:{},pattern:'Semicolon test: complete sentence on both sides? Never before and/but/so.',repro_type:'eng',repro_prompt:'Fix this: "The test results were clear the team needed to redesign the wing."',repro_rule:'Two complete sentences need a semicolon or period between them.'},
+{lvl:2,concept:'Transition Words',q:'Choose the best transition. "The first engine design overheated. ___, the revised design ran perfectly."',choices:['Therefore','However','Furthermore','Similarly'],correct:1,exp:'Failure then success. These ideas contrast. "However" signals contrast.',method:{},pattern:'Contrast: however. Cause-effect: therefore. Addition: furthermore. Similarity: similarly.',repro_type:'eng',repro_prompt:'Choose: "The car was fastest in qualifying. ___, it finished last in the race."',repro_rule:'Fast qualifying plus last place equals contrast. Use However.'},
+{lvl:3,concept:'Misplaced Modifier',q:'Which sentence has NO modifier error?',choices:['Running at top speed, the corner was taken by the car.','The car, running at top speed, took the corner perfectly.','At top speed, the corner was running when the car took it.','Running the car at top speed, the corner was taken perfectly.'],correct:1,exp:'"Running at top speed" describes the car. The car must immediately follow that phrase.',method:{},pattern:'When a sentence opens with an -ing phrase and comma, the next noun must be the thing doing that action.',repro_type:'eng',repro_prompt:'Fix: "Studying all night, the exam felt easy to Alex."',repro_rule:'Who was studying? Alex. Alex must come right after the comma.'},
+{lvl:3,concept:'Colons',q:'Which is correct? "Chiron trained three great heroes ___ Achilles, Hercules, and Jason."',choices:[', namely','a dash',':',';'],correct:2,exp:'A colon introduces a list when what comes before it is a complete sentence. "Chiron trained three great heroes" is complete.',method:{},pattern:'Colon test: complete sentence before it? Then it can introduce a list.',repro_type:'eng',repro_prompt:'Add correct punctuation: "The test covered three topics ___ grammar, algebra, and reading."',repro_rule:'"The test covered three topics" is complete. What follows is a list. Use a colon.'},
+{lvl:3,concept:'Redundancy',q:'Which sentence eliminates unnecessary repetition?',choices:['The final end result was a faster car.','The end result was a faster car.','The result was a faster car.','The final result in the end was a faster car.'],correct:2,exp:'"Result" already means the outcome. "Final" and "end" repeat that idea.',method:{},pattern:'If a word\'s meaning is already in another word, one is redundant. "End result" and "past history" are common examples.',repro_type:'eng',repro_prompt:'Remove the redundancy: "The basic fundamentals of aerodynamics are not complicated."',repro_rule:'"Basic" and "fundamentals" mean the same thing. Remove one.'},
+{lvl:3,concept:'Concision',q:'Which revision is most concise?',choices:['Due to the fact that he practiced, Alex improved.','Because he practiced, Alex improved.','In light of the fact that Alex practiced, he improved.','Alex improved as a result of the fact that he practiced.'],correct:1,exp:'"Because he practiced" does the same job as "due to the fact that he practiced" in two words instead of seven.',method:{},pattern:'"Due to the fact that" always becomes "because." Shorter is always better on the ACT.',repro_type:'eng',repro_prompt:'Rewrite concisely: "In the event that it rains, the test will be postponed."',repro_rule:'"In the event that" equals "if."'},
+],
+math:[
+{lvl:1,concept:'Substitution',q:'If v = 4, what is 3v + 2?',choices:['9','12','14','18'],correct:2,exp:'Replace v with 4: 3(4) + 2 = 12 + 2 = 14. Multiply before adding.',method:{vars:'v = 4',formula:'3v + 2',work:'= 3(4) + 2\n= 12 + 2\n= 14'},pattern:'Replace the variable with its number, then follow order of operations.',repro_type:'math',repro_prompt:'If t = 5, what is 4t - 3?',repro_vars:'t = 5',repro_formula:'4t - 3',repro_answer:'17'},
+{lvl:1,concept:'One-Step Equations',q:'If x + 6 = 10, what is x?',choices:['2','3','4','5'],correct:2,exp:'Undo what was done to x. Since 6 was added, subtract 6 from both sides: x = 10 - 6 = 4.',method:{vars:'x = unknown',formula:'x + 6 = 10',work:'x = 10 - 6\nx = 4'},pattern:'To isolate a variable, do the opposite operation to both sides.',repro_type:'math',repro_prompt:'Solve for x: x - 3 = 9',repro_vars:'x = unknown',repro_formula:'x - 3 = 9',repro_answer:'12'},
+{lvl:1,concept:'Area of a Rectangle',q:'A test track section is 12 meters long and 4 meters wide. What is its area?',choices:['16 sq m','32 sq m','48 sq m','52 sq m'],correct:2,exp:'Area = length x width = 12 x 4 = 48. Note: 32 is the perimeter. Read what the question asks.',method:{vars:'length = 12 m\nwidth = 4 m',formula:'Area = length x width',work:'Area = 12 x 4\n= 48 sq m'},pattern:'Area = length x width. Perimeter = 2(length + width). Both appear in choices. Read carefully.',repro_type:'math',repro_prompt:'A room is 9 feet long and 6 feet wide. What is the area?',repro_vars:'length = 9 ft\nwidth = 6 ft',repro_formula:'Area = length x width',repro_answer:'54'},
+{lvl:1,concept:'Percentages',q:'What is 25% of 80?',choices:['15','18','20','25'],correct:2,exp:'Convert percent to decimal: 25% = 0.25. Multiply: 0.25 x 80 = 20.',method:{vars:'percent = 25%\nwhole = 80',formula:'part = (percent / 100) x whole',work:'= 0.25 x 80\n= 20'},pattern:'Percent of a number: convert to decimal then multiply.',repro_type:'math',repro_prompt:'What is 30% of 60?',repro_vars:'percent = 30%\nwhole = 60',repro_formula:'part = 0.30 x 60',repro_answer:'18'},
+{lvl:1,concept:'Ratios',q:'In a class of 30 students, 12 are girls. What is the ratio of girls to boys?',choices:['2:3','3:2','2:5','5:2'],correct:0,exp:'Boys = 30 - 12 = 18. Ratio = 12:18. Divide both by 6: 2:3.',method:{vars:'girls = 12\nboys = 30 - 12 = 18',formula:'ratio = girls : boys',work:'12 : 18\ndivide both by 6\n= 2 : 3'},pattern:'To simplify a ratio, find the greatest common factor and divide each number by it.',repro_type:'math',repro_prompt:'A box has 15 red balls and 10 blue balls. What is the ratio of red to blue?',repro_vars:'red = 15\nblue = 10',repro_formula:'ratio = red : blue',repro_answer:'3:2'},
+{lvl:1,concept:'Order of Operations',q:'What is the value of 3 + 4 x 2?',choices:['14','11','10','8'],correct:1,exp:'Multiplication before addition. 4 x 2 = 8 first, then 3 + 8 = 11.',method:{vars:'expression: 3 + 4 x 2',formula:'multiply before adding',work:'4 x 2 = 8\n3 + 8 = 11'},pattern:'Multiply and divide before you add and subtract.',repro_type:'math',repro_prompt:'What is 5 + 3 x 4?',repro_vars:'expression: 5 + 3 x 4',repro_formula:'multiply before adding',repro_answer:'17'},
+{lvl:2,concept:'Linear Equations',q:'If 4x + 5 = 21, what is the value of 2x?',choices:['4','8','10','16'],correct:1,exp:'Solve: 4x = 16, x = 4. Then find what the question asks: 2x = 2(4) = 8.',method:{vars:'x = unknown',formula:'4x + 5 = 21\nthen find 2x',work:'4x = 16\nx = 4\n2x = 2(4) = 8'},pattern:'Solve for x first, then compute the expression the question asks for.',repro_type:'math',repro_prompt:'If 3x - 2 = 13, what is the value of 6x?',repro_vars:'x = unknown',repro_formula:'3x - 2 = 13 then 6x',repro_answer:'30'},
+{lvl:2,concept:'Distance Velocity Time',q:'A car travels at 75 mph for 4 hours. How far does it travel?',choices:['79 miles','150 miles','300 miles','375 miles'],correct:2,exp:'d = v x t. Distance = 75 x 4 = 300 miles.',method:{vars:'v = 75 mph\nt = 4 hours\nd = ?',formula:'d = v x t',work:'d = 75 x 4\nd = 300 miles'},pattern:'d = v x t. Know any two, solve for the third.',repro_type:'math',repro_prompt:'A car travels at 55 mph for 3 hours. How far?',repro_vars:'v = 55 mph\nt = 3 hours',repro_formula:'d = v x t',repro_answer:'165'},
+{lvl:2,concept:'Slope',q:'What is the slope of the line through (1, 2) and (5, 10)?',choices:['1','2','3','4'],correct:1,exp:'Slope = (10 - 2) / (5 - 1) = 8 / 4 = 2.',method:{vars:'Point 1: (1, 2)\nPoint 2: (5, 10)',formula:'slope = (y2 - y1) / (x2 - x1)',work:'= (10 - 2) / (5 - 1)\n= 8 / 4\n= 2'},pattern:'Slope = rise / run = change in y / change in x.',repro_type:'math',repro_prompt:'Find the slope through (2, 3) and (6, 11).',repro_vars:'Point 1: (2, 3)\nPoint 2: (6, 11)',repro_formula:'slope = (y2 - y1) / (x2 - x1)',repro_answer:'2'},
+{lvl:2,concept:'Percentage Change',q:'A lap time improved from 80 seconds to 68 seconds. What is the percent decrease?',choices:['12%','14%','15%','17%'],correct:2,exp:'% change = (change / original) x 100 = (12 / 80) x 100 = 15%.',method:{vars:'original = 80\nnew = 68\nchange = 12',formula:'% change = (change / original) x 100',work:'= (12 / 80) x 100\n= 15%'},pattern:'Always divide by where you started (the original).',repro_type:'math',repro_prompt:'Drag decreased from 500 N to 400 N. What is the percent decrease?',repro_vars:'original = 500\nnew = 400\nchange = 100',repro_formula:'% change = (change / original) x 100',repro_answer:'20%'},
+{lvl:2,concept:'Functions',q:'If f(x) = 2x + 3, what is f(5)?',choices:['10','11','13','15'],correct:2,exp:'f(5) means replace x with 5. f(5) = 2(5) + 3 = 13.',method:{vars:'x = 5',formula:'f(x) = 2x + 3',work:'f(5) = 2(5) + 3\n= 10 + 3\n= 13'},pattern:'f(number) means substitute that number for x, then follow order of operations.',repro_type:'math',repro_prompt:'If g(x) = 3x - 1, what is g(4)?',repro_vars:'x = 4',repro_formula:'g(x) = 3x - 1',repro_answer:'11'},
+{lvl:2,concept:'Triangle Angles',q:'A triangle has angles of 55 and 75 degrees. What is the third angle?',choices:['40','50','55','60'],correct:1,exp:'Triangle angles always sum to 180. 180 - 55 - 75 = 50.',method:{vars:'A = 55\nB = 75\nC = ?',formula:'A + B + C = 180',work:'55 + 75 + C = 180\nC = 50'},pattern:'Triangle angles always sum to 180. Add what you know, subtract from 180.',repro_type:'math',repro_prompt:'A triangle has angles of 40 and 95 degrees. What is the third?',repro_vars:'A = 40\nB = 95',repro_formula:'A + B + C = 180',repro_answer:'45'},
+{lvl:3,concept:'Systems of Equations',q:'If x + y = 12 and x - y = 4, what is x?',choices:['4','6','8','10'],correct:2,exp:'Add both equations. The y values cancel: 2x = 16, so x = 8.',method:{vars:'Eq1: x + y = 12\nEq2: x - y = 4',formula:'Add equations to cancel y',work:'2x = 16\nx = 8'},pattern:'If one variable has opposite signs, add the equations and it disappears.',repro_type:'math',repro_prompt:'If x + y = 10 and x - y = 2, what is x?',repro_vars:'Eq1: x + y = 10\nEq2: x - y = 2',repro_formula:'Add equations',repro_answer:'6'},
+{lvl:3,concept:'Factoring Quadratics',q:'Which values of x satisfy x^2 - 7x + 12 = 0?',choices:['x = 2 and x = 6','x = 3 and x = 4','x = -3 and x = -4','x = 1 and x = 12'],correct:1,exp:'Find two numbers that multiply to 12 and add to -7. Those are -3 and -4. So (x-3)(x-4)=0 giving x=3 or x=4.',method:{vars:'Need: multiply to 12\n      add to -7',formula:'(x - ?)(x - ?) = 0',work:'Pairs: 3 and 4\n3 x 4 = 12\n-3 + -4 = -7\n(x-3)(x-4) = 0\nx = 3 or x = 4'},pattern:'For x^2 + bx + c = 0: find two numbers that multiply to c and add to b.',repro_type:'math',repro_prompt:'Find x values that satisfy x^2 - 5x + 6 = 0.',repro_vars:'Multiply to: 6\nAdd to: -5',repro_formula:'(x - ?)(x - ?) = 0',repro_answer:'x = 2 and x = 3'},
+{lvl:3,concept:'Rate Problems',q:'Two cars leave the same point in opposite directions. Car A at 60 mph, Car B at 45 mph. How far apart after 2 hours?',choices:['120 miles','90 miles','210 miles','150 miles'],correct:2,exp:'Car A: 60 x 2 = 120. Car B: 45 x 2 = 90. Opposite directions so add: 120 + 90 = 210.',method:{vars:'vA = 60 mph, t = 2\nvB = 45 mph, t = 2',formula:'d = v x t for each\ntotal = dA + dB',work:'dA = 120\ndB = 90\ntotal = 210'},pattern:'Opposite directions: calculate each distance then add. Same direction: subtract.',repro_type:'math',repro_prompt:'Two trains leave in opposite directions at 70 and 50 mph. How far apart after 3 hours?',repro_vars:'v1 = 70, t = 3\nv2 = 50, t = 3',repro_formula:'d = v x t for each, then add',repro_answer:'360 miles'},
+{lvl:3,concept:'Probability',q:'A bag has 3 red, 4 blue, and 5 green balls. What is the probability of picking blue?',choices:['1/4','1/3','4/12','2/3'],correct:1,exp:'Total = 12. Blue = 4. P = 4/12 = 1/3.',method:{vars:'blue = 4\ntotal = 12',formula:'P = favorable / total',work:'P = 4/12 = 1/3'},pattern:'Probability = what you want divided by total possible. Count total first.',repro_type:'math',repro_prompt:'A bag has 5 red and 7 blue marbles. Probability of picking red?',repro_vars:'red = 5\ntotal = 12',repro_formula:'P = red / total',repro_answer:'5/12'},
+],
+reading:[
+{lvl:1,concept:'Finding Information Directly',passage:'Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-shaped car pushes air to the side and over the top, reducing the resistance that slows the car down.',q:'According to the passage, what do race car engineers use aerodynamics for?',choices:['To design more powerful engines','To make cars faster and more stable','To reduce the weight of the car','To improve fuel quality'],correct:1,exp:'The passage states directly: engineers use aerodynamics to make cars faster and more stable.',method:{},pattern:'For "according to the passage" questions, find the exact sentence. The correct answer restates it.',repro_type:'read',repro_prompt:'What does a well-shaped car do to air?',repro_answer:'Pushes it to the side and over the top, reducing resistance.'},
+{lvl:1,concept:'Vocabulary in Context',passage:'Aerodynamics is the study of how air moves around solid objects. Race car engineers use aerodynamics to make cars faster and more stable at high speeds. A well-shaped car pushes air to the side and over the top, reducing the resistance that slows the car down.',q:'As used in the passage, "resistance" most nearly means:',choices:['engine power','air that pushes back against the car','the weight of the car','the speed of the car'],correct:1,exp:'The passage says resistance slows the car down. Only "air that pushes back" is consistent with something that slows a car.',method:{},pattern:'Read the full sentence. Pick the definition that fits the context, not the dictionary.',repro_type:'read',repro_prompt:'What is the best synonym for "stable" in: "make cars faster and more stable at high speeds"?',repro_answer:'Steady, balanced, or controlled.'},
+{lvl:2,concept:'Main Idea',passage:'For decades, engineers assumed that a heavier car was a safer car. Crash tests in the 1970s seemed to confirm this belief. But modern research tells a different story. Lightweight materials like carbon fiber absorb crash energy more effectively than steel, protecting the driver while also making the car faster.',q:'The main idea of this passage is that:',choices:['Crash tests from the 1970s proved heavy cars are safer.','Modern materials can be both safer and more efficient than heavy ones.','Carbon fiber is the most expensive engineering material.','Engineers have always known lighter cars are safer.'],correct:1,exp:'The passage introduces an old belief and then argues modern research overturns it.',method:{},pattern:'The main idea covers everything in the passage. A detail answers what. A main idea answers what is the point.',repro_type:'read',repro_prompt:'What did engineers assume for decades and what changed that view?',repro_answer:'They assumed heavier cars were safer. Modern research showed lightweight materials absorb crashes better.'},
+{lvl:2,concept:'Inference',passage:'Early aircraft designers built wings by intuition and trial and error. The Wright Brothers took a different approach. They built a wind tunnel, collected systematic data on wing shapes, and used that data to design their aircraft. Their first powered flight lasted 12 seconds. Within two years they were flying for 38 minutes.',q:'The passage implies that the Wright Brothers rapid improvement was primarily due to:',choices:['Better funding than competitors.','Using data and systematic testing rather than intuition.','Favorable wind conditions at Kitty Hawk.','Previous experience with powered aircraft.'],correct:1,exp:'The passage contrasts intuition with systematic data. The rapid improvement follows directly from their data-driven approach.',method:{},pattern:'Inference questions ask what the passage implies. The answer must be supported by the passage.',repro_type:'read',repro_prompt:'What does the comparison between 12 seconds and 38 minutes suggest?',repro_answer:'That their systematic approach was working rapidly.'},
+{lvl:2,concept:'Vocabulary in Context',passage:'For decades, engineers assumed that a heavier car was a safer car. Crash tests in the 1970s seemed to confirm this belief. But modern research tells a different story. Lightweight materials like carbon fiber absorb crash energy more effectively than steel.',q:'As used in the passage, "confirm" most nearly means:',choices:['contradict','support','question','replace'],correct:1,exp:'The tests confirmed the belief. In context, confirm means support or provide evidence for.',method:{},pattern:'Vocabulary in context: the definition is in the surrounding sentences.',repro_type:'read',repro_prompt:'What does "effectively" mean in: "lightweight materials absorb crash energy more effectively than steel"?',repro_answer:'Better, or more successfully.'},
+{lvl:3,concept:"Author's Purpose",passage:"Critics of electric vehicles often focus on the limitations of current battery technology. What these critics miss is that battery technology is improving at a rate that mirrors the early development of internal combustion engines. In 1910, the gasoline engine was crude and unreliable. Today it powers the global economy. Electric motors are on the same trajectory.",q:"The author's primary purpose in this passage is to:",choices:['Explain how internal combustion engines work.','Argue that electric vehicles will eventually succeed.','Criticize those who support gasoline engines.','Present a balanced view of vehicle technology.'],correct:1,exp:'The author compares electric batteries to early gasoline engines to argue EVs are on a path to success.',method:{},pattern:"Author's purpose: Inform means neutral facts. Persuade means argues for a position. Tone tells you which.",repro_type:'read',repro_prompt:'Does the author think electric vehicles will succeed or fail? What evidence supports your answer?',repro_answer:'Succeed. The author compares EV battery development to early gasoline engines implying the same successful trajectory.'},
+{lvl:3,concept:'Tone and Attitude',passage:'Some engineers dismiss computational fluid dynamics as a shortcut that produces imprecise results. This view is understandable since early CFD models were indeed crude. But dismissing CFD today is like refusing to use a calculator because slide rules built character. Modern CFD predicts airflow with remarkable accuracy and has become indispensable to Formula 1 teams worldwide.',q:"The author's attitude toward CFD can best be described as:",choices:['Cautious and uncertain about its reliability.','Strongly supportive, while acknowledging early limitations.','Neutral and purely informational.','Critical of those who rely on it too heavily.'],correct:1,exp:'The author acknowledges early CFD was crude but strongly defends modern CFD as accurate and indispensable.',method:{},pattern:'Tone questions: look for words that signal feelings. The correct answer captures both the stance and any qualifications.',repro_type:'read',repro_prompt:'What does the author compare dismissing CFD to, and why does this comparison work?',repro_answer:'Refusing to use a calculator because slide rules built character. Both involve rejecting a better modern tool.'},
+],
+science:[
+{lvl:1,concept:'Reading a Table',passage:'Water temperature recorded over time:\n0 min: 20C\n5 min: 35C\n10 min: 50C\n15 min: 65C',q:'According to the data, what was the temperature at 10 minutes?',choices:['20C','35C','50C','65C'],correct:2,exp:'Find 10 min in the data and read: 50C. No calculation needed.',method:{vars:'Time = 10 min',formula:'Read from table',work:'10 min = 50C'},pattern:'Direct reading questions: find the row, read the value. Do not calculate.',repro_type:'math',repro_prompt:'How many degrees did temperature rise from 5 min to 15 min?',repro_vars:'Temp at 5 min = 35C\nTemp at 15 min = 65C',repro_formula:'change = final - initial',repro_answer:'30C'},
+{lvl:1,concept:'Identifying a Trend',passage:'Wing lift force at different air speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N',q:'As air speed increases, lift force:',choices:['Decreases','Stays the same','Increases','First increases then decreases'],correct:2,exp:'Read lift values in order: 120, 270, 480, 750. Each is higher. Trend is increasing.',method:{},pattern:'To identify a trend, read values in order. Consistently going up means increasing.',repro_type:'math',repro_prompt:'What is the lift force at 60 mph?',repro_vars:'Speed = 60 mph',repro_formula:'Read from table',repro_answer:'270 N'},
+{lvl:2,concept:'Non-Linear Trend',passage:'Wing lift force at different air speeds:\n40 mph: 120 N\n60 mph: 270 N\n80 mph: 480 N\n100 mph: 750 N',q:'Which best describes the relationship between air speed and lift?',choices:['Lift decreases as speed increases.','Lift increases at the same rate each time.','Lift increases but the rate of increase grows larger.','Lift and speed are not related.'],correct:2,exp:'Lift goes up. Check the increases: 150, 210, 270. The gaps are growing. The rate accelerates.',method:{vars:'Lift: 120, 270, 480, 750',formula:'Differences between values',work:'270-120=150\n480-270=210\n750-480=270\nGrowing, not constant'},pattern:'Equal differences = linear. Growing differences = nonlinear.',repro_type:'math',repro_prompt:'What is the lift at 80 mph divided by the air speed at 80 mph?',repro_vars:'lift = 480 N\nspeed = 80 mph',repro_formula:'ratio = lift / speed',repro_answer:'6 N/mph'},
+{lvl:2,concept:'Calculating from Data',passage:'Fuel efficiency at different speeds:\n55 mph: 34 mpg\n65 mph: 29 mpg\n75 mph: 23 mpg\n85 mph: 18 mpg',q:'How many gallons are needed to travel 230 miles at 65 mph?',choices:['6.7 gallons','7.2 gallons','7.9 gallons','8.3 gallons'],correct:2,exp:'At 65 mph fuel efficiency = 29 mpg. Gallons = 230 / 29 = 7.93.',method:{vars:'distance = 230\nmpg at 65 = 29',formula:'gallons = distance / mpg',work:'= 230 / 29\n= 7.93 gallons'},pattern:'Read the correct value from the table. Then apply the formula.',repro_type:'math',repro_prompt:'How many gallons to travel 230 miles at 85 mph?',repro_vars:'distance = 230\nmpg at 85 = 18',repro_formula:'gallons = distance / mpg',repro_answer:'12.8 gallons'},
+{lvl:2,concept:'Identifying Variables',passage:'Experiment testing drag force:\nCondition A: smooth, 60 mph: 200 N\nCondition B: rough, 60 mph: 310 N\nCondition C: smooth, 90 mph: 450 N\nCondition D: rough, 90 mph: 698 N',q:'In this experiment, what is the independent variable?',choices:['Drag force','Air speed only','Surface texture only','Both air speed and surface texture'],correct:3,exp:'The experiment changes two things: texture and speed. Both are independent variables. Drag force is what is measured.',method:{},pattern:'Independent variable = what the experimenter changes. Dependent variable = what is measured.',repro_type:'read',repro_prompt:'Which condition produced the most drag and why?',repro_answer:'Condition D. Both factors that increase drag are at their maximum.'},
+{lvl:3,concept:'Comparing Conditions',passage:'Drag force on a car body:\nAngle 0, 60 mph: 200 N\nAngle 0, 90 mph: 450 N\nAngle 5, 60 mph: 260 N\nAngle 5, 90 mph: 585 N',q:'Which factor had a greater effect on drag: speed from 60 to 90 mph, or angle from 0 to 5 degrees?',choices:['Speed had a greater effect.','Angle had a greater effect.','Both had equal effects.','The data does not allow comparison.'],correct:0,exp:'Speed effect at 0 degrees: (450-200)/200 x 100 = 125%. Angle effect at 60 mph: (260-200)/200 x 100 = 30%. Speed wins.',method:{vars:'Speed: 200 to 450\nAngle: 200 to 260',formula:'% change = (change/original) x 100',work:'Speed: 250/200 x 100 = 125%\nAngle: 60/200 x 100 = 30%'},pattern:'To compare two factors: isolate each by holding the other constant. Calculate percent change for each.',repro_type:'math',repro_prompt:'What is the percent increase in drag when angle goes from 0 to 5 degrees at 90 mph?',repro_vars:'Drag at 0 deg, 90 mph = 450 N\nDrag at 5 deg, 90 mph = 585 N',repro_formula:'% change = (change/original) x 100',repro_answer:'30%'},
+{lvl:3,concept:'Drawing Conclusions',passage:'Three fuel additives tested:\nAdditive A: +8% efficiency, -2% power\nAdditive B: +3% efficiency, +5% power\nAdditive C: +12% efficiency, -8% power\nNo additive: baseline',q:'A racing team needs maximum power and can sacrifice some efficiency. Which additive?',choices:['Additive A','Additive B','Additive C','No additive'],correct:1,exp:'The team prioritizes power. Only Additive B increases power (+5%). A and C both decrease power.',method:{},pattern:'When given a specific goal, match the data to that goal directly.',repro_type:'read',repro_prompt:'Which additive for maximum efficiency and what is the tradeoff?',repro_answer:'Additive C gives highest efficiency (+12%) but the tradeoff is an 8% loss in power.'},
+],
+writing:[
+{lvl:1,concept:'Active Voice',q:'Which sentence is clearest and most direct?',choices:['The problem was solved by the engineer.','The engineer solved the problem.','The solving of the problem was done by the engineer.','It was the engineer who solved the problem.'],correct:1,exp:'"The engineer solved the problem" puts the subject doing the action. Active voice.',method:{},pattern:'Active: subject does the action. Choose active on the ACT.',repro_type:'eng',repro_prompt:'Rewrite in active voice: "The data was analyzed by the research team."',repro_rule:'Put the doer first.'},
+{lvl:1,concept:'Concision',q:'Which revision best improves: "Due to the fact that he studied, Alex passed the exam."',choices:['Due to studying, Alex passed the exam.','Because he studied, Alex passed the exam.','Because of the fact of his studying, Alex passed the exam.','Alex passed the exam due to the fact that studying occurred.'],correct:1,exp:'"Because he studied" does the same job in three words instead of eight.',method:{},pattern:'"Due to the fact that" always becomes "because."',repro_type:'eng',repro_prompt:'Rewrite concisely: "In the event that it rains, the test will be postponed."',repro_rule:'"In the event that" equals "if."'},
+{lvl:2,concept:'Transition Words',q:'Best transition: "The first engine design overheated. ___, the revised design ran perfectly."',choices:['Therefore','However','Furthermore','Similarly'],correct:1,exp:'Failure then success. These contrast. "However" signals contrast.',method:{},pattern:'Contrast: however. Cause-effect: therefore. Addition: furthermore.',repro_type:'eng',repro_prompt:'Choose: "The car was fastest in qualifying. ___, it finished last in the race."',repro_rule:'Contrast. Use However.'},
+{lvl:2,concept:'Word Choice',q:'Most precise word: "The aerodynamic changes had a ___ effect on performance."',choices:['big','large','significant','sizeable'],correct:2,exp:'"Significant" is the most precise and formal. "Big" and "large" are informal.',method:{},pattern:'When four words have similar meanings, choose the most precise and formal for the context.',repro_type:'eng',repro_prompt:'Choose: "The engineer made a ___ (smart/calculated) decision about the wing design."',repro_rule:'"Calculated" is more precise for an engineer.'},
+{lvl:3,concept:'Redundancy',q:'Which sentence eliminates unnecessary repetition?',choices:['The final end result was a faster car.','The end result was a faster car.','The result was a faster car.','The final result in the end was a faster car.'],correct:2,exp:'"Result" already means the outcome. "Final" and "end" repeat that idea.',method:{},pattern:'If a word\'s meaning is already in another word, one is redundant.',repro_type:'eng',repro_prompt:'Remove the redundancy: "The basic fundamentals of aerodynamics are not complicated."',repro_rule:'"Basic" and "fundamentals" mean the same thing. Remove one.'},
+{lvl:3,concept:'Sentence Combining',q:'Which best combines: "The test was successful. The results exceeded all expectations."',choices:['The test was successful, and the results exceeded all expectations.','The test was successful the results exceeded all expectations.','The test was successful; however, the results exceeded all expectations.','The test was successful being that the results exceeded expectations.'],correct:0,exp:'Two complete sentences can be joined with comma + and. Choice A does this. Choice B is a comma splice.',method:{},pattern:'Two agreeing sentences: comma + and. Two contrasting sentences: comma + but.',repro_type:'eng',repro_prompt:'Combine: "The wind tunnel data was clear. The wing needed a complete redesign."',repro_rule:'The ideas contrast in effect. Use comma + so, or a semicolon.'},
+]
+};
+
+const TOPICS=[{id:'english',name:'English',color:'#c9a84c'},{id:'math',name:'Math',color:'#6b9fd4'},{id:'reading',name:'Reading',color:'#4caf7d'},{id:'science',name:'Science',color:'#b07fd4'},{id:'writing',name:'Writing',color:'#e06060'}];
+const TC={english:'#c9a84c',math:'#6b9fd4',reading:'#4caf7d',science:'#b07fd4',writing:'#e06060'};
+const TL={english:'English',math:'Math',reading:'Reading',science:'Science',writing:'Writing'};
+const MISSIONS=[{name:'Operation: First Contact',desc:'Every engineer starts somewhere. Today Chiron learns how you think.'},{name:'Operation: Comma Precision',desc:'Grammar rules that never change. Learn the sequence, not the guess.'},{name:'Operation: Algebraic Force',desc:'Set up before you solve. Variables. Formula. Work. In that order.'},{name:'Operation: Signal Extraction',desc:'Reading under pressure is a skill. We train it today.'},{name:'Operation: Data Intercept',desc:'Engineers read data before they trust instincts. Today we practice.'},{name:'Operation: Mixed Formation',desc:'The ACT does not sort by subject. Neither does Chiron today.'},{name:'Operation: Weak Point',desc:'Chiron knows where points are being left behind. Today we attack it.'},{name:'Operation: Pattern Recognition',desc:'Every question type has a tell. Today we learn to see them.'}];
+const SAT_MISSIONS=[{name:'Operation: Benchmark Alpha',desc:'40 questions. 45 minutes. Every topic. This is where you measure real progress against the clock.'},{name:'Operation: Benchmark Bravo',desc:'Full compressed benchmark. Timed. Mixed. No coaching loop. Just you and the questions.'},{name:'Operation: Benchmark Charlie',desc:'45 minutes on the clock. Treat this like the real thing. Chiron will be watching the data.'}];
+const TEACH_CONCEPTS=[{topic:'english',prompt:'What is a comma splice, and how do you fix one? Give an example.'},{topic:'math',prompt:'What does d = v x t mean? When would an engineer use it?'},{topic:'math',prompt:'How do you find the slope of a line between two points? Walk through an example.'},{topic:'reading',prompt:'How do you find the main idea of a passage?'},{topic:'science',prompt:'How can you tell from a data table whether a relationship is linear or not?'},{topic:'english',prompt:'Explain the difference between a colon and a semicolon, with an example of each.'},{topic:'math',prompt:'How do you solve a system of two equations by adding them together?'},{topic:'english',prompt:'What is parallel structure? Give an example that breaks it and one that fixes it.'},{topic:'math',prompt:'Explain how to find a percentage of a number. Walk through 30% of 80 step by step.'},{topic:'science',prompt:'What is the difference between an independent variable and a dependent variable?'}];
+
+let S={streak:0,xp:0,missions:0,totalQ:0,totalCorrect:0,reproductions:0,topicScores:{english:[],math:[],reading:[],science:[],writing:[]},topicLevels:{english:1,math:1,reading:1,science:1,writing:1},history:[],lastMissionDate:null,bestStreak:0,satCount:0};
+let Q={questions:[],current:0,answers:[],xpEarned:0,mode:'daily',phase:'answer'};
+let satTimer=null,satSecondsLeft=2700;
+let drillTimer=null,drillSec=90,drillQs=[],drillIdx=0,drillCorrect=0;
+
+// ── CHIRON CONFIG ── edit these two lines only ─────────────────────────────
+const MISSION_START = '2026-06-24'; // date Alex started Chiron (YYYY-MM-DD)
+const TARGET_DATE   = '2026-09-13'; // ACT test date (YYYY-MM-DD)
+// ──────────────────────────────────────────────────────────────────────────
+
+function save(){try{localStorage.setItem('chiron_v5',JSON.stringify(S));}catch(e){}}
+function load(){try{const d=localStorage.getItem('chiron_v5');if(d){const p=JSON.parse(d);S={...S,...p};TOPICS.forEach(t=>{if(!S.topicScores[t.id])S.topicScores[t.id]=[];if(!S.topicLevels[t.id])S.topicLevels[t.id]=1;});}}catch(e){}}
+function topicPct(id){const a=S.topicScores[id]||[];if(!a.length)return 0;const r=a.slice(-20);return Math.round(r.reduce((x,y)=>x+y,0)/r.length*100);}
+function updateLevels(){TOPICS.forEach(t=>{const pct=topicPct(t.id),cnt=S.topicScores[t.id].length;if(cnt>=8&&pct>=72&&S.topicLevels[t.id]===1)S.topicLevels[t.id]=2;if(cnt>=16&&pct>=76&&S.topicLevels[t.id]===2)S.topicLevels[t.id]=3;});}
+function projScore(){
+  if(S.totalQ<15)return null;
+  let wCorrect=0,wTotal=0;
+  TOPICS.forEach(t=>{
+    const scores=S.topicScores[t.id]||[];
+    const lvl=S.topicLevels[t.id]||1;
+    const weight=lvl===1?0.20:1.0;
+    scores.forEach(s=>{wCorrect+=s*weight;wTotal+=weight;});
+  });
+  if(wTotal<5)return null;
+  const pct=wCorrect/wTotal;
+  return Math.min(36,Math.max(14,Math.round(14+pct*22)));
+}
+function isSaturday(){return new Date().getDay()===6;}
+function checkPw(){
+  const val=document.getElementById('pw-input').value.trim();
+  if(val==='0000'){
+    // Admin reset
+    if(confirm('RESET ALL CHIRON DATA?\n\nClears missions, XP, streak, scores, and test date.\nAlex will see the setup screen on next login.\n\nCannot be undone.')){
+      try{localStorage.removeItem('chiron_v5');sessionStorage.removeItem('chiron_auth');}catch(e){}
+      document.getElementById('pw-error').textContent='';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-error').style.color='var(--ok)';
+      document.getElementById('pw-error').textContent='Reset complete. Enter 6253 to continue.';
+    }else{
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+    return;
+  }
+  if(val==='6253'){
+    document.getElementById('pw-screen').style.display='none';
+    try{sessionStorage.setItem('chiron_auth','1');}catch(e){}
+    // Show onboarding if no test date saved yet
+    const saved=JSON.parse(localStorage.getItem('chiron_v5')||'{}');
+    if(!saved.actTestDate){
+      const ob=document.getElementById('onboard-screen');
+      ob.style.display='flex';
+      // Default date picker to 3 months from today
+      const d=new Date();d.setMonth(d.getMonth()+3);
+      document.getElementById('ob-date-input').value=d.toISOString().split('T')[0];
+    }
+  }else{
+    document.getElementById('pw-error').style.color='var(--err)';
+    document.getElementById('pw-error').textContent='Incorrect. Try again.';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){const inp=document.getElementById('pw-input');if(inp){inp.addEventListener('input',function(){if(this.value.length===4)checkPw();});inp.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});try{if(sessionStorage.getItem('chiron_auth')==='1')document.getElementById('pw-screen').style.display='none';}catch(e){}}});
+
+function go(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('screen-'+name).classList.add('active');['dashboard','quiz','challenge','progress'].forEach((n,i)=>{if(n===name)document.querySelectorAll('.tab')[i].classList.add('active');});if(name==='progress')renderProgress();if(name==='dashboard')renderDash();if(name==='challenge')chHome();}
+
+function renderTopicGrid(id){document.getElementById(id).innerHTML=TOPICS.map(t=>{const pct=topicPct(t.id),cnt=S.topicScores[t.id].length,lvl=S.topicLevels[t.id];return`<div class="tc"><div class="tc-hdr"><span class="tc-name">${t.name}</span><span class="tc-pct" style="color:${t.color}">${pct}%</span></div><div class="tc-track"><div class="tc-fill" style="width:${pct}%;background:${t.color}"></div></div><div class="tc-sub">${cnt===0?'No data yet':cnt+' questions · Level '+lvl}</div></div>`;}).join('');}
+
+function renderDash(){const proj=projScore();document.getElementById('streak').textContent=S.streak;document.getElementById('xp-val').textContent=S.xp.toLocaleString()+' XP';document.getElementById('xp-fill').style.width=(S.xp%500)/500*100+'%';document.getElementById('s-m').textContent=S.missions;document.getElementById('s-q').textContent=S.totalQ;document.getElementById('s-a').textContent=S.totalQ>0?Math.round(S.totalCorrect/S.totalQ*100)+'%':'—';document.getElementById('s-r').textContent=S.reproductions;const lvls=['Gaining Ground','Gaining Ground','On Track','Closing In','The Number'];document.getElementById('lvl-name').textContent=lvls[proj?Math.min(4,Math.max(0,Math.floor((proj-18)/3))):0];if(proj){document.getElementById('proj').textContent=proj;document.getElementById('sbar').style.width=Math.max(2,Math.min(100,(proj-18)/(30-18)*100))+'%';}else{document.getElementById('proj').textContent='—';document.getElementById('sbar').style.width='2%';}const savedDates=JSON.parse(localStorage.getItem('chiron_v5')||'{}');
+  const targetStr=savedDates.actTestDate||TARGET_DATE;
+  const startStr=savedDates.missionStart||MISSION_START;
+  const target=new Date(targetStr);const start=new Date(startStr);
+  const daysLeft=Math.max(0,Math.ceil((target-new Date())/86400000));
+  document.getElementById('cdown').textContent=daysLeft;const today=new Date().toDateString(),done=S.lastMissionDate===today;document.getElementById('start-btn').style.display=done?'none':'inline-block';document.getElementById('done-msg').style.display=done?'inline':'none';document.getElementById('limit-notice').classList.toggle('show',done);const satBanner=document.getElementById('sat-banner');if(isSaturday()){satBanner.classList.add('show');const si=S.satCount%SAT_MISSIONS.length;document.getElementById('sat-title').textContent=SAT_MISSIONS[si].name;document.getElementById('sat-desc').textContent=SAT_MISSIONS[si].desc;}else{satBanner.classList.remove('show');}const di=Math.floor((new Date()-(new Date(new Date().getFullYear(),0,0)))/86400000);const m=MISSIONS[di%MISSIONS.length];document.getElementById('m-name').textContent=m.name;document.getElementById('m-desc').textContent=m.desc;renderTopicGrid('tgrid-dash');}
+
+async function initMission(mode){go('quiz');qState('loading');Q={questions:[],current:0,answers:[],xpEarned:0,mode,phase:'answer'};const msgs=['Chiron is preparing your mission...','Calibrating to your level...','Selecting questions...','Almost ready...'];let mi=0;document.getElementById('load-msg').textContent=msgs[0];const iv=setInterval(()=>{mi=(mi+1)%msgs.length;document.getElementById('load-msg').textContent=msgs[mi];},1800);const order=buildOrder(mode);const aiRes=await Promise.allSettled(order.slice(0,5).map(t=>genAI(t,mode)));clearInterval(iv);for(let i=0;i<order.length;i++){const t=order[i];if(i<5&&aiRes[i].status==='fulfilled'&&aiRes[i].value)Q.questions.push({...aiRes[i].value,topic:t});else Q.questions.push(getBankQ(t));}if(mode==='saturday'){satSecondsLeft=2700;startSatTimer();}qState('active');document.getElementById('timer-bar').style.display=mode==='saturday'?'flex':'none';renderQ();}
+
+function buildOrder(mode){updateLevels();let order=[];if(mode==='saturday'){order=[...Array(18).fill('english'),...Array(12).fill('math'),...Array(6).fill('reading'),...Array(4).fill('science')];}else{const weights=TOPICS.map(t=>({id:t.id,w:Math.max(2,10-Math.floor(topicPct(t.id)/13))}));const tw=weights.reduce((a,b)=>a+b.w,0);weights.forEach(w=>{const cnt=Math.max(1,Math.round(w.w/tw*20));for(let i=0;i<cnt;i++)order.push(w.id);});while(order.length>20)order.pop();while(order.length<20)order.push(TOPICS[Math.floor(Math.random()*TOPICS.length)].id);}for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}return order;}
+
+function getBankQ(topic){const lvl=S.topicLevels[topic]||1;const b=BANK[topic]||BANK.math;let pool=b.filter(q=>q.lvl===lvl);if(!pool.length)pool=b.filter(q=>q.lvl<=lvl+1);if(!pool.length)pool=b;return{...pool[Math.floor(Math.random()*pool.length)],topic};}
+
+async function genAI(topic,mode){const lvl=S.topicLevels[topic]||1;const lvlDesc={1:'Level 1: genuine ACT difficulty, one-to-two steps, ONE plausible wrong answer that catches a common mistake. NOT middle school level -- this is real ACT content for a high school junior.',2:'Level 2: solid ACT medium difficulty, two steps, two plausible distractors that catch common errors.',3:'Level 3: full ACT hard difficulty, all four choices plausible, concept mastery required to distinguish correct answer.'}[lvl];const prompt=`You are Chiron, ACT tutor. Generate ONE ACT-style question for topic: "${topic}". Difficulty: ${lvlDesc}\n\nReturn ONLY valid JSON:\n{"lvl":${lvl},"concept":"specific concept","passage":"40-60 words for reading or science only, else empty string","q":"question text","choices":["A","B","C","D"],"correct":0,"exp":"2-3 sentences why correct is right and why the most tempting wrong answer is wrong.","method":{"vars":"using v not r for velocity","formula":"the formula","work":"step by step"},"pattern":"One sentence starting with a verb.","repro_type":"math or eng or read","repro_prompt":"reproduction challenge","repro_vars":"if math","repro_formula":"if math","repro_answer":"correct answer"}\n\nRules: correct must be 0, 1, 2, or 3. Use v for velocity, d=v x t for motion.`;const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:900,messages:[{role:'user',content:prompt}]})});const data=await res.json();return JSON.parse((data.content?.[0]?.text||'').replace(/```json|```/g,'').trim());}
+
+function startSatTimer(){if(satTimer)clearInterval(satTimer);satTimer=setInterval(()=>{satSecondsLeft--;const m=Math.floor(satSecondsLeft/60),s=satSecondsLeft%60;const el=document.getElementById('timer-display');const fill=document.getElementById('timer-fill');if(el){el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='timer-display'+(satSecondsLeft<=300?' urgent':'');}if(fill){fill.style.width=(satSecondsLeft/2700*100)+'%';fill.className='timer-fill'+(satSecondsLeft<=300?' urgent':'');}if(satSecondsLeft<=0){clearInterval(satTimer);finishQuiz();}},1000);}
+
+function renderQ(){const q=Q.questions[Q.current],total=Q.questions.length,num=Q.current+1;Q.phase='answer';document.getElementById('qpt').textContent=`Question ${num} of ${total}`;document.getElementById('qpf').style.width=(num/total*100)+'%';document.getElementById('qxp').textContent=`+${Q.xpEarned} XP`;document.getElementById('qbadge').textContent=TL[q.topic]||q.topic;document.getElementById('qbadge').className='qbadge'+(Q.mode==='saturday'?' sat':'');document.getElementById('qlvl').textContent=`Level ${q.lvl||1}`;document.getElementById('qconcept').textContent=q.concept||'';document.getElementById('qnum').textContent=`Q${num}`;const p=q.passage||'';const pEl=document.getElementById('qpassage');if(p.trim()){pEl.textContent=p;pEl.style.display='block';}else{pEl.style.display='none';}document.getElementById('qtext').textContent=q.q||q.question||'';const isMathSci=['math','science'].includes(q.topic);const sc=document.getElementById('scaffold');if(Q.mode==='saturday'){sc.style.display='none';renderAnsBtns();}else if(isMathSci){sc.style.display='block';sc.classList.remove('locked');document.getElementById('sc-vars').value='';document.getElementById('sc-form').value='';document.getElementById('sc-work').value='';document.getElementById('sc-commit').value='';document.getElementById('qans').innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:13px;background:var(--surface);border-radius:var(--r)">Complete the setup and commit your answer first.</div>';}else{sc.style.display='none';renderAnsBtns();}document.getElementById('coaching-panel').classList.remove('show');document.getElementById('correct-panel').classList.remove('show');document.getElementById('next-btn').style.display='none';}
+
+function commitAndReveal(){const commit=document.getElementById('sc-commit').value.trim();if(!commit){alert('Write your answer in the box before revealing the choices.');return;}document.getElementById('scaffold').classList.add('locked');renderAnsBtns();}
+function renderAnsBtns(){const q=Q.questions[Q.current];const L=['A','B','C','D'];// Shuffle choices but track where the correct answer landed
+if(!q._shuffled){const idxs=[0,1,2,3];for(let i=3;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idxs[i],idxs[j]]=[idxs[j],idxs[i]];}q._shuffledChoices=idxs.map(i=>q.choices[i]);q._shuffledCorrect=idxs.indexOf(q.correct);q._shuffled=true;}const choices=q._shuffledChoices;const correct=q._shuffledCorrect;q._displayCorrect=correct;document.getElementById('qans').innerHTML=(choices||[]).map((c,i)=>`<button class="abtn" onclick="selectAns(${i})"><span class="aletter">${L[i]}</span><span>${c}</span></button>`).join('');}
+
+function selectAns(idx){if(Q.phase!=='answer')return;Q.phase='feedback';const q=Q.questions[Q.current];const correctIdx=q._displayCorrect!==undefined?q._displayCorrect:q.correct;const isRight=idx===correctIdx;Q.answers[Q.current]=idx;S.topicScores[q.topic]=S.topicScores[q.topic]||[];S.topicScores[q.topic].push(isRight?1:0);S.totalQ++;if(isRight)S.totalCorrect++;document.querySelectorAll('.abtn').forEach((b,i)=>{b.disabled=true;if(i===correctIdx)b.classList.add('correct');if(i===idx&&!isRight)b.classList.add('wrong');});if(isRight){const xp=10;Q.xpEarned+=xp;S.xp+=xp;showCorrect(q,false);document.getElementById('next-btn').style.display='inline-block';}else{if(Q.mode==='saturday'){Q.xpEarned+=3;S.xp+=3;showCorrect(q,true);document.getElementById('next-btn').style.display='inline-block';}else{showCoaching(q,idx);}}document.getElementById('qxp').textContent=`+${Q.xpEarned} XP`;save();}
+
+function showCorrect(q,wasWrong){const panel=document.getElementById('correct-panel');panel.classList.add('show');const title=document.getElementById('correct-title');title.textContent=wasWrong?`Correct answer — ${q.concept||TL[q.topic]}`:`Correct — ${q.concept||TL[q.topic]}`;title.style.color=wasWrong?'var(--warn)':'var(--ok)';document.getElementById('correct-text').textContent=q.exp||'';document.getElementById('correct-pattern').textContent=q.pattern||'';}
+
+function showCoaching(q,wrongIdx){document.getElementById('coaching-panel').classList.add('show');document.getElementById('diag-title').textContent=`Not quite — ${q.concept||TL[q.topic]}`;document.getElementById('diag-text').textContent=q.exp||'';document.getElementById('diag-step').textContent=`You chose: "${q.choices[wrongIdx]}" — here is where the sequence went wrong.`;const m=q.method||{};const hasM=m.vars||m.formula||m.work;document.getElementById('demo-grid').innerHTML=hasM?`<div class="demo-col"><div class="dl">What we know</div><div class="dv">${m.vars||'—'}</div></div><div class="demo-col"><div class="dl">Formula</div><div class="dv">${m.formula||m.form||'—'}</div></div>`:'<div style="font-size:12px;color:var(--muted)">Apply the rule directly.</div>';document.getElementById('demo-work').innerHTML=hasM&&m.work?`<div class="demo-col" style="margin-top:8px"><div class="dl">Work</div><div class="dv">${m.work}</div></div>`:'';document.getElementById('demo-pattern').textContent=q.pattern||'';buildRepro(q);}
+
+function buildRepro(q){const rt=q.repro_type||'eng';document.getElementById('repro-desc').textContent='Work through this from scratch using the correct sequence.';let html='';if(rt==='math'){html=`<div class="repro-scaffold"><div class="repro-grid"><div class="repro-col"><label>What I know</label><textarea id="r-vars" placeholder="${q.repro_vars||'List the values'}"></textarea></div><div class="repro-col"><label>Formula</label><textarea id="r-form" placeholder="${q.repro_formula||'Write the formula'}"></textarea></div></div><div class="repro-work"><label>Work</label><textarea id="r-work" placeholder="Show every step"></textarea></div><div class="repro-answer"><label>My answer</label><input type="text" id="r-answer" placeholder="Final answer"/></div></div><div style="font-size:11px;color:var(--faint);margin-top:6px">Problem: ${q.repro_prompt||q.q}</div>`;}else{html=`<div class="eng-repro"><div class="eng-repro-prompt">${q.repro_prompt||'Apply the rule.'}</div>${q.repro_rule?`<div style="font-size:11px;color:var(--gold);margin-bottom:8px">Hint: ${q.repro_rule}</div>`:''}<textarea class="eng-repro-input" id="r-answer" placeholder="Write your answer..." style="height:70px"></textarea></div>`;}document.getElementById('repro-content').innerHTML=html;document.getElementById('repro-feedback').classList.remove('show');document.getElementById('repro-submit').disabled=false;document.getElementById('repro-submit').textContent='Submit my work';}
+
+async function submitRepro(){const q=Q.questions[Q.current];const answer=document.getElementById('r-answer')?.value?.trim()||'';if(!answer){alert('Write your answer before submitting.');return;}document.getElementById('repro-submit').disabled=true;document.getElementById('repro-submit').textContent='Chiron is reading...';try{const prompt=`You are Chiron, ACT coach. A student got a question wrong and is doing the reproduction exercise.\n\nConcept: "${q.concept}"\nChallenge: "${q.repro_prompt||q.q}"\nCorrect answer: "${q.repro_answer||''}"\nStudent response: "${answer}"\n\nDid the student demonstrate the correct sequence? 2-3 sentences. Specific. If correct: confirm the sequence. If not: identify exactly where it broke down. No em dashes. Start with [CORRECT] or [RETRY].`;const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,messages:[{role:'user',content:prompt}]})});const data=await res.json();const text=data.content?.[0]?.text||'[RETRY] Review the correct sequence.';const isGood=text.startsWith('[CORRECT]');const feedback=text.replace(/^\[(CORRECT|RETRY)\]\s*/,'');const xp=isGood?7:3;S.xp+=xp;Q.xpEarned+=xp;S.reproductions++;save();const fb=document.getElementById('repro-feedback');fb.className='repro-feedback show '+(isGood?'good':'retry');document.getElementById('repro-feedback-text').textContent=feedback;document.getElementById('repro-xp').textContent=`+${xp} XP earned`;document.getElementById('qxp').textContent=`+${Q.xpEarned} XP`;document.getElementById('next-btn').style.display='inline-block';document.getElementById('repro-submit').textContent='Submitted';}catch(e){document.getElementById('repro-feedback-text').textContent='Chiron is unavailable. Review the correct sequence above.';document.getElementById('repro-feedback').className='repro-feedback show retry';document.getElementById('next-btn').style.display='inline-block';document.getElementById('repro-submit').textContent='Submitted';}}
+
+function nextQ(){Q.current++;if(Q.current>=Q.questions.length){finishQuiz();return;}renderQ();}
+function saveExit(){if(satTimer)clearInterval(satTimer);save();go('dashboard');qState('idle');}
+
+async function finishQuiz(){if(satTimer)clearInterval(satTimer);const score=Q.answers.filter((a,i)=>{const q=Q.questions[i];const correctIdx=q._displayCorrect!==undefined?q._displayCorrect:q.correct;return a===correctIdx;}).length;const total=Q.questions.length,pct=Math.round(score/total*100);S.missions++;const today=new Date().toDateString();if(S.lastMissionDate!==today){S.streak++;S.lastMissionDate=today;}if(S.streak>S.bestStreak)S.bestStreak=S.streak;if(Q.mode==='saturday')S.satCount++;S.history.unshift({date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),score:`${score}/${total}`,pct,xp:Q.xpEarned,mode:Q.mode});S.history=S.history.slice(0,40);updateLevels();save();qState('results');document.getElementById('rscore').textContent=`${score}/${total}`;document.getElementById('rlabel').textContent=Q.mode==='saturday'?'Saturday Benchmark Complete':'Mission Complete';const tr={};Q.questions.forEach((q,i)=>{if(!tr[q.topic])tr[q.topic]={r:0,t:0};tr[q.topic].t++;if(Q.answers[i]===q.correct)tr[q.topic].r++;});const msgEl=document.getElementById('cmsg');msgEl.textContent='Chiron is assessing...';try{const weak=TOPICS.filter(t=>topicPct(t.id)<60&&S.topicScores[t.id].length>3).map(t=>t.name);const prompt=`You are Chiron, the centaur mentor. Alex, 17, wants to be an aerospace engineer. ACT target: 30. He scored ${score}/${total} (${pct}%) on a ${Q.mode==='saturday'?'Saturday benchmark':'daily mission'}. Streak: ${S.streak} days. ${weak.length?'Weak: '+weak.join(', ')+'.':'Solid across all areas.'}\n\n2-3 sentences. Direct, wise, believes in Alex. ${pct>=80?'He did well. Raise the bar.':pct>=60?'Solid. Name what needs sharpening.':'Honest and supportive. Tie to engineering goal.'} No em dashes.`;const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:150,messages:[{role:'user',content:prompt}]})});const data=await res.json();msgEl.textContent=data.content?.[0]?.text||defMsg(pct);}catch(e){msgEl.textContent=defMsg(pct);}document.getElementById('r-breakdown').innerHTML='<div class="stitle" style="margin-top:15px">Topic Breakdown</div>'+Object.entries(tr).map(([t,r])=>{const p=Math.round(r.r/r.t*100),col=p>=80?'#4caf7d':p>=60?'#c9a84c':'#e06060';return`<div class="hist-row"><span style="font-size:12px">${TL[t]}</span><div style="flex:1;margin:0 12px;height:3px;background:var(--surface);border-radius:2px;overflow:hidden"><div style="width:${p}%;height:100%;background:${col}"></div></div><span style="font-family:'Cinzel',serif;font-size:12px;color:${col}">${r.r}/${r.t}</span></div>`;}).join('');buildCompletionPing(score,total,pct,tr);const nextSat=document.getElementById('next-sat-card');if(Q.mode==='saturday'){nextSat.classList.add('show');}else{nextSat.classList.remove('show');}renderDash();}
+
+function buildCompletionPing(score,total,pct,topicResults){const topicStr=Object.entries(topicResults).map(([t,r])=>`${TL[t]}:${Math.round(r.r/r.t*100)}`).join(' ');const proj=projScore()||'--';const mode=Q.mode==='saturday'?'SATURDAY':'DAILY';const subject=`CHIRON | ${mode} | ${score}/${total} (${pct}%) | ${topicStr} | XP:${S.xp} | Streak:${S.streak} | Proj:${proj}`;const body=`Chiron Mission Report\n\nDate: ${new Date().toLocaleDateString()}\nMode: ${mode}\nScore: ${score}/${total} (${pct}%)\nStreak: ${S.streak} days\nProjected ACT Score: ${proj}\nTotal XP: ${S.xp}\n\nTopic Results:\n${Object.entries(topicResults).map(([t,r])=>`${TL[t]}: ${r.r}/${r.t} (${Math.round(r.r/r.t*100)}%)`).join('\n')}\n\n-- Sent automatically from Chiron`;const mailto=`mailto:michaelsgerber@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;document.getElementById('ping-link').href=mailto;document.getElementById('ping-link').onclick=function(){setTimeout(()=>{document.getElementById('ping-link').style.display='none';document.getElementById('ping-sent').style.display='block';},1000);};}
+
+function defMsg(p){if(p>=80)return'That is the standard. Keep it there.';if(p>=60)return'Solid. Close the gaps.';return'Today showed you where the work is. Come back tomorrow.';}
+function reviewMission(){Q.current=0;qState('active');document.getElementById('timer-bar').style.display='none';renderQ();const q=Q.questions[0];document.querySelectorAll('.abtn').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');if(Q.answers[0]!==undefined&&i===Q.answers[0]&&Q.answers[0]!==q.correct)b.classList.add('wrong');});if(Q.answers[0]!==undefined&&Q.answers[0]!==q.correct)showCoaching(q,Q.answers[0]);else if(Q.answers[0]===q.correct)showCorrect(q,false);document.getElementById('next-btn').style.display='inline-block';}
+function qState(st){['idle','loading','active','results'].forEach(s=>{const el=document.getElementById('q-'+s);if(el)el.style.display='none';});const t=document.getElementById('q-'+st);if(t)t.style.display=st==='loading'?'flex':'block';}
+
+function chHome(){document.getElementById('ch-home').style.display='block';['ch-drill','ch-teach','ch-dive'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});}
+function startDrill(){document.getElementById('ch-home').style.display='none';document.getElementById('ch-drill').style.display='block';document.getElementById('d-results').style.display='none';document.getElementById('d-area').style.display='block';drillSec=90;drillIdx=0;drillCorrect=0;const b=BANK.math.filter(q=>q.lvl===1);const sh=[...b].sort(()=>Math.random()-.5);drillQs=[];for(let i=0;i<10;i++)drillQs.push({...sh[i%sh.length],topic:'math'});renderDrillQ();if(drillTimer)clearInterval(drillTimer);drillTimer=setInterval(tickDrill,1000);}
+function tickDrill(){drillSec--;const m=Math.floor(drillSec/60),s=drillSec%60;const el=document.getElementById('d-timer');el.textContent=`${m}:${s.toString().padStart(2,'0')}`;el.className='drill-timer'+(drillSec<=20?' urgent':'');if(drillSec<=0){clearInterval(drillTimer);endDrill();}}
+function renderDrillQ(){if(drillIdx>=drillQs.length){endDrill();return;}const q=drillQs[drillIdx];const L=['A','B','C','D'];document.getElementById('d-area').innerHTML=`<div class="qcard" style="margin-bottom:10px"><div class="qmeta"><span class="qbadge c">Speed Q${drillIdx+1}/10</span></div><div class="qtext" style="font-size:13px">${q.q||q.question}</div><div class="ans-list">${(q.choices||[]).map((c,i)=>`<button class="abtn" onclick="drillAns(${i})" style="padding:10px 12px;font-size:12px"><span class="aletter">${L[i]}</span><span>${c}</span></button>`).join('')}</div></div>`;}
+function drillAns(idx){if(idx===drillQs[drillIdx].correct){drillCorrect++;S.xp+=5;}drillIdx++;if(drillIdx>=drillQs.length)endDrill();else renderDrillQ();}
+function endDrill(){clearInterval(drillTimer);document.getElementById('d-area').style.display='none';document.getElementById('d-results').style.display='block';document.getElementById('d-score').textContent=`${drillCorrect}/10`;save();}
+
+function startTeach(){document.getElementById('ch-home').style.display='none';document.getElementById('ch-teach').style.display='block';document.getElementById('teach-exp').classList.remove('show');document.getElementById('teach-input').value='';const weak=TOPICS.slice().sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const pool=TEACH_CONCEPTS.filter(c=>c.topic===weak.id);const c=pool.length?pool[Math.floor(Math.random()*pool.length)]:TEACH_CONCEPTS[Math.floor(Math.random()*TEACH_CONCEPTS.length)];document.getElementById('teach-prompt').textContent=c.prompt;document.getElementById('grade-btn').disabled=false;document.getElementById('grade-btn').textContent='Submit to Chiron';}
+async function gradeTeach(){const input=document.getElementById('teach-input').value.trim();if(!input){alert('Write your explanation first.');return;}document.getElementById('grade-btn').disabled=true;document.getElementById('grade-btn').textContent='Chiron is reading...';const concept=document.getElementById('teach-prompt').textContent;try{const prompt=`You are Chiron. Alex was asked: "${concept}"\nHis answer: "${input}"\n\n2-3 sentences. Acknowledge what is right. Identify what is missing. Give the correct framing. End with encouragement tied to aerospace engineering. No em dashes. Start with [Excellent], [Good], or [Needs Work].`;const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,messages:[{role:'user',content:prompt}]})});const data=await res.json();const text=data.content?.[0]?.text||'[Good] Solid attempt.';document.getElementById('teach-exp-text').textContent=text;const xp=text.includes('Excellent')?15:text.includes('Good')?10:5;document.getElementById('teach-xp').textContent=`+${xp} XP`;S.xp+=xp;save();document.getElementById('teach-exp').classList.add('show');}catch(e){document.getElementById('teach-exp-text').textContent='Chiron is unavailable. Review your answer.';document.getElementById('teach-exp').classList.add('show');}document.getElementById('grade-btn').disabled=false;document.getElementById('grade-btn').textContent='Submit to Chiron';}
+
+function startDive(){document.getElementById('ch-home').style.display='none';document.getElementById('ch-dive').style.display='block';const weak=TOPICS.slice().sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const b=BANK[weak.id]||BANK.math;const sh=[...b].sort(()=>Math.random()-.5).slice(0,8);let idx=0,correct=0;const L=['A','B','C','D'];function render(){if(idx>=sh.length){S.xp+=correct*8;save();document.getElementById('dive-area').innerHTML=`<div class="rcard" style="margin:0"><div class="rscore">${correct}/${sh.length}</div><div class="rlabel">Deep Dive - ${weak.name}</div><div class="chiron-msg">You chose to go deeper. That separates the engineers who get there from the ones who almost do.</div></div>`;return;}const q=sh[idx];document.getElementById('dive-area').innerHTML=`<div class="qcard"><div class="qmeta"><span class="qbadge">${weak.name}</span><span class="qlvl">Level ${q.lvl||1}</span><span class="qconcept">${q.concept||''}</span><span class="qnum">Q${idx+1}/${sh.length}</span></div>${q.passage?`<div class="passage">${q.passage}</div>`:''}<div class="qtext">${q.q||q.question}</div><div class="ans-list">${q.choices.map((c,i)=>`<button class="abtn" id="da${i}" onclick="diveAns(${i})"><span class="aletter">${L[i]}</span><span>${c}</span></button>`).join('')}</div></div><div class="correct-panel" id="dive-exp" style="margin-top:10px"><div class="correct-text" id="dive-exp-txt"></div><div style="margin-top:10px"><button class="btn" onclick="diveNext()" style="font-size:12px;padding:9px 16px">Next</button></div></div>`;window.diveAns=function(i){const right=i===q.correct;if(right)correct++;S.topicScores[weak.id]=S.topicScores[weak.id]||[];S.topicScores[weak.id].push(right?1:0);S.totalQ++;if(right)S.totalCorrect++;S.xp+=right?8:2;save();document.querySelectorAll('.abtn').forEach((b,j)=>{b.disabled=true;if(j===q.correct)b.classList.add('correct');if(j===i&&!right)b.classList.add('wrong');});document.getElementById('dive-exp-txt').textContent=q.exp||'';document.getElementById('dive-exp').classList.add('show');};window.diveNext=function(){idx++;render();};}render();}
+
+function renderProgress(){const weak=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(a.id)-topicPct(b.id))[0];const strong=TOPICS.filter(t=>S.topicScores[t.id].length>5).sort((a,b)=>topicPct(b.id)-topicPct(a.id))[0];const note=document.getElementById('ch-assess');if(S.totalQ<10)note.textContent='Complete your first mission and Chiron will assess your strengths.';else if(weak&&strong&&weak.id!==strong.id)note.textContent=`Your ${strong.name} is your current foundation. Your ${weak.name} is where the points are being left behind. Tomorrow\'s mission will prioritize it.`;else if(weak)note.textContent=`${weak.name} needs the most attention right now.`;else note.textContent='Showing consistency. Keep the streak alive.';const histEl=document.getElementById('hist-list');histEl.innerHTML=S.history.length===0?'<div style="color:var(--faint);font-size:12px;text-align:center;padding:18px">No missions completed yet.</div>':S.history.map(h=>{const col=h.pct>=80?'#4caf7d':h.pct>=60?'#c9a84c':'#e06060';const ml=h.mode==='saturday'?'SATURDAY':'DAILY';return`<div class="hist-row"><span style="font-size:11px;color:var(--muted)">${h.date}</span><span style="font-size:9px;color:var(--faint);letter-spacing:1.5px;text-transform:uppercase">${ml}</span><span style="font-family:'Cinzel',serif;font-size:12px;color:${col}">${h.score} - ${h.pct}%</span><span style="font-size:10px;color:var(--gold)">+${h.xp} XP</span></div>`;}).join('');renderTopicGrid('tgrid-prog');drawConstellation();}
+
+function drawConstellation(){const canvas=document.getElementById('constellation');if(!canvas)return;const ctx=canvas.getContext('2d');const dpr=window.devicePixelRatio||1;canvas.width=canvas.offsetWidth*dpr;canvas.height=canvas.offsetHeight*dpr;ctx.scale(dpr,dpr);const w=canvas.offsetWidth,h=canvas.offsetHeight;ctx.clearRect(0,0,w,h);const stars=[{x:w*.12,y:h*.35,topic:'english'},{x:w*.32,y:h*.72,topic:'math'},{x:w*.54,y:h*.22,topic:'reading'},{x:w*.74,y:h*.68,topic:'science'},{x:w*.90,y:h*.30,topic:'writing'}];for(let i=0;i<stars.length-1;i++){const p1=topicPct(stars[i].topic),p2=topicPct(stars[i+1].topic);if(p1>15&&p2>15){ctx.strokeStyle=`rgba(201,168,76,${Math.min(.35,(p1+p2)/400)})`;ctx.lineWidth=.5;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(stars[i].x,stars[i].y);ctx.lineTo(stars[i+1].x,stars[i+1].y);ctx.stroke();ctx.setLineDash([]);}}stars.forEach(s=>{const pct=topicPct(s.topic),r=3+pct/15,col=TC[s.topic];ctx.beginPath();ctx.arc(s.x,s.y,r,0,Math.PI*2);ctx.fillStyle=pct>0?col:'rgba(255,255,255,.07)';ctx.fill();if(pct>0){ctx.beginPath();ctx.arc(s.x,s.y,r+5,0,Math.PI*2);ctx.strokeStyle=col+'22';ctx.lineWidth=1;ctx.stroke();}ctx.fillStyle='rgba(240,230,200,.5)';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(TL[s.topic],s.x,s.y+r+13);if(pct>0){ctx.fillStyle=col;ctx.font='9px Inter,sans-serif';ctx.fillText(pct+'%',s.x,s.y-r-5);}});}
+
+function initStars(){const c=document.getElementById('stars');const ctx=c.getContext('2d');function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}resize();window.addEventListener('resize',resize);const stars=Array.from({length:120},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*1.1+.2,o:Math.random()*.4+.08,sp:Math.random()*.2+.04}));function tick(t){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{const o=s.o+Math.sin(t*s.sp*.001)*.1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,230,200,${Math.max(0,Math.min(1,o))})`;ctx.fill();});requestAnimationFrame(tick);}requestAnimationFrame(tick);}
+
+async function loadBank(){
+  try{
+    // Try manifest first; fall back to single file
+    let files=['questions.json'];
+    try{
+      const mRes=await fetch('manifest.json?v='+Date.now());
+      if(mRes.ok){const m=await mRes.json();if(Array.isArray(m)&&m.length)files=m;}
+    }catch(e){}
+    // Reset bank so we don't double-load on retry
+    ['math','english','reading','science','writing'].forEach(t=>{BANK[t]=[];});
+    for(const file of files){
+      try{
+        const res=await fetch(file+'?v='+Date.now());
+        if(!res.ok)continue;
+        const data=await res.json();
+        ['math','english','reading','science','writing'].forEach(t=>{
+          if(data[t]&&Array.isArray(data[t])){BANK[t]=(BANK[t]||[]).concat(data[t]);}
+        });
+        console.log('Loaded '+file);
+      }catch(e){console.warn('Could not load '+file,e);}
+    }
+    const total=Object.values(BANK).reduce((a,b)=>a+b.length,0);
+    console.log('Bank ready: '+total+' questions across '+files.length+' file(s)');
+  }catch(e){console.warn('Bank load error',e);}
+}
+
+function completeOnboarding(){
+  const dateVal=document.getElementById('ob-date-input').value;
+  if(!dateVal){alert('Please pick your ACT test date.');return;}
+  // Save to state
+  const saved=JSON.parse(localStorage.getItem('chiron_v5')||'{}');
+  saved.actTestDate=dateVal;
+  saved.missionStart=new Date().toISOString().split('T')[0];
+  localStorage.setItem('chiron_v5',JSON.stringify(saved));
+  document.getElementById('onboard-screen').style.display='none';
+  load();renderDash();
+}
+
+// Reset via 0000 on password screen
+loadBank().then(() => { load(); initStars(); renderDash(); });
+</script>
+</body>
+</html>
