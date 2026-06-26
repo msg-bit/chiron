@@ -3082,11 +3082,7 @@
       ],
       "correct": 1,
       "exp": "Find 2000 RPM and read: 120C.",
-      "method": {
-        "vars": "RPM=2000",
-        "formula": "read from table",
-        "work": "120C"
-      },
+      "method": {},
       "pattern": "Direct reading: find the row, read the value. Do not calculate.",
       "repro_type": "math",
       "repro_prompt": "Temperature increase from 1000 to 3000 RPM?",
@@ -3170,11 +3166,7 @@
       ],
       "correct": 2,
       "exp": "Differences: 150, 210, 270. Growing = nonlinear.",
-      "method": {
-        "vars": "differences",
-        "formula": "compare consecutive differences",
-        "work": "growing"
-      },
+      "method": {},
       "pattern": "Equal differences = linear. Growing differences = nonlinear.",
       "repro_type": "math",
       "repro_prompt": "Lift increase from 80 to 100 mph?",
